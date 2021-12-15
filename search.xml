@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>比較同層選取器與同層相鄰選取器的差異</title>
-    <url>/2021/12/15/%E6%AF%94%E8%BC%83%E5%90%8C%E5%B1%A4%E9%81%B8%E5%8F%96%E5%99%A8%E8%88%87%E5%90%8C%E5%B1%A4%E7%9B%B8%E9%84%B0%E9%81%B8%E5%8F%96%E5%99%A8%E7%9A%84%E5%B7%AE%E7%95%B0/</url>
-    <content><![CDATA[<p>本篇短文主要是解釋「同層選取器(General Sibling Combinator)」與「同層相鄰選取器(Adjacent Sibling Combinator)」兩者的使用時機，再以實例比較兩者之間的差異。<br>同層選取器 A ~ B：<br>假設要將 h1 標籤以下的 p 段落全部統一改為綠色字設定時，可使用同層選取器，可觀察到除了 h1 標籤仍為瀏覽器設定的字色以外，其以下的 p 段落全都被改為綠色字。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> ~ <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-</search>
