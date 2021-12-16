@@ -42,21 +42,21 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #383940;
-    --second-background-color: #32333a;
+    --background-color: #fff;
+    --second-background-color: #e6e6e6;
     --primary-color: #f90;
-    --first-text-color: #d2d2d7;
-    --second-text-color: #cbcbd1;
-    --third-text-color: #9595a2;
-    --fourth-text-color: #242429;
-    --default-text-color: #bebec6;
-    --border-color: #5c5e6a;
+    --first-text-color: #949494;
+    --second-text-color: #858585;
+    --third-text-color: #525252;
+    --fourth-text-color: #141414;
+    --default-text-color: #666;
+    --border-color: #fff;
     --selection-color: #ffa31a;
     --shadow-color: rgba(128,128,128,0.2);
     --shadow-hover-color: rgba(128,128,128,0.28);
-    --scrollbar-color: #32333a;
-    --scroll-bar-bg-color: #5c5e6a;
-    --link-color: #c5c5cc;
+    --scrollbar-color: #e6e6e6;
+    --scroll-bar-bg-color: #fff;
+    --link-color: #757575;
     --copyright-info-color: #a30029;
     --avatar-background-color: #005cb8;
     --pjax-progress-bar-color: linear-gradient(45deg, #ea404a, #ea722f, #e9a71f, #67e559, #18ecec, #1b85f1, #ee1dee);
@@ -83,21 +83,21 @@
   --pjax-progress-bar-color: linear-gradient(45deg, #f10006, #ef5b00, #e59c01, #19ca05, #00cab5, #0264c8, #c303c3);
 }
 .dark-mode {
-  --background-color: #383940;
-  --second-background-color: #32333a;
+  --background-color: #fff;
+  --second-background-color: #e6e6e6;
   --primary-color: #f90;
-  --first-text-color: #d2d2d7;
-  --second-text-color: #cbcbd1;
-  --third-text-color: #9595a2;
-  --fourth-text-color: #242429;
-  --default-text-color: #bebec6;
-  --border-color: #5c5e6a;
+  --first-text-color: #949494;
+  --second-text-color: #858585;
+  --third-text-color: #525252;
+  --fourth-text-color: #141414;
+  --default-text-color: #666;
+  --border-color: #fff;
   --selection-color: #ffa31a;
   --shadow-color: rgba(128,128,128,0.2);
   --shadow-hover-color: rgba(128,128,128,0.28);
-  --scrollbar-color: #32333a;
-  --scroll-bar-bg-color: #5c5e6a;
-  --link-color: #c5c5cc;
+  --scrollbar-color: #e6e6e6;
+  --scroll-bar-bg-color: #fff;
+  --link-color: #757575;
   --copyright-info-color: #a30029;
   --avatar-background-color: #005cb8;
   --pjax-progress-bar-color: linear-gradient(45deg, #ea404a, #ea722f, #e9a71f, #67e559, #18ecec, #1b85f1, #ee1dee);
