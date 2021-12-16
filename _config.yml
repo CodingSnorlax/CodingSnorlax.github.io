@@ -99,11 +99,19 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: keep
 
+# Search
+## See: https://github.com/theme-next/hexo-generator-searchdb
+search:
+  path: search.json
+  field: post
+  content: true
+  format: striptags
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
   repo: https://github.com/CodingSnorlax/CodingSnorlax.github.io.git
   # https://github.com/[你的 GitHub 帳號]/[你的 GitHub 帳號].github.io.git
-  branch: master
-  message: 'coding notes'
+  branch: gh-pages
+  message: '部落格頁面'
