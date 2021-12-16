@@ -9,7 +9,7 @@
     
     <title>
         
-            認識 const 的特性 |
+            強制轉型 (2) 字串篇 |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">認識 const 的特性</span>
+            <span class="title-hover-animation">強制轉型 (2) 字串篇</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 13:34:11</span>
-        <span class="mobile">2021-12-16 13:34</span>
+        <span class="pc">2021-12-16 20:08:19</span>
+        <span class="mobile">2021-12-16 20:08</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,11 +183,15 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5/">資料型別</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/">原始型別</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B/">強制轉型</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,31 +226,40 @@
         
 
         <div class="article-content markdown-body">
-            <img src="https://miro.medium.com/max/1400/0*g1_rI1aLr_8A20xB">
+            <h3 id="字串的顯性與隱性轉型"><a href="#字串的顯性與隱性轉型" class="headerlink" title="字串的顯性與隱性轉型"></a>字串的顯性與隱性轉型</h3><p><strong>強制轉型的三大規則</strong>：</p>
+<ol>
+<li>強制轉型有分<code>顯性轉型(explicit coercion)</code>及隱性轉型<code>(implicit coercion)</code>。</li>
+<li>強制轉型將轉出：布林值、字串、數字。</li>
+<li>原始型別和物件型別這兩種值的轉換邏輯會不大一樣。(但目前只會先著重在紀錄原始型別的強制轉型)</li>
+</ol>
+<h4 id="字串的顯性轉型"><a href="#字串的顯性轉型" class="headerlink" title="字串的顯性轉型"></a>字串的顯性轉型</h4><ul>
+<li>字串的顯性轉型一樣是透過函式。</li>
+<li>透過回傳結果可觀察到 String() 將數字、布林值、null、undefined 轉為字串。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">666666</span>; </span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">undefined</span>; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(a), <span class="keyword">typeof</span> <span class="built_in">String</span>(a)); <span class="comment">// 回傳 666666 string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(b), <span class="keyword">typeof</span> <span class="built_in">String</span>(b)); <span class="comment">// 回傳 true string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(c), <span class="keyword">typeof</span> <span class="built_in">String</span>(c)); <span class="comment">// 回傳 false string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(d), <span class="keyword">typeof</span> <span class="built_in">String</span>(d)); <span class="comment">// 回傳 null string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(e), <span class="keyword">typeof</span> <span class="built_in">String</span>(e)); <span class="comment">// 回傳 undefined string </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(d.toString()); </span><br><span class="line"><span class="comment">//Uncaught TypeError: Cannot read properties of null (reading &#x27;toString&#x27;) </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(e.toString()); </span><br><span class="line"><span class="comment">//Uncaught TypeError: Cannot read properties of undefined (reading &#x27;toString&#x27;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="const-的使用時機"><a href="#const-的使用時機" class="headerlink" title="const 的使用時機"></a>const 的使用時機</h3><p>用 const 來宣告的變數，被稱為「常數 (constant) 」，常數只可被讀取，但不允許更動。</p>
-<p>那什麼時機會用到 const 來宣告一個變數呢？例如：天上有一個太陽，太陽的數量是恆常不變的、或是一筆商品的定價，或任何你在開發上不希望被更動的資料等。</p>
-<h3 id="const-宣告的變數特性"><a href="#const-宣告的變數特性" class="headerlink" title="const 宣告的變數特性"></a>const 宣告的變數特性</h3><h4 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h4><p>const 與 let 一樣，兩者所宣告的變數都是存在於區塊作用域，因此在 { } 外，將讀取不到值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">const</span> today = <span class="string">&#x27;2021/10/13&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(today);  <span class="comment">// 顯示 today is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="不可重複宣告同一個變數及重新賦予值"><a href="#不可重複宣告同一個變數及重新賦予值" class="headerlink" title="不可重複宣告同一個變數及重新賦予值"></a>不可重複宣告同一個變數及重新賦予值</h4><p>const 宣告過的變數，除了不可再一次用 const 重複宣告，也不可再重新賦予值。</p>
-<p>當以 const 宣告 sunNum 這個變數，並賦予值為 1，又要再一次用 const 宣告這個變數的時候，主控台回傳告知 sunNum 這個變數已經被宣告過了。</p>
-<p>接下來，如果要將 sunNum 重新賦予值為 100 的時候，也會得到主控台回傳「賦予值到常數」這個動作的報錯。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">2</span>; </span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Identifier &#x27;sunNum&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sunNum = <span class="number">100</span>; </span><br><span class="line"><span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br>
-<br>
+<p><code>備註</code><br>String(value) 和 value.toString() 都是能強制轉型為字串的函式，<br>但在 value.toString() 這個方法中，null 和 undefined 將無法轉為字串型別。</p>
+<h4 id="字串的隱性轉型"><a href="#字串的隱性轉型" class="headerlink" title="字串的隱性轉型"></a>字串的隱性轉型</h4><p>字串的隱性轉型，必要的條件是在算式中，至少其中一個值為字串，<br><code>( + ) 運算子</code>會觸發隱性轉型，以下組合都會轉出字串：</p>
+<ul>
+<li>字串 + 字串</li>
+<li>字串 + 數字</li>
+<li>字串 + 布林值</li>
+<li>字串 + undefined</li>
+<li>字串 + null</li>
+<li>字串 + NaN</li>
+<li>字串 + 數字 + null</li>
+<li>字串 + 物件</li>
+<li>字串 + 陣列</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;3&quot;</span> + <span class="string">&quot;3&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> b = <span class="string">&quot;8&quot;</span> + <span class="number">3</span>; </span><br><span class="line"><span class="keyword">let</span> c = <span class="string">&quot;9&quot;</span> + <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">undefined</span> + <span class="string">&quot;3&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">null</span> + <span class="string">&quot;3&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> f = <span class="literal">NaN</span> + <span class="string">&quot;aaa&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> g = <span class="literal">null</span> + <span class="number">111</span> + <span class="string">&quot;666&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> h = <span class="string">&quot;here&quot;</span> + &#123;&#125;; </span><br><span class="line"><span class="keyword">let</span> i = <span class="string">&quot;here&quot;</span> + []; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a, <span class="keyword">typeof</span> a); <span class="comment">// 回傳 33 string </span></span><br><span class="line"><span class="built_in">console</span>.log(b, <span class="keyword">typeof</span> b); <span class="comment">// 回傳 83 string </span></span><br><span class="line"><span class="built_in">console</span>.log(c, <span class="keyword">typeof</span> c); <span class="comment">// 回傳 9true string </span></span><br><span class="line"><span class="built_in">console</span>.log(d, <span class="keyword">typeof</span> d); <span class="comment">// 回傳 undefined3 string </span></span><br><span class="line"><span class="built_in">console</span>.log(e, <span class="keyword">typeof</span> e); <span class="comment">// 回傳 null3 string </span></span><br><span class="line"><span class="built_in">console</span>.log(f, <span class="keyword">typeof</span> f); <span class="comment">// 回傳 NaNaaa string </span></span><br><span class="line"><span class="built_in">console</span>.log(g, <span class="keyword">typeof</span> g); <span class="comment">// 回傳 111666 string </span></span><br><span class="line"><span class="built_in">console</span>.log(g, <span class="keyword">typeof</span> h); <span class="comment">// 回傳 here[object Object] string </span></span><br><span class="line"><span class="built_in">console</span>.log(g, <span class="keyword">typeof</span> i); <span class="comment">// 回傳 here[object Object] string</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="參考資料與圖片出處："><a href="#參考資料與圖片出處：" class="headerlink" title="參考資料與圖片出處："></a>參考資料與圖片出處：</h3><ul>
-<li>JavaScript 變數作用域 Variable Scope</li>
-<li>JavaScript 那個 let, const, var 到底差在哪？</li>
-<li>語法與型別</li>
-<li>[JS學徒特訓班] JavaScript ES6 : var, let, const 差異</li>
-<li>Why don’t we use var anymore?</li>
-<li>Var, Let, and Const — What’s the Difference?</li>
-<li>How JavaScript variable scoping is just like multiple levels of government</li>
-<li>[JavaScript] Javascript 的作用域 (Scope) 與範圍鏈 (Scope Chain)：往外找</li>
-<li>02 var、let、const 與 ES6 簡介</li>
-<li>我知道你懂 hoisting，可是你了解到多深？</li>
-<li>Photo credit to David Monje on Unsplash</li>
+<p>以上為布林值及字串的強制轉型，而下一篇將專注在整理數字的強制轉型，<br>並比較多在討論比較運算子 == 寬鬆等於、!= 寬鬆不等於的隱性轉型過程。</p>
+<h4 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h4><ul>
+<li>Day10 — 隱含的強制轉型</li>
+<li>[22] 強制轉型 — ToBoolean、Falsy、Truthy</li>
+<li>JavaScript type coercion explained</li>
+<li>MDN — Addition (+)</li>
+<li>JS 我轉型我又轉了打我阿笨蛋</li>
 </ul>
 
         </div>
@@ -269,13 +282,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/%E8%AA%8D%E8%AD%98%20undefined%20%E8%88%87%20null%20%E7%9A%84%E5%9E%8B%E5%88%A5/"
+                           href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E7%AF%87/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">認識 undefined 與 null 的型別</span>
+                                <span class="post-nav-title-item">強制轉型 (3) 數字型別與轉型規則篇</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -285,10 +298,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E6%AF%94%E8%BC%83%20var%20%E8%88%87%20let%20%E7%9A%84%20hoisting/"
+                           href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%B8%83%E6%9E%97%E5%80%BC%E7%AF%87/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">比較 var 與 let 的 hoisting</span>
+                                <span class="post-nav-title-item">強制轉型 (1) 布林值篇</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -413,7 +426,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">const 的使用時機</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E5%AE%A3%E5%91%8A%E7%9A%84%E8%AE%8A%E6%95%B8%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">const 宣告的變數特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.</span> <span class="nav-text">區塊作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E5%90%8C%E4%B8%80%E5%80%8B%E8%AE%8A%E6%95%B8%E5%8F%8A%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">不可重複宣告同一個變數及重新賦予值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E5%9C%96%E7%89%87%E5%87%BA%E8%99%95%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">參考資料與圖片出處：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%B8%B2%E7%9A%84%E9%A1%AF%E6%80%A7%E8%88%87%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">字串的顯性與隱性轉型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%B8%B2%E7%9A%84%E9%A1%AF%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">字串的顯性轉型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%B8%B2%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">字串的隱性轉型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

@@ -9,7 +9,7 @@
     
     <title>
         
-            認識 const 的特性 |
+            JS 物件(object) 的基礎觀念 |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">認識 const 的特性</span>
+            <span class="title-hover-animation">JS 物件(object) 的基礎觀念</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 13:34:11</span>
-        <span class="mobile">2021-12-16 13:34</span>
+        <span class="pc">2021-12-16 22:35:18</span>
+        <span class="mobile">2021-12-16 22:35</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,11 +183,7 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5/">物件型別</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,33 +218,27 @@
         
 
         <div class="article-content markdown-body">
-            <img src="https://miro.medium.com/max/1400/0*g1_rI1aLr_8A20xB">
+            <p>在開始看物件取值之前，再看一看物件的基本定義吧！</p>
+<h3 id="物件的結構"><a href="#物件的結構" class="headerlink" title="物件的結構"></a>物件的結構</h3><p><strong>屬性(key)</strong> ：用來取得資料的「位置」。<br><strong>值(value)</strong> ：有不同型別。</p>
+<p><code>在物件內，沒有順序性，只有屬性名稱與值。</code></p>
+<h3 id="物件的功能"><a href="#物件的功能" class="headerlink" title="物件的功能"></a>物件的功能</h3><p>物件是 JavaScript 的物件型別之一，理解它的方法就跟在認識真實世界中的實體物件一樣，<br>JS 的物件內會有很多屬性，而屬性可以是一個原始型別的值、物件或陣列，這些資料可以<code>構成一項物品的詳細資訊</code>。</p>
+<p>假設有一個筆袋，這是它的資訊：</p>
+<p>一個 Kokuyo 的黑色筆袋<br>2020 年出廠<br>材質是棉布<br>非手工製造<br>內容物：一枝尺、一枝鉛筆、一枝原子筆，及一個橡皮擦<br>售價：原價 990 元，使用會員卡打折後為 891 元</p>
+<p>而這筆資訊轉換為物件，可以這樣紀錄：</p>
+<h3 id="宣告物件"><a href="#宣告物件" class="headerlink" title="宣告物件"></a>宣告物件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> pencilCase = &#123; </span><br><span class="line">     <span class="string">&quot;brand&quot;</span>: <span class="string">&quot;Kokuyo&quot;</span>, </span><br><span class="line">     <span class="string">&quot;year&quot;</span>: <span class="number">2020</span>, </span><br><span class="line">     <span class="string">&quot;color&quot;</span>: <span class="string">&quot;black&quot;</span>, </span><br><span class="line">     <span class="string">&quot;material&quot;</span>: <span class="string">&quot;cotton&quot;</span>, </span><br><span class="line">     <span class="string">&quot;isHandmade&quot;</span>: <span class="literal">false</span>, </span><br><span class="line">     <span class="string">&quot;contents&quot;</span>: [<span class="string">&#x27;ruler&#x27;</span>, <span class="string">&#x27;pencil&#x27;</span>, <span class="string">&#x27;pen&#x27;</span>, <span class="string">&#x27;eraser&#x27;</span>], </span><br><span class="line">     <span class="string">&quot;01_price&quot;</span>: <span class="number">990</span>, </span><br><span class="line">     <span class="string">&quot;02_price&quot;</span>: <span class="number">891</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="const-的使用時機"><a href="#const-的使用時機" class="headerlink" title="const 的使用時機"></a>const 的使用時機</h3><p>用 const 來宣告的變數，被稱為「常數 (constant) 」，常數只可被讀取，但不允許更動。</p>
-<p>那什麼時機會用到 const 來宣告一個變數呢？例如：天上有一個太陽，太陽的數量是恆常不變的、或是一筆商品的定價，或任何你在開發上不希望被更動的資料等。</p>
-<h3 id="const-宣告的變數特性"><a href="#const-宣告的變數特性" class="headerlink" title="const 宣告的變數特性"></a>const 宣告的變數特性</h3><h4 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h4><p>const 與 let 一樣，兩者所宣告的變數都是存在於區塊作用域，因此在 { } 外，將讀取不到值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">const</span> today = <span class="string">&#x27;2021/10/13&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(today);  <span class="comment">// 顯示 today is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="不可重複宣告同一個變數及重新賦予值"><a href="#不可重複宣告同一個變數及重新賦予值" class="headerlink" title="不可重複宣告同一個變數及重新賦予值"></a>不可重複宣告同一個變數及重新賦予值</h4><p>const 宣告過的變數，除了不可再一次用 const 重複宣告，也不可再重新賦予值。</p>
-<p>當以 const 宣告 sunNum 這個變數，並賦予值為 1，又要再一次用 const 宣告這個變數的時候，主控台回傳告知 sunNum 這個變數已經被宣告過了。</p>
-<p>接下來，如果要將 sunNum 重新賦予值為 100 的時候，也會得到主控台回傳「賦予值到常數」這個動作的報錯。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">2</span>; </span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Identifier &#x27;sunNum&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sunNum = <span class="number">100</span>; </span><br><span class="line"><span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br>
-<br>
+<p><strong>使用時機：記述詳細資訊</strong></p>
+<h3 id="讀取物件的屬性-造訪資料"><a href="#讀取物件的屬性-造訪資料" class="headerlink" title="讀取物件的屬性 (造訪資料)"></a>讀取物件的屬性 (造訪資料)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> product = &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    屬性   值(value)</span></span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;King Size Bed&quot;</span>,</span><br><span class="line">    <span class="attr">price</span>: <span class="number">3000</span>,</span><br><span class="line">    <span class="attr">color</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(personal.name) <span class="comment">// &quot;King Size Bed&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(personal.price) <span class="comment">// 3000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="參考資料與圖片出處："><a href="#參考資料與圖片出處：" class="headerlink" title="參考資料與圖片出處："></a>參考資料與圖片出處：</h3><ul>
-<li>JavaScript 變數作用域 Variable Scope</li>
-<li>JavaScript 那個 let, const, var 到底差在哪？</li>
-<li>語法與型別</li>
-<li>[JS學徒特訓班] JavaScript ES6 : var, let, const 差異</li>
-<li>Why don’t we use var anymore?</li>
-<li>Var, Let, and Const — What’s the Difference?</li>
-<li>How JavaScript variable scoping is just like multiple levels of government</li>
-<li>[JavaScript] Javascript 的作用域 (Scope) 與範圍鏈 (Scope Chain)：往外找</li>
-<li>02 var、let、const 與 ES6 簡介</li>
-<li>我知道你懂 hoisting，可是你了解到多深？</li>
-<li>Photo credit to David Monje on Unsplash</li>
+<h3 id="新增物件的屬性"><a href="#新增物件的屬性" class="headerlink" title="新增物件的屬性"></a>新增物件的屬性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> product = &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    屬性   值(value)</span></span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;King Size Bed&quot;</span>,</span><br><span class="line">    <span class="attr">price</span>: <span class="number">3000</span>,</span><br><span class="line">    <span class="attr">color</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">product.id = <span class="string">&#x27;xiw9249204sp&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(product);</span><br><span class="line"><span class="comment">// 回傳 &#123;name: &quot;King Size Bed&quot;, price: 3000, color: &#x27;white&#x27;, id: &#x27;xiw9249204sp&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>新增物件的屬性 &amp; 修改物件屬性內的值</strong> :<br>看起來都是用一樣的方法，但概念上有點不同。</p>
+<ul>
+<li>一個是<code>新增一個全新的屬性</code>到物件內</li>
+<li>一個是<code>修改</code>物件原有屬性的值</li>
 </ul>
-
+<h3 id="重新賦予物件的值"><a href="#重新賦予物件的值" class="headerlink" title="重新賦予物件的值"></a>重新賦予物件的值</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> personal = &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    屬性   值(value)</span></span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;Karen&quot;</span>,</span><br><span class="line">    <span class="attr">money</span>: <span class="number">3000</span>,</span><br><span class="line">    <span class="attr">pc</span>: <span class="string">&quot;Mac M1 Max&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//語意：花了3000元買電腦</span></span><br><span class="line">personal.money -= <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//語意：增加購買條件 Mac M1 Max Ram36GB版</span></span><br><span class="line">personal.pc += <span class="string">&quot;Ram36GB版&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -269,13 +259,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/%E8%AA%8D%E8%AD%98%20undefined%20%E8%88%87%20null%20%E7%9A%84%E5%9E%8B%E5%88%A5/"
+                           href="/2021/12/16/%E7%89%A9%E4%BB%B6%E5%8F%96%E5%80%BC%EF%BC%9A%E7%94%A8%E9%BB%9E%E5%8F%96%E5%80%BC/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">認識 undefined 與 null 的型別</span>
+                                <span class="post-nav-title-item">物件取值：用點取值</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -285,10 +275,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E6%AF%94%E8%BC%83%20var%20%E8%88%87%20let%20%E7%9A%84%20hoisting/"
+                           href="/2021/12/16/%E8%AA%8D%E8%AD%98-switch-%E7%9A%84%E7%94%A8%E6%B3%95/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">比較 var 與 let 的 hoisting</span>
+                                <span class="post-nav-title-item">認識 switch 的用法</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -413,7 +403,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">const 的使用時機</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E5%AE%A3%E5%91%8A%E7%9A%84%E8%AE%8A%E6%95%B8%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">const 宣告的變數特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.</span> <span class="nav-text">區塊作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E5%90%8C%E4%B8%80%E5%80%8B%E8%AE%8A%E6%95%B8%E5%8F%8A%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">不可重複宣告同一個變數及重新賦予值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E5%9C%96%E7%89%87%E5%87%BA%E8%99%95%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">參考資料與圖片出處：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E7%9A%84%E7%B5%90%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">物件的結構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">物件的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A3%E5%91%8A%E7%89%A9%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">宣告物件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%80%E5%8F%96%E7%89%A9%E4%BB%B6%E7%9A%84%E5%B1%AC%E6%80%A7-%E9%80%A0%E8%A8%AA%E8%B3%87%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">讀取物件的屬性 (造訪資料)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%89%A9%E4%BB%B6%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">新增物件的屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E7%89%A9%E4%BB%B6%E7%9A%84%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">重新賦予物件的值</span></a></li></ol>
     </div>
 </div>
         </aside>

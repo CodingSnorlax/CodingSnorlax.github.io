@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            強制轉型 (3) 數字型別與轉型規則篇 |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":false},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">強制轉型 (3) 數字型別與轉型規則篇</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-16 20:08:48</span>
+        <span class="mobile">2021-12-16 20:08</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5/">資料型別</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/">原始型別</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B/">強制轉型</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E6%AF%94%E8%BC%83%E9%81%8B%E7%AE%97%E5%AD%90/">比較運算子</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>繼強制轉型的布林值、字串篇之後，本篇主要在歸納數字型別的強制轉型，並找出隱性轉型背後的原理。</p>
+<h3 id="數字型別的顯性與隱性轉型"><a href="#數字型別的顯性與隱性轉型" class="headerlink" title="數字型別的顯性與隱性轉型"></a>數字型別的顯性與隱性轉型</h3><p><strong>強制轉型的三大規則</strong>：</p>
+<ol>
+<li>強制轉型有分<code>顯性轉型(explicit coercion)</code>及<code>隱性轉型(implicit coercion)</code>。</li>
+<li>強制轉型將轉出：布林值、字串、數字。</li>
+<li>原始型別和物件型別這兩種值的轉換邏輯會不大一樣。(但目前只會先著重在紀錄原始型別的強制轉型)</li>
+</ol>
+<h3 id="數字的顯性轉型"><a href="#數字的顯性轉型" class="headerlink" title="數字的顯性轉型"></a>數字的顯性轉型</h3><p>數字的顯性轉型一樣是透過函式，這邊將透過 Number() 為例說明，而根據印出的結果觀察到：</p>
+<ul>
+<li>透過 Number() 能轉為數字的，就會回傳數字</li>
+<li>透過 Number() 無法轉為數字的，會轉出 NaN（像是 undefined ）</li>
+<li>在運算過程當中，布林值 true 被 Number() 轉為數字 1、false 為數字 0</li>
+<li>null、空字串將會被 Number() 轉為 數字 0</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="string">&#x27;666666&#x27;</span>; </span><br><span class="line"><span class="keyword">let</span> b = <span class="string">&#x27;seven&#x27;</span> </span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">let</span> f = <span class="literal">undefined</span>; </span><br><span class="line"><span class="keyword">let</span> g = <span class="string">&quot;&quot;</span>; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(a), <span class="keyword">typeof</span> <span class="built_in">Number</span>(a)); <span class="comment">// 回傳 666666 &#x27;number&#x27; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(b), <span class="keyword">typeof</span> <span class="built_in">Number</span>(b)); <span class="comment">// 回傳 NaN &#x27;number&#x27; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(c), <span class="keyword">typeof</span> <span class="built_in">Number</span>(c)); <span class="comment">// 回傳 1 &#x27;number&#x27; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(d), <span class="keyword">typeof</span> <span class="built_in">Number</span>(d)); <span class="comment">// 回傳 0 &#x27;number&#x27; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(e), <span class="keyword">typeof</span> <span class="built_in">Number</span>(e)); <span class="comment">// 回傳 0 &#x27;number&#x27; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(f), <span class="keyword">typeof</span> <span class="built_in">Number</span>(f)); <span class="comment">// 回傳 NaN &#x27;number&#x27; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(g), <span class="keyword">typeof</span> <span class="built_in">Number</span>(g)); <span class="comment">// 回傳 0 &#x27;number&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>備註</code> parseInt() 能將數字的字串取整數。</p>
+<h3 id="數字的隱性轉型"><a href="#數字的隱性轉型" class="headerlink" title="數字的隱性轉型"></a>數字的隱性轉型</h3><p>有運算子的時候，隱性轉型將自動把值轉換為數字型別進行運算，若無法轉為數字型別的，則會轉為字串。</p>
+<h4 id="一-算術運算子"><a href="#一-算術運算子" class="headerlink" title="(一) 算術運算子"></a>(一) 算術運算子</h4><h5 id="算術運算子：加法"><a href="#算術運算子：加法" class="headerlink" title="算術運算子：加法"></a>算術運算子：加法</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">3</span> + <span class="literal">true</span> <span class="comment">//4 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">true</span> + <span class="literal">false</span> <span class="comment">//1 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">null</span> + <span class="literal">true</span>; <span class="comment">//1 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">null</span> + <span class="number">666</span>; <span class="comment">//666 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">undefined</span> + <span class="number">3</span>; <span class="comment">//NaN &#x27;number&#x27; </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 無法轉換為數字的 undefined：</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span> + <span class="literal">null</span>) <span class="comment">// 回傳 NaN (number)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>備註</code> 當 ( + ) 遇到字串就不會轉為數字型別！</p>
+<h5 id="算術運算子：減法"><a href="#算術運算子：減法" class="headerlink" title="算術運算子：減法"></a>算術運算子：減法</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">3</span> - <span class="literal">true</span> <span class="comment">//2 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">true</span> - <span class="literal">false</span> <span class="comment">//1 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">null</span> - <span class="literal">true</span>; <span class="comment">//-1 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">null</span> - <span class="number">666</span>; <span class="comment">//-666 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">undefined</span> - <span class="number">3</span>; <span class="comment">//NaN &#x27;number&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="算術運算子：乘、除法"><a href="#算術運算子：乘、除法" class="headerlink" title="算術運算子：乘、除法"></a>算術運算子：乘、除法</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">3</span> * <span class="string">&quot;6&quot;</span>; <span class="comment">// 18 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">true</span> * <span class="string">&quot;3&quot;</span>;<span class="comment">// 3 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">undefined</span> * <span class="number">3</span>; <span class="comment">// NaN &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">undefined</span> * <span class="string">&quot;3&quot;</span>; <span class="comment">// NaN &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">undefined</span> * <span class="literal">true</span>; <span class="comment">// NaN &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> f = <span class="literal">null</span> * <span class="number">666</span>; <span class="comment">// 0 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> g = <span class="literal">null</span> * <span class="string">&quot;666&quot;</span>; <span class="comment">// 0 &#x27;number&#x27; </span></span><br><span class="line"><span class="keyword">let</span> h = <span class="literal">null</span> * <span class="literal">true</span>; <span class="comment">// 0 &#x27;number&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>註1</code>：字串遇到乘法、除法都會轉為數字型別<br><code>註2</code>：任何值與 undefined 相乘、相除都是 NaN<br><code>註3</code>：任何值與 null 相乘、相除都是 0</p>
+<h4 id="二-比較運算子"><a href="#二-比較運算子" class="headerlink" title="(二) 比較運算子"></a>(二) 比較運算子</h4><p>在算術運算子整理到一段落後，接著是探討比較運算子 == 和 != 在強制轉型中的背後原理。</p>
+<p>為什麼是這兩個呢？<br>因為首先需要知道：</p>
+<ul>
+<li><code>==</code> 和 <code>!=</code>：著重在「值」的比較，因為不比較型別，所以可允許強制轉型發生作用。</li>
+<li><code>===</code> 及 <code>!==</code>：不允許強制轉型的發生，若不希望程式碼被強制轉型，請記得要使用 === 或 !==。</li>
+</ul>
+<br>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left">符號</th>
+<th align="left">特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一般相等</td>
+<td align="left">==</td>
+<td align="left">轉為相同型別，再比較兩者的值</td>
+</tr>
+<tr>
+<td>嚴格相等</td>
+<td align="left">===</td>
+<td align="left">先看型別，再看值</td>
+</tr>
+<tr>
+<td>不等於</td>
+<td align="left">!=</td>
+<td align="left">比較兩者的值，但不比較型別</td>
+</tr>
+<tr>
+<td>嚴格不等於</td>
+<td align="left">!==</td>
+<td align="left">先看型別，再看值</td>
+</tr>
+</tbody></table>
+<p><code>備註</code> <strong>嚴格相等</strong> === 與<strong>嚴格不等於</strong> !== 皆<code>不允許</code>自動轉型！</p>
+<h5 id="比較運算子：＝＝"><a href="#比較運算子：＝＝" class="headerlink" title="比較運算子：＝＝"></a>比較運算子：＝＝</h5><p><code>範例 1 </code><br>== 的運算過程，為了要比較「值」，會執行隱性轉型的動作，<br>可以視為是字串 ‘666’ 被隱性轉型為 Number(‘666’)，故得到運算結果為 true。<br>而 === 會先比較型別、再比較「值」，因此 === 只要先發現型別不同，<br>就回傳 false，所以不希望程式碼被 JS 隱性轉型的時候，就應該使用 ===。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 範例1 </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">666</span> == <span class="string">&#x27;666&#x27;</span>); <span class="comment">// true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">666</span> === <span class="string">&#x27;666&#x27;</span>); <span class="comment">// false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>範例 2 </code><br>true 跟 ‘1’ 都經歷了隱性轉型的過程，第一行程式碼可以視為是 Number(true) == Number(‘1’)，故得到 true。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 範例2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> == <span class="string">&#x27;1&#x27;</span>); <span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> === <span class="string">&#x27;1&#x27;</span>); <span class="comment">//false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>範例 3 </code><br>上述兩個範例都是能被轉換為數字型別的，<br>但是，當遇到非字串也非布林值的狀況，結果會是如何？</p>
+<p>這邊在 == 的運算中，可以視 null 為 String(null)，所以是 ‘null’ 不等於空字串，故得到 false。<br>原因是隱性轉型是由 JS 來幫你決定轉哪一種，運算子的運算過程中，會<code>先自動轉為數字型別</code>，<br><strong>若不能轉為數字的，會改而轉字串</strong>，再比較值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 範例3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> == <span class="string">&#x27;&#x27;</span>); <span class="comment">//false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> === <span class="string">&#x27;&#x27;</span>); <span class="comment">//false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="比較運算子：！＝"><a href="#比較運算子：！＝" class="headerlink" title="比較運算子：！＝"></a>比較運算子：！＝</h5><p><code>範例 1 </code><br>為何 666 不等於 ‘666’ 是 true，但 666 不等於 ‘666’ 又變成 false?<br>很關鍵的一點就在於，比較運算子 != 也是會忽略型別，並允許字串被轉換為數字，再比較「值」；<br>相反地，!== 則是會優先比較型別，再看值。</p>
+<p><code>範例 2 </code><br>遇到兩者都非數字的情況下，運算過程也可被視為是 Number(true) 跟 Number(‘1’) 的運算，<br>得到 false 的結果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 範例1 </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">666</span> != <span class="string">&#x27;666&#x27;</span>); <span class="comment">// false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">666</span> !== <span class="string">&#x27;666&#x27;</span>); <span class="comment">// true </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 範例2 </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> != <span class="string">&#x27;1&#x27;</span>); <span class="comment">// false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> !== <span class="string">&#x27;1&#x27;</span>); <span class="comment">// true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>最後歸納出四個重點：</p>
+<ul>
+<li>強制轉型有分為<code>顯性轉型</code>與<code>隱性轉型</code>，不管哪一種轉型，也只會轉出布林值、字串或數字其中一種。</li>
+<li>顯性轉型都是以手動用函式的方法將值轉換為自己指定要的型別。</li>
+<li>隱性轉型是由 JS 來幫你決定轉哪一種，當有運算子的時候，會<code>優先轉為數字型別</code>；<strong>遇到無法轉為數字的，改而轉成字串，再比較值</strong>。</li>
+<li>承第 3 點，<strong>加法運算子是較為特殊的一種，若遇到有字串，則優先轉字串再比較值</strong>。</li>
+</ul>
+<br>
+
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li>MDN — Equality comparisons and sameness</li>
+<li>MDN — 算術運算子</li>
+<li>重新認識 JavaScript: Day 07 「比較」與自動轉型的規則</li>
+<li>何謂強制轉型、以及如何作到轉換型別？</li>
+<li>Type Coercion in JavaScript</li>
+<li>Day11 — 寬鬆相等 VS. 嚴格相等</li>
+<li>[27] 強制轉型 — 寬鬆相等 ( == ) vs. 嚴格相等 ( === )</li>
+<li>[27–1] 強制轉型 — 番外篇 （ 運算子預設的規定 ex: ==、+ ）</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/16/if-%E5%92%8C-switch-%E7%9A%84%E5%B7%AE%E7%95%B0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">switch 和 if 的差異和使用時機</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%AD%97%E4%B8%B2%E7%AF%87/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">強制轉型 (2) 字串篇</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E7%9A%84%E9%A1%AF%E6%80%A7%E8%88%87%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">數字型別的顯性與隱性轉型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B8%E5%AD%97%E7%9A%84%E9%A1%AF%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">數字的顯性轉型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B8%E5%AD%97%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">數字的隱性轉型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80-%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">3.1.</span> <span class="nav-text">(一) 算術運算子</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90%EF%BC%9A%E5%8A%A0%E6%B3%95"><span class="nav-number">3.1.1.</span> <span class="nav-text">算術運算子：加法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90%EF%BC%9A%E6%B8%9B%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">算術運算子：減法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90%EF%BC%9A%E4%B9%98%E3%80%81%E9%99%A4%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">算術運算子：乘、除法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C-%E6%AF%94%E8%BC%83%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">3.2.</span> <span class="nav-text">(二) 比較運算子</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%94%E8%BC%83%E9%81%8B%E7%AE%97%E5%AD%90%EF%BC%9A%EF%BC%9D%EF%BC%9D"><span class="nav-number">3.2.1.</span> <span class="nav-text">比較運算子：＝＝</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%94%E8%BC%83%E9%81%8B%E7%AE%97%E5%AD%90%EF%BC%9A%EF%BC%81%EF%BC%9D"><span class="nav-number">3.2.2.</span> <span class="nav-text">比較運算子：！＝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

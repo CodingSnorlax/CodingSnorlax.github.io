@@ -9,7 +9,7 @@
     
     <title>
         
-            認識 const 的特性 |
+            if 判斷式的巢狀結構 |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">認識 const 的特性</span>
+            <span class="title-hover-animation">if 判斷式的巢狀結構</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 13:34:11</span>
-        <span class="mobile">2021-12-16 13:34</span>
+        <span class="pc">2021-12-16 21:51:44</span>
+        <span class="mobile">2021-12-16 21:51</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,11 +183,7 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E6%B5%81%E7%A8%8B%E5%88%A4%E6%96%B7/">流程判斷</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,32 +218,17 @@
         
 
         <div class="article-content markdown-body">
-            <img src="https://miro.medium.com/max/1400/0*g1_rI1aLr_8A20xB">
-
-<h3 id="const-的使用時機"><a href="#const-的使用時機" class="headerlink" title="const 的使用時機"></a>const 的使用時機</h3><p>用 const 來宣告的變數，被稱為「常數 (constant) 」，常數只可被讀取，但不允許更動。</p>
-<p>那什麼時機會用到 const 來宣告一個變數呢？例如：天上有一個太陽，太陽的數量是恆常不變的、或是一筆商品的定價，或任何你在開發上不希望被更動的資料等。</p>
-<h3 id="const-宣告的變數特性"><a href="#const-宣告的變數特性" class="headerlink" title="const 宣告的變數特性"></a>const 宣告的變數特性</h3><h4 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h4><p>const 與 let 一樣，兩者所宣告的變數都是存在於區塊作用域，因此在 { } 外，將讀取不到值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">const</span> today = <span class="string">&#x27;2021/10/13&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(today);  <span class="comment">// 顯示 today is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="不可重複宣告同一個變數及重新賦予值"><a href="#不可重複宣告同一個變數及重新賦予值" class="headerlink" title="不可重複宣告同一個變數及重新賦予值"></a>不可重複宣告同一個變數及重新賦予值</h4><p>const 宣告過的變數，除了不可再一次用 const 重複宣告，也不可再重新賦予值。</p>
-<p>當以 const 宣告 sunNum 這個變數，並賦予值為 1，又要再一次用 const 宣告這個變數的時候，主控台回傳告知 sunNum 這個變數已經被宣告過了。</p>
-<p>接下來，如果要將 sunNum 重新賦予值為 100 的時候，也會得到主控台回傳「賦予值到常數」這個動作的報錯。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">2</span>; </span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Identifier &#x27;sunNum&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sunNum = <span class="number">100</span>; </span><br><span class="line"><span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br>
-<br>
-
-<h3 id="參考資料與圖片出處："><a href="#參考資料與圖片出處：" class="headerlink" title="參考資料與圖片出處："></a>參考資料與圖片出處：</h3><ul>
-<li>JavaScript 變數作用域 Variable Scope</li>
-<li>JavaScript 那個 let, const, var 到底差在哪？</li>
-<li>語法與型別</li>
-<li>[JS學徒特訓班] JavaScript ES6 : var, let, const 差異</li>
-<li>Why don’t we use var anymore?</li>
-<li>Var, Let, and Const — What’s the Difference?</li>
-<li>How JavaScript variable scoping is just like multiple levels of government</li>
-<li>[JavaScript] Javascript 的作用域 (Scope) 與範圍鏈 (Scope Chain)：往外找</li>
-<li>02 var、let、const 與 ES6 簡介</li>
-<li>我知道你懂 hoisting，可是你了解到多深？</li>
-<li>Photo credit to David Monje on Unsplash</li>
+            <h4 id="if-判斷式的結構"><a href="#if-判斷式的結構" class="headerlink" title="if 判斷式的結構"></a>if 判斷式的結構</h4><ul>
+<li>由 if 和 else 組成，但若沒有 else，程式碼依然能夠執行。</li>
+<li>可透過比較運算子、邏輯運算子的運算得出 true 或 false。</li>
+<li>可轉換非布林值的值，除了 falsy 值以外的值 (空字串、數字0、NaN、null、undefined…)，都會被判定為 true。</li>
+<li>在每一個小括號 ( ) 內都有一個條件判斷的運算，當條件沒有符合，就再比對下一個條件，直到比對出 true 的<code>一個結果</code>為止。</li>
 </ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> myCar = <span class="string">&#x27;Porsche&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(myCar === <span class="string">&#x27;Volvo&#x27;</span>)&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我開 Volvo&#x27;</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (myCar === <span class="string">&#x27;Benz&#x27;</span>)&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我開 Benz&#x27;</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (myCar === <span class="string">&#x27;VolksWagen&#x27;</span>)&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我開 VolksWagen&#x27;</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (myCar === <span class="string">&#x27;Porsche&#x27;</span>)&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我開 Porsche&#x27;</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我沒車！&#x27;</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// 印出 &#x27;我開 Porsche&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="if-判斷式的巢狀結構"><a href="#if-判斷式的巢狀結構" class="headerlink" title="if 判斷式的巢狀結構"></a>if 判斷式的巢狀結構</h4><p>很多人可能以為 if 判斷式是由 if, else if 和 else 組成，<br>但其實 else if 的出現只是文字排版的緣故，看到底下程式碼將會恍然大悟！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> myCar = <span class="string">&#x27;Porsche&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(myCar === <span class="string">&#x27;Volvo&#x27;</span>)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;我開 Volvo&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> </span><br><span class="line"><span class="keyword">if</span> (myCar === <span class="string">&#x27;Benz&#x27;</span>)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;我開 Benz&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> </span><br><span class="line"><span class="keyword">if</span> (myCar === <span class="string">&#x27;VolksWagen&#x27;</span>)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;我開 VolksWagen&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> </span><br><span class="line"><span class="keyword">if</span> (myCar === <span class="string">&#x27;Porsche&#x27;</span>)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;我開 Porsche&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;我沒車！&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 印出 &#x27;我開 Porsche&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -269,13 +250,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/%E8%AA%8D%E8%AD%98%20undefined%20%E8%88%87%20null%20%E7%9A%84%E5%9E%8B%E5%88%A5/"
+                           href="/2021/12/16/%E8%AA%8D%E8%AD%98-switch-%E7%9A%84%E7%94%A8%E6%B3%95/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">認識 undefined 與 null 的型別</span>
+                                <span class="post-nav-title-item">認識 switch 的用法</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -285,10 +266,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E6%AF%94%E8%BC%83%20var%20%E8%88%87%20let%20%E7%9A%84%20hoisting/"
+                           href="/2021/12/16/if-%E5%92%8C-switch-%E7%9A%84%E5%B7%AE%E7%95%B0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">比較 var 與 let 的 hoisting</span>
+                                <span class="post-nav-title-item">switch 和 if 的差異和使用時機</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -413,7 +394,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">const 的使用時機</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E5%AE%A3%E5%91%8A%E7%9A%84%E8%AE%8A%E6%95%B8%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">const 宣告的變數特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.</span> <span class="nav-text">區塊作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E5%90%8C%E4%B8%80%E5%80%8B%E8%AE%8A%E6%95%B8%E5%8F%8A%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">不可重複宣告同一個變數及重新賦予值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E5%9C%96%E7%89%87%E5%87%BA%E8%99%95%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">參考資料與圖片出處：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#if-%E5%88%A4%E6%96%B7%E5%BC%8F%E7%9A%84%E7%B5%90%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">if 判斷式的結構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if-%E5%88%A4%E6%96%B7%E5%BC%8F%E7%9A%84%E5%B7%A2%E7%8B%80%E7%B5%90%E6%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">if 判斷式的巢狀結構</span></a></li></ol>
     </div>
 </div>
         </aside>

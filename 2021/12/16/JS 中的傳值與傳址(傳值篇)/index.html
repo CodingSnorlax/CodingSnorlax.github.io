@@ -9,7 +9,7 @@
     
     <title>
         
-            認識 const 的特性 |
+            JS 中的傳值與傳址 (傳值篇) |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">認識 const 的特性</span>
+            <span class="title-hover-animation">JS 中的傳值與傳址 (傳值篇)</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 13:34:11</span>
-        <span class="mobile">2021-12-16 13:34</span>
+        <span class="pc">2021-12-16 18:33:49</span>
+        <span class="mobile">2021-12-16 18:33</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,11 +183,15 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94/">變數與記憶體</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5/">資料型別</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/">原始型別</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,31 +226,39 @@
         
 
         <div class="article-content markdown-body">
-            <img src="https://miro.medium.com/max/1400/0*g1_rI1aLr_8A20xB">
+            <h3 id="理解傳值和傳址最重要的三大關鍵"><a href="#理解傳值和傳址最重要的三大關鍵" class="headerlink" title="理解傳值和傳址最重要的三大關鍵"></a>理解傳值和傳址最重要的三大關鍵</h3><ol>
+<li>必須先能分清楚「值」有分<code>物件型別</code>、<code>原始型別</code></li>
+<li>變數在賦予值的時候，電腦記憶體空間是如何運作的</li>
+<li>有沒有進行「重新賦予值」這個動作</li>
+</ol>
+<p>基本上掌握這三點，那麽這個問題大概就先理清了一大半。<br>所以，在要回答這個問題之前，是不是應該先問，什麼是<code>值</code>？</p>
+<h3 id="什麼是「值」-Value-？"><a href="#什麼是「值」-Value-？" class="headerlink" title="什麼是「值」(Value)？"></a>什麼是「值」(Value)？</h3><p>先前在分辨 null 與 undefined 的差異這篇文章內，已討論過何謂「值」。<br>所謂的「值」，就是在變數裡存進去的一筆資料，而這資料又分為物件型別與原始型別，可參考以下示意圖。</p>
+<img src="https://miro.medium.com/max/700/1*9QnbDRDVvwmrWXmZ-0Sg5g.png">
 
-<h3 id="const-的使用時機"><a href="#const-的使用時機" class="headerlink" title="const 的使用時機"></a>const 的使用時機</h3><p>用 const 來宣告的變數，被稱為「常數 (constant) 」，常數只可被讀取，但不允許更動。</p>
-<p>那什麼時機會用到 const 來宣告一個變數呢？例如：天上有一個太陽，太陽的數量是恆常不變的、或是一筆商品的定價，或任何你在開發上不希望被更動的資料等。</p>
-<h3 id="const-宣告的變數特性"><a href="#const-宣告的變數特性" class="headerlink" title="const 宣告的變數特性"></a>const 宣告的變數特性</h3><h4 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h4><p>const 與 let 一樣，兩者所宣告的變數都是存在於區塊作用域，因此在 { } 外，將讀取不到值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">const</span> today = <span class="string">&#x27;2021/10/13&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(today);  <span class="comment">// 顯示 today is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="不可重複宣告同一個變數及重新賦予值"><a href="#不可重複宣告同一個變數及重新賦予值" class="headerlink" title="不可重複宣告同一個變數及重新賦予值"></a>不可重複宣告同一個變數及重新賦予值</h4><p>const 宣告過的變數，除了不可再一次用 const 重複宣告，也不可再重新賦予值。</p>
-<p>當以 const 宣告 sunNum 這個變數，並賦予值為 1，又要再一次用 const 宣告這個變數的時候，主控台回傳告知 sunNum 這個變數已經被宣告過了。</p>
-<p>接下來，如果要將 sunNum 重新賦予值為 100 的時候，也會得到主控台回傳「賦予值到常數」這個動作的報錯。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">2</span>; </span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Identifier &#x27;sunNum&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sunNum = <span class="number">100</span>; </span><br><span class="line"><span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br>
-<br>
+<h4 id="如何運用「值」？"><a href="#如何運用「值」？" class="headerlink" title="如何運用「值」？"></a>如何運用「值」？</h4><p>舉例來說，今天有一個人名叫 Karen，他說他目前最喜歡的歌手叫做 Bruno Major，<br>這一筆資料的值是一個人名，型別是<code>字串</code>。<br>於是，Karen 最喜歡的歌手是 Bruno Major 這一筆資料，就儲存在 karenFavoriteSinger 這個變數裡了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> karenFavoriteSinger = <span class="string">&#x27;Bruno Major&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="參考資料與圖片出處："><a href="#參考資料與圖片出處：" class="headerlink" title="參考資料與圖片出處："></a>參考資料與圖片出處：</h3><ul>
-<li>JavaScript 變數作用域 Variable Scope</li>
-<li>JavaScript 那個 let, const, var 到底差在哪？</li>
-<li>語法與型別</li>
-<li>[JS學徒特訓班] JavaScript ES6 : var, let, const 差異</li>
-<li>Why don’t we use var anymore?</li>
-<li>Var, Let, and Const — What’s the Difference?</li>
-<li>How JavaScript variable scoping is just like multiple levels of government</li>
-<li>[JavaScript] Javascript 的作用域 (Scope) 與範圍鏈 (Scope Chain)：往外找</li>
-<li>02 var、let、const 與 ES6 簡介</li>
-<li>我知道你懂 hoisting，可是你了解到多深？</li>
-<li>Photo credit to David Monje on Unsplash</li>
+<h4 id="什麼是「傳值」？"><a href="#什麼是「傳值」？" class="headerlink" title="什麼是「傳值」？"></a>什麼是「傳值」？</h4><p>此時，又來了一個 Karen 的同學 Yang，Yang 說好巧啊，他最喜歡的歌手也是 Bruno Major！<br>所以他們兩個都很喜歡同一個歌手，於是可以這樣寫：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> yangFavoriteSinger = karenFavoriteSinger; <span class="comment">//傳值 </span></span><br><span class="line"><span class="built_in">console</span>.log(yangFavoriteSinger); <span class="comment">// 回傳 Bruno Major</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>又過了幾天，Karen 突然在 Watermelon Music 聽到了一首超棒的歌，<br>噢，結果他很興高采烈地跟 Yang 分享這件事，他對天空大聲高喊說，<br>他發現突然已經沒那麼喜歡 Bruno Major 了，現在他最喜歡的歌手是 Robbie Williams，於是可以這樣寫：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">karenFavoriteSinger = <span class="string">&#x27;Robbie Williams&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>現在，讓我們再度回過頭檢視 karenFavoriteSinger 和 yangFavoriteSinger 這兩個變數吧！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(karenFavoriteSinger); <span class="comment">//回傳 Robbie Williams </span></span><br><span class="line"><span class="built_in">console</span>.log(yangFavoriteSinger); <span class="comment">// 仍然回傳 Bruno Major</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所以「傳值」這件事，其實可以理解為，Karen 和 Yang 曾經有過共同喜歡的歌手，<br>但後來雖然 Karen 變了，他喜歡的跟 Yang 不同了，但是，Yang 是個有主見的人，他並不需要跟著一起改變啊！</p>
+<p>然而，這個現象背後的原理是：<br>當變數每一次被賦予一個新的值，電腦都會<strong>開一個記憶體來儲存這個值</strong>，並重新將變數指向這個記憶體。</p>
+<h4 id="兩步驟拆解「傳值」："><a href="#兩步驟拆解「傳值」：" class="headerlink" title="兩步驟拆解「傳值」："></a>兩步驟拆解「傳值」：</h4><ol>
+<li>電腦「複製」一個完完全全相同的值</li>
+<li>電腦同時新開一個記憶體空間儲存這個值，並把變數 yangFavoriteSinger 指向到這個值過去，最後，值都是儲存在各自獨立的記憶體空間。</li>
+</ol>
+<p>既然傳值後，值都是儲存在各自獨立的記憶體空間，那麼當變數重新賦予一個新的值，自然也會再依循剛剛的兩個步驟再走一次。</p>
+<img src="https://miro.medium.com/max/700/1*xrNFpSC7DzNomCChxKKz0w.png">
+
+<h4 id="小結：傳值的兩個重點"><a href="#小結：傳值的兩個重點" class="headerlink" title="小結：傳值的兩個重點"></a>小結：傳值的兩個重點</h4><ul>
+<li>傳值所指的「值」都是屬於原始資料型別 (Primitive Type)。</li>
+<li>傳值有一個很關鍵的重點是「複製」，複製後在記憶體空間中，兩個變數的值都是獨立存在不同的記憶體之中，因此，就算其中一方突然改變心意，各自都還是獨立個體，並不互相影響。</li>
 </ul>
 
         </div>
@@ -269,13 +281,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/%E8%AA%8D%E8%AD%98%20undefined%20%E8%88%87%20null%20%E7%9A%84%E5%9E%8B%E5%88%A5/"
+                           href="/2021/12/16/JS-%E4%B8%AD%E7%9A%84%E5%82%B3%E5%80%BC%E8%88%87%E5%82%B3%E5%9D%80-%E5%82%B3%E5%9D%80%E7%AF%87/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">認識 undefined 與 null 的型別</span>
+                                <span class="post-nav-title-item">JS 中的傳值與傳址 (傳址篇)</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -285,10 +297,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E6%AF%94%E8%BC%83%20var%20%E8%88%87%20let%20%E7%9A%84%20hoisting/"
+                           href="/2021/12/16/%E8%AA%8D%E8%AD%98%20undefined%20%E8%88%87%20null%20%E7%9A%84%E5%9E%8B%E5%88%A5/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">比較 var 與 let 的 hoisting</span>
+                                <span class="post-nav-title-item">認識 undefined 與 null 的型別</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -413,7 +425,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">const 的使用時機</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E5%AE%A3%E5%91%8A%E7%9A%84%E8%AE%8A%E6%95%B8%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">const 宣告的變數特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.</span> <span class="nav-text">區塊作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E5%90%8C%E4%B8%80%E5%80%8B%E8%AE%8A%E6%95%B8%E5%8F%8A%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">不可重複宣告同一個變數及重新賦予值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E5%9C%96%E7%89%87%E5%87%BA%E8%99%95%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">參考資料與圖片出處：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%82%B3%E5%80%BC%E5%92%8C%E5%82%B3%E5%9D%80%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%89%E5%A4%A7%E9%97%9C%E9%8D%B5"><span class="nav-number">1.</span> <span class="nav-text">理解傳值和傳址最重要的三大關鍵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E3%80%8C%E5%80%BC%E3%80%8D-Value-%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什麼是「值」(Value)？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%8B%E7%94%A8%E3%80%8C%E5%80%BC%E3%80%8D%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">如何運用「值」？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E3%80%8C%E5%82%B3%E5%80%BC%E3%80%8D%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">什麼是「傳值」？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A9%E6%AD%A5%E9%A9%9F%E6%8B%86%E8%A7%A3%E3%80%8C%E5%82%B3%E5%80%BC%E3%80%8D%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">兩步驟拆解「傳值」：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90%EF%BC%9A%E5%82%B3%E5%80%BC%E7%9A%84%E5%85%A9%E5%80%8B%E9%87%8D%E9%BB%9E"><span class="nav-number">2.4.</span> <span class="nav-text">小結：傳值的兩個重點</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

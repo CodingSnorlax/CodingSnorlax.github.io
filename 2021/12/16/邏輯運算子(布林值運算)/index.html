@@ -9,7 +9,7 @@
     
     <title>
         
-            認識 const 的特性 |
+            邏輯運算子 (布林值運算) |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">認識 const 的特性</span>
+            <span class="title-hover-animation">邏輯運算子 (布林值運算)</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 13:34:11</span>
-        <span class="mobile">2021-12-16 13:34</span>
+        <span class="pc">2021-12-16 19:25:52</span>
+        <span class="mobile">2021-12-16 19:25</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,11 +183,7 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90/">邏輯運算子</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,32 +218,41 @@
         
 
         <div class="article-content markdown-body">
-            <img src="https://miro.medium.com/max/1400/0*g1_rI1aLr_8A20xB">
-
-<h3 id="const-的使用時機"><a href="#const-的使用時機" class="headerlink" title="const 的使用時機"></a>const 的使用時機</h3><p>用 const 來宣告的變數，被稱為「常數 (constant) 」，常數只可被讀取，但不允許更動。</p>
-<p>那什麼時機會用到 const 來宣告一個變數呢？例如：天上有一個太陽，太陽的數量是恆常不變的、或是一筆商品的定價，或任何你在開發上不希望被更動的資料等。</p>
-<h3 id="const-宣告的變數特性"><a href="#const-宣告的變數特性" class="headerlink" title="const 宣告的變數特性"></a>const 宣告的變數特性</h3><h4 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h4><p>const 與 let 一樣，兩者所宣告的變數都是存在於區塊作用域，因此在 { } 外，將讀取不到值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">const</span> today = <span class="string">&#x27;2021/10/13&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(today);  <span class="comment">// 顯示 today is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="不可重複宣告同一個變數及重新賦予值"><a href="#不可重複宣告同一個變數及重新賦予值" class="headerlink" title="不可重複宣告同一個變數及重新賦予值"></a>不可重複宣告同一個變數及重新賦予值</h4><p>const 宣告過的變數，除了不可再一次用 const 重複宣告，也不可再重新賦予值。</p>
-<p>當以 const 宣告 sunNum 這個變數，並賦予值為 1，又要再一次用 const 宣告這個變數的時候，主控台回傳告知 sunNum 這個變數已經被宣告過了。</p>
-<p>接下來，如果要將 sunNum 重新賦予值為 100 的時候，也會得到主控台回傳「賦予值到常數」這個動作的報錯。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> sunNum = <span class="number">2</span>; </span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Identifier &#x27;sunNum&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sunNum = <span class="number">100</span>; </span><br><span class="line"><span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br>
-<br>
-
-<h3 id="參考資料與圖片出處："><a href="#參考資料與圖片出處：" class="headerlink" title="參考資料與圖片出處："></a>參考資料與圖片出處：</h3><ul>
-<li>JavaScript 變數作用域 Variable Scope</li>
-<li>JavaScript 那個 let, const, var 到底差在哪？</li>
-<li>語法與型別</li>
-<li>[JS學徒特訓班] JavaScript ES6 : var, let, const 差異</li>
-<li>Why don’t we use var anymore?</li>
-<li>Var, Let, and Const — What’s the Difference?</li>
-<li>How JavaScript variable scoping is just like multiple levels of government</li>
-<li>[JavaScript] Javascript 的作用域 (Scope) 與範圍鏈 (Scope Chain)：往外找</li>
-<li>02 var、let、const 與 ES6 簡介</li>
-<li>我知道你懂 hoisting，可是你了解到多深？</li>
-<li>Photo credit to David Monje on Unsplash</li>
+            <h3 id="邏輯運算子簡介"><a href="#邏輯運算子簡介" class="headerlink" title="邏輯運算子簡介"></a>邏輯運算子簡介</h3><p>邏輯運算子的三種符號</p>
+<ul>
+<li><code>&amp;&amp;</code> (and)：當所有用 &amp;&amp; 連接的條件都是 true，就回傳 true，否則回傳 false</li>
+<li><code>||</code> (or)：所有用 || 連接的條件，只要其中有一個是 true，就回傳 true</li>
+<li><code>!</code> (not)：!true 會回傳 false，而 !false 會回傳 true</li>
 </ul>
+<h3 id="短路求值-short-circuit-evaluation"><a href="#短路求值-short-circuit-evaluation" class="headerlink" title="短路求值 (short-circuit evaluation)"></a>短路求值 (short-circuit evaluation)</h3><h5>根據 MDN 文件的定義</h5>
+
+<p><code>邏輯運算子</code>通常被用於布林值；使用於布林值時，它們會回傳布林型態的值。<br>然而，&amp;&amp; 和 || 運算子實際上是回傳兩指定運算元之一，<br>因此用於<code>非布林型態值</code>時，它可能會回傳一個非布林型態的值。</p>
+<p>而上述這段話大概又可以再拆解出下面這兩個問題：</p>
+<ol>
+<li>什麼叫做短路求值？</li>
+<li>布林值、真值、虛值到底怎麼分？</li>
+</ol>
+<h4 id="何謂短路求值？"><a href="#何謂短路求值？" class="headerlink" title="何謂短路求值？"></a>何謂短路求值？</h4><p>根據 MDN 的解釋：<br>Short-circuit evaluation<br>As logical expressions are evaluated left to right, they are tested for possible “short-circuit” evaluation using the following rules:<br>false &amp;&amp; anything is short-circuit evaluated to false.<br>true || anything is short-circuit evaluated to true.<br>The rules of logic guarantee that these evaluations are always correct. Note that the anything part of the above expressions is not evaluated, so any side effects of doing so do not take effect.</p>
+<p>也就是說：</p>
+<ol>
+<li>邏輯運算子的運算順序是：由左至右。</li>
+<li>在 &amp;&amp; 的運算中，可求出為 false 的值。</li>
+<li>在 || 的運算中，可求出為 true 的值。</li>
+</ol>
+<h4 id="amp-amp-邏輯運算子的短路求值"><a href="#amp-amp-邏輯運算子的短路求值" class="headerlink" title="&amp;&amp; 邏輯運算子的短路求值"></a>&amp;&amp; 邏輯運算子的短路求值</h4><p>舉例說明：<br>從 MDN 已經知道定義了。但假如有 2 個以上的布林值用 &amp;&amp; 運算呢？這樣看可能會更清楚。<br>從以下四個印出的結果，可以想像，&amp;&amp; 的運算過程只要遇到 false 就跳出停止，同時得到 false。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> &amp;&amp; <span class="literal">true</span>); <span class="comment">//回傳 true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">false</span> &amp;&amp; <span class="literal">true</span>); <span class="comment">//回傳 false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> &amp;&amp; <span class="literal">false</span> &amp;&amp; <span class="literal">true</span>); <span class="comment">//回傳 false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> &amp;&amp; <span class="literal">true</span> &amp;&amp; <span class="literal">false</span> &amp;&amp; <span class="literal">true</span>); <span class="comment">//回傳 false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="邏輯運算子的短路求值"><a href="#邏輯運算子的短路求值" class="headerlink" title="|| 邏輯運算子的短路求值"></a>|| 邏輯運算子的短路求值</h4><p>在遇到都是 false 的情況下，|| 才回傳 false；反之，只要有一個 true 就會回傳 true。<br>但假如有兩個以上的布林值用 || 運算呢？那結果又會如何？<br>從以下印出的結果，一樣可以想像為，|| 的運算過程只要遇到 true 就跳出停止，同時得到 true 的結果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> || <span class="literal">true</span>); <span class="comment">//回傳 true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">false</span> || <span class="literal">false</span>); <span class="comment">//回傳 false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> || <span class="literal">false</span>); <span class="comment">//回傳 true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">false</span> || <span class="literal">true</span> || <span class="literal">false</span>); <span class="comment">//回傳 true (在第二個true跳出)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">false</span> &amp;&amp; <span class="literal">false</span> &amp;&amp; <span class="literal">true</span> &amp;&amp; <span class="literal">true</span>); <span class="comment">// true(在第三個true跳出)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h4><p>看到這邊，大概可以歸納出何謂「短路賦值」：</p>
+<ul>
+<li><p>邏輯運算子 &amp;&amp; 的運算過程:<br>會是由左至右，回傳第一個是 falsy 的值。若皆為 truthy，則回傳最後一個值。</p>
+</li>
+<li><p>邏輯運算子 || 的運算過程:<br>會是由左至右，回傳第一個是 truthy 的值。若皆為 falsy，則回傳最後一個值。</p>
+</li>
+</ul>
+<p>以上的部分，都是邏輯運算子的布林值運算，但如果要運算<code>非布林值</code>的時候，又該如何判斷 true 或 false?<br>因此下一篇將著重解釋非布林型態的值，並會探討<code>真值 truthy</code> 及<code>虛值 falsy</code>。</p>
 
         </div>
 
@@ -269,13 +274,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/%E8%AA%8D%E8%AD%98%20undefined%20%E8%88%87%20null%20%E7%9A%84%E5%9E%8B%E5%88%A5/"
+                           href="/2021/12/16/%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90(%E9%9D%9E%E5%B8%83%E6%9E%97%E5%80%BC%E9%81%8B%E7%AE%97)/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">認識 undefined 與 null 的型別</span>
+                                <span class="post-nav-title-item">邏輯運算子 (非布林值運算)</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -285,10 +290,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E6%AF%94%E8%BC%83%20var%20%E8%88%87%20let%20%E7%9A%84%20hoisting/"
+                           href="/2021/12/16/JS-%E4%B8%AD%E7%9A%84%E5%82%B3%E5%80%BC%E8%88%87%E5%82%B3%E5%9D%80-%E5%82%B3%E5%9D%80%E7%AF%87/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">比較 var 與 let 的 hoisting</span>
+                                <span class="post-nav-title-item">JS 中的傳值與傳址 (傳址篇)</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -413,7 +418,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">const 的使用時機</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-%E5%AE%A3%E5%91%8A%E7%9A%84%E8%AE%8A%E6%95%B8%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">const 宣告的變數特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.</span> <span class="nav-text">區塊作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E5%90%8C%E4%B8%80%E5%80%8B%E8%AE%8A%E6%95%B8%E5%8F%8A%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">不可重複宣告同一個變數及重新賦予值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E5%9C%96%E7%89%87%E5%87%BA%E8%99%95%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">參考資料與圖片出處：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">邏輯運算子簡介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC-short-circuit-evaluation"><span class="nav-number">2.</span> <span class="nav-text">短路求值 (short-circuit evaluation)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.0.1.</span> <span class="nav-text">根據 MDN 文件的定義</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%95%E8%AC%82%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">何謂短路求值？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#amp-amp-%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">&amp;&amp; 邏輯運算子的短路求值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text">|| 邏輯運算子的短路求值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">2.4.</span> <span class="nav-text">小結</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
