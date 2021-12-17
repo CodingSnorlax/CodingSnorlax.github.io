@@ -9,7 +9,7 @@
     
     <title>
         
-            比較 var 與 let 的作用域 |
+            同時搜尋到圖與文字：以 h1 包覆 logo |
         
         Karen&#39;s Coding Notes
     </title>
@@ -21,7 +21,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":false},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">比較 var 與 let 的作用域</span>
+            <span class="title-hover-animation">同時搜尋到圖與文字：以 h1 包覆 logo</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 12:32:16</span>
-        <span class="mobile">2021-12-16 12:32</span>
+        <span class="pc">2021-12-16 11:34:20</span>
+        <span class="mobile">2021-12-16 11:34</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -179,15 +179,15 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        <a href="/categories/CSS/">CSS</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
+                        &gt; <a href="/categories/CSS/%E8%83%8C%E6%99%AF/">背景</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                        &gt; <a href="/categories/CSS/logo/">logo</a>&nbsp;
                     </li>
                 
             </ul>
@@ -199,7 +199,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                        <a href="/tags/CSS/">CSS</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,24 +222,28 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="var-與-let-比一比"><a href="#var-與-let-比一比" class="headerlink" title="var 與 let 比一比"></a>var 與 let 比一比</h3><p>用 let 所宣告的變數範圍又更為聚焦、比 var 更為嚴謹。</p>
-<h4 id="let-的區塊作用域"><a href="#let-的區塊作用域" class="headerlink" title="let 的區塊作用域"></a>let 的區塊作用域</h4><p>這邊以 let 在 if 條件式內宣告一個變數，並發現：<br>以 let 宣告的變數只能在<code>大括號的範圍內</code>被讀取，在大括號以外就無法取得變數的值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tellMyFavoriteSingerLately</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> nameOfTheSinger = <span class="string">&#x27;Bruno Major&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(nameOfTheSinger, <span class="string">&#x27;(使用let來宣告的變數，印出的位置在區塊作用域之內)&#x27;</span>);</span><br><span class="line">    <span class="comment">// 顯示 Bruno Major (使用let來宣告的變數，印出的位置在區塊作用域之內)</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">console</span>.log(nameOfTheSinger, <span class="string">&#x27;(使用let來宣告的變數，印出的位置在函式作用域之內)&#x27;</span>); </span><br><span class="line">    <span class="comment">// nameOfTheSinger is not defined</span></span><br><span class="line"> </span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line"> tellMyFavoriteSingerLately();</span><br><span class="line"> <span class="built_in">console</span>.log(nameOfTheSinger, <span class="string">&#x27;(印出的位置在函式作用域之外)&#x27;</span>); </span><br><span class="line"> <span class="comment">// nameOfTheSinger is not defined</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <p>當在撰寫網頁時，如果想用 h1 標籤來包覆 logo 圖片，HTML 結構會是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;＃&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span>&gt;</span>Karen&#x27;s Coding Notes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><code>備註</code><br>if 判斷式及 for、while 迴圈皆有大括號語法。</p>
-<h4 id="var-的函式作用域"><a href="#var-的函式作用域" class="headerlink" title="var 的函式作用域"></a>var 的函式作用域</h4><p>這邊以 var 在 if 條件式內宣告一個變數，並發現：</p>
+<p>而在 CSS 則可以考慮選用 background-image 來置入 logo 圖片：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;https://reurl.cc/mLX1AM&#x27;</span>)</span><br><span class="line">  background-repeat: no-repeat;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">262px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">262px</span>;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#888</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此時，在瀏覽器上會顯示 logo 圖案，且在圖片之上也會顯示 a 標籤內的文字 Karen’s Coding Notes：<br><img src="https://i.imgur.com/EeXpz53.png"></p>
+<p>到這裡，問題出現了，既然會用 h1 來包覆 logo 圖示，是代表 logo 被認定為這一頁的重要資訊，因為在網頁 SEO 的規則中，h1 意味著主要標題，一個網頁中也只能有一個。</p>
+<p>若 h1 是重要資訊，而爬蟲程式卻讀不到標籤內有文字，將會判定不符合 SEO 規定，因此內容不可空白。</p>
+<p>因此我們的目標是：</p>
 <ul>
-<li>在 if 條件式的大括號以外，依然可以讀取得到這個用 var 宣告的變數。</li>
-<li>var 宣告的變數，它的作用域範圍在<code>整個函式之內</code>，而在函式之外，就讀不到值了，故顯示 <code>not defined</code>。</li>
+<li>在網頁架構中同時有 logo 圖示與字</li>
+<li>實際在頁面上又只顯示圖示而不要看見字</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tellMyFavoriteSingerLately</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> nameOfTheSinger = <span class="string">&#x27;Bruno Major&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(nameOfTheSinger, <span class="string">&#x27;(用var宣告變數，印出的位置在函式作用域之內)&#x27;</span>); </span><br><span class="line">		<span class="comment">// 顯示 Bruno Major (用var來宣告的變數，印出的位置在函式作用域之內)</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">tellMyFavoriteSingerLately();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nameOfTheSinger, <span class="string">&#x27;(印出的位置在函式作用域之外)&#x27;</span>); </span><br><span class="line"><span class="comment">// nameOfTheSinger is not defined</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="var-函式作用域的潛在問題"><a href="#var-函式作用域的潛在問題" class="headerlink" title="var 函式作用域的潛在問題"></a>var 函式作用域的潛在問題</h4><p>為什麼在 ES6 問世後，越來越少人用 var 來宣告變數？究竟原因為何？</p>
-<p>我們或許可試著從接下來的範例來窺知一二：</p>
-<p>假如在全域範圍(程式碼第 2 行)先以 var 宣告一個變數 myCarColor 賦予值為 ‘red’，在 if 判斷式內又再一次宣告 myCarColor 並賦予值為 ‘black’，最後印出 myCarColor 得到的結果，是 ‘black’。</p>
-<p>由此可得知，以 var 宣告的變數，在這些有大括號 { } 的程式碼（像是 if 判斷式及 for、while 迴圈）作用域範圍不夠精確，將導致大括號內的程式碼會污染到全域變數的問題。</p>
-<p>這就不難了解為什麼在 ES6 後，越來越多人愛用 let &amp; const 來宣告變數了。但理解 var 的性質仍是必要的，因為總難免會遇到需要維護舊程式碼的情況。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> myCarColor = <span class="string">&quot;red&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> myCarColor = <span class="string">&quot;black&quot;</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(myCarColor) <span class="comment">// 顯示 black</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>由於 h1 本身就是一個區塊元素，那麼便可以考慮將文字推出區塊元素的原理，來進行文字的挪移。</p>
+<p>做法：</p>
+<ul>
+<li>用 text-indent: 101% 將文字推出 h1 之外</li>
+<li>用 overflow: hidden 將溢出區塊的部分都隱藏起來</li>
+<li>用 white-space: nowrap 強制這一串文字不換行</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;https://reurl.cc/mLX1AM&#x27;</span>);</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">262px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">262px</span>;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#888</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*  將文字推出 &lt;h1&gt;  */</span></span><br><span class="line">  <span class="attribute">text-indent</span>: <span class="number">101%</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -248,7 +252,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                        <a href="/tags/CSS/">#CSS</a>&nbsp;
                     </li>
                 
             </ul>
@@ -260,13 +264,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E6%AF%94%E8%BC%83%20var%20%E8%88%87%20let%20%E7%9A%84%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A/"
+                           href="/2021/12/16/%E6%B4%BB%E7%94%A8%20CSS%20backgrounds%20%E5%81%9A%E6%BB%BF%E7%89%88%E8%83%8C%E6%99%AF%20(%E4%B8%8A)/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">比較 var 與 let 的重複宣告</span>
+                                <span class="post-nav-title-item">活用 CSS backgrounds 做滿版背景 (上)</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -276,10 +280,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/var,%20let,%20const%EF%BC%9A%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F/"
+                           href="/2021/12/15/%E5%90%8C%E5%B1%A4%E9%81%B8%E5%8F%96%E5%99%A8%EF%BC%9F%E5%90%8C%E5%B1%A4%E7%9B%B8%E9%84%B0%E9%81%B8%E5%8F%96%E5%99%A8%EF%BC%9F/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">淺談變數與它們的作用域</span>
+                                <span class="post-nav-title-item">同層選取器？同層相鄰選取器？</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -404,7 +408,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#var-%E8%88%87-let-%E6%AF%94%E4%B8%80%E6%AF%94"><span class="nav-number">1.</span> <span class="nav-text">var 與 let 比一比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#let-%E7%9A%84%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.1.</span> <span class="nav-text">let 的區塊作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#var-%E7%9A%84%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.2.</span> <span class="nav-text">var 的函式作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#var-%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%BD%9B%E5%9C%A8%E5%95%8F%E9%A1%8C"><span class="nav-number">1.3.</span> <span class="nav-text">var 函式作用域的潛在問題</span></a></li></ol></li></ol>
+        
     </div>
 </div>
         </aside>

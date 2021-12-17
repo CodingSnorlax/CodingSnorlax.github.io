@@ -19,7 +19,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":false},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -165,6 +165,233 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2021/12/17/%E6%93%8D%E4%BD%9C%20HTML%20%E5%B1%AC%E6%80%A7%20(2)%20getAttribute%20%E7%94%A8%E4%BE%86%E5%8F%96%E5%80%BC/">
+                        操作 HTML 屬性 (2) getAttribute 用來取值
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        
+
+
+
+getAttribute 用來取值getAttribute 是透過選取 element 的屬性名稱，得到屬性的值，既然是回傳一個值，因此 getAttribute 其實就是可以用來取值和組資料的！(關於 getAttribute 取值的部分會...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 21:15:05 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/%E6%93%8D%E4%BD%9C%20HTML%20%E5%B1%AC%E6%80%A7%20(2)%20getAttribute%20%E7%94%A8%E4%BE%86%E5%8F%96%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/12/17/%E6%93%8D%E4%BD%9C%20HTML%20%E5%B1%AC%E6%80%A7%20(1)%20setAttribute%20%E6%9B%B4%E6%94%B9%E5%B1%AC%E6%80%A7%E8%88%87%E5%80%BC/">
+                        操作 HTML 屬性 (1) setAttribute 增設屬性與值
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        
+
+
+
+setAttribute 增設屬性與值setAttribute 是可以同時用來增設 HTML 元素上的屬性以及屬性的值，由於這樣的特性，setAttribute 可以用來做很多事。
+
+
+setAttribute 的寫法123element.s...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 20:53:32 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/%E6%93%8D%E4%BD%9C%20HTML%20%E5%B1%AC%E6%80%A7%20(1)%20setAttribute%20%E6%9B%B4%E6%94%B9%E5%B1%AC%E6%80%A7%E8%88%87%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/12/17/%E5%B1%AC%E6%80%A7%E9%81%B8%E5%8F%96%E6%96%B9%E5%BC%8F/">
+                        querySelectorAll 搭配屬性選取器
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        CSS 屬性選取器的長相：[ ]根據 MDN 的解釋 
+
+中文版CSS 屬性選擇器通過已經存在的屬性名或屬性值配對到元素。 
+
+
+英文版The CSS attribute selector matches elements based on the ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 14:54:46 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/%E5%B1%AC%E6%80%A7%E9%81%B8%E5%8F%96%E6%96%B9%E5%BC%8F/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/12/17/DOM%20API(%E4%BA%8C)/">
+                        DOM API(二)：getElement(s)By-* 系列與 HTMLCollection 物件
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        
+
+在前一篇認識了 querySelector 及 querySelectorAll，而本篇要解釋的是選取 DOM 的 getElement(s)By-* 系列，並互相比較這兩種方法選取的 DOM 集合，有何不同。
+
+
+getElementById ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 09:25:27 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/DOM%20API(%E4%BA%8C)/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/12/17/DOM%20API(%E4%B8%80)/">
+                        DOM API(一)：querySelector、querySelectorAll
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        在寫 JavaScript 的時候，要綁定 DOM 一定會頻繁用到 querySelector 和 querySelectorAll，因此這篇要來紀錄一下這兩者的用法，以下也搭配 DOM 結構的示意圖。
+
+
+
+querySelector (選取 1 ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 09:23:49 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/DOM%20API(%E4%B8%80)/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/12/17/%E4%BB%80%E9%BA%BC%E6%98%AF%20DOM%EF%BC%9ADOM%20API%20%E7%9A%84%E8%83%8C%E5%BE%8C%E5%8E%9F%E7%90%86/">
+                        什麼是 DOM：DOM API 的背後原理
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        如何選取 DOM選取 DOM 的方式，我們可以透過以下幾種選取器：
+
+querySeletor()
+querySeletorAll()
+getElementByTagName()
+getElementByClassName()
+getElementB...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 08:30:18 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/%E4%BB%80%E9%BA%BC%E6%98%AF%20DOM%EF%BC%9ADOM%20API%20%E7%9A%84%E8%83%8C%E5%BE%8C%E5%8E%9F%E7%90%86/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/12/17/%E4%BB%80%E9%BA%BC%E6%98%AF%20DOM%EF%BC%9ADOM%20%E8%88%87%E5%AE%83%E7%9A%84%E7%AF%80%E9%BB%9E/">
+                        什麼是 DOM：DOM 與它的節點
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        網頁的 Document這篇主要在介紹什麼是 DOM (文件物件模型)。但在開始探討 DOM 之前，不得不先提到 document！網頁開發經常看到的 document 其實是一包物件，只要在 dev tool 上面輸入 document，就會看到 ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 08:28:18 GMT+0800">2021-12-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/12/17/%E4%BB%80%E9%BA%BC%E6%98%AF%20DOM%EF%BC%9ADOM%20%E8%88%87%E5%AE%83%E7%9A%84%E7%AF%80%E9%BB%9E/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2021/12/16/%E7%89%A9%E4%BB%B6%E5%8F%96%E5%80%BC%EF%BC%9A%E7%94%A8%E6%96%B9%E6%8B%AC%E8%99%9F%E5%8F%96%E5%80%BC/">
                         物件取值：用方括號取值
                     </a>
@@ -173,7 +400,9 @@
                 <div class="home-article-content markdown-body">
                     
                         用方括號取值 (Bracket notation)obj[value]透過方括號的物件取值，value 可以視為是一個字串(透過單或雙引號包裹的一個字串、數字或布林)，而我們可以透過此一特性，在物件中代入一個字串或一個變數。
-在 [ ] 帶入字串12...
+
+
+在 [ ] 帶入字串...
                     
                 </div>
 
@@ -233,7 +462,9 @@
                         在開始看物件取值之前，再看一看物件的基本定義吧！
 物件的結構屬性(key) ：用來取得資料的「位置」。值(value) ：有不同型別。
 在物件內，沒有順序性，只有屬性名稱與值。
-物件的功能物件是 JavaScript 的物件型別之一，理解它的方法就跟...
+
+
+物件的功能物件是 JavaScript 的物件型別之一，理解它的方法...
                     
                 </div>
 
@@ -245,218 +476,6 @@
     </div>
 
     <a href="/2021/12/16/JS%20%E7%89%A9%E4%BB%B6(object)%20%E7%9A%84%E5%9F%BA%E7%A4%8E%E8%A7%80%E5%BF%B5/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/%E8%AA%8D%E8%AD%98-switch-%E7%9A%84%E7%94%A8%E6%B3%95/">
-                        認識 switch 的用法
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        switch 的基本結構主要由 switch, case, break 和 default 組成。
-switch 的 (  )switch 的 ( ) 內，主要是一個變數，而變數的值可能是字串、布林值、數字、null、undefined，而這個變數將...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 21:52:06 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/%E8%AA%8D%E8%AD%98-switch-%E7%9A%84%E7%94%A8%E6%B3%95/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/if-%E5%88%A4%E6%96%B7%E5%BC%8F%E7%9A%84%E8%9C%82%E5%B7%A2%E7%B5%90%E6%A7%8B/">
-                        if 判斷式的巢狀結構
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        if 判斷式的結構
-由 if 和 else 組成，但若沒有 else，程式碼依然能夠執行。
-可透過比較運算子、邏輯運算子的運算得出 true 或 false。
-可轉換非布林值的值，除了 falsy 值以外的值 (空字串、數字0、NaN、null、un...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 21:51:44 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/if-%E5%88%A4%E6%96%B7%E5%BC%8F%E7%9A%84%E8%9C%82%E5%B7%A2%E7%B5%90%E6%A7%8B/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/if-%E5%92%8C-switch-%E7%9A%84%E5%B7%AE%E7%95%B0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F/">
-                        switch 和 if 的差異和使用時機
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        這一篇主要在探討 JavaScript 中的 switch (switch-case) 和 if 判斷式(if-else statement) 之間有什麼異同，又應該如何判斷選用的時機？
-比較 switch 和 if 的運算過程首先，兩者在外觀上就有...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 21:40:17 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/if-%E5%92%8C-switch-%E7%9A%84%E5%B7%AE%E7%95%B0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E7%AF%87/">
-                        強制轉型 (3) 數字型別與轉型規則篇
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        繼強制轉型的布林值、字串篇之後，本篇主要在歸納數字型別的強制轉型，並找出隱性轉型背後的原理。
-數字型別的顯性與隱性轉型強制轉型的三大規則：
-
-強制轉型有分顯性轉型(explicit coercion)及隱性轉型(implicit coercion)。...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 20:08:48 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E7%AF%87/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%AD%97%E4%B8%B2%E7%AF%87/">
-                        強制轉型 (2) 字串篇
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        字串的顯性與隱性轉型強制轉型的三大規則：
-
-強制轉型有分顯性轉型(explicit coercion)及隱性轉型(implicit coercion)。
-強制轉型將轉出：布林值、字串、數字。
-原始型別和物件型別這兩種值的轉換邏輯會不大一樣。(但目前只...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 20:08:19 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%AD%97%E4%B8%B2%E7%AF%87/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%B8%83%E6%9E%97%E5%80%BC%E7%AF%87/">
-                        強制轉型 (1) 布林值篇
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        JS 的強制轉型要開始探討 JavaScript 的強制轉型（coercion），也一樣是在談資料型別間如何轉換的問題。但因為不太可能記起所有的轉型變化，只能盡可能地去理解轉型的規則了。
-強制轉型的三大規則：
-
-強制轉型有分顯性轉型(explicit...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 20:08:00 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%B8%83%E6%9E%97%E5%80%BC%E7%AF%87/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90(%E9%9D%9E%E5%B8%83%E6%9E%97%E5%80%BC%E9%81%8B%E7%AE%97)/">
-                        邏輯運算子 (非布林值運算)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        邏輯運算子轉換布林值首先還是先回顧一下，依照最基礎定義，&amp;&amp; 和 || 在運算「純」布林值的時候，會回傳 true、false，最基礎可發展出這八種變化：
-12345678910console.log(true &amp;&amp; ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 19:27:57 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90(%E9%9D%9E%E5%B8%83%E6%9E%97%E5%80%BC%E9%81%8B%E7%AE%97)/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>

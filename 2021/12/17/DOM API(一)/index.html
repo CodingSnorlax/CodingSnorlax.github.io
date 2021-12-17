@@ -9,7 +9,7 @@
     
     <title>
         
-            強制轉型 (1) 布林值篇 |
+            DOM API(一)：querySelector、querySelectorAll |
         
         Karen&#39;s Coding Notes
     </title>
@@ -21,7 +21,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":false},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">強制轉型 (1) 布林值篇</span>
+            <span class="title-hover-animation">DOM API(一)：querySelector、querySelectorAll</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 20:08:00</span>
-        <span class="mobile">2021-12-16 20:08</span>
+        <span class="pc">2021-12-17 09:23:49</span>
+        <span class="mobile">2021-12-17 09:23</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,15 +183,11 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5/">資料型別</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E9%81%B8%E5%8F%96%E5%99%A8/">選取器</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/">原始型別</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B/">強制轉型</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/DOM/">DOM</a>&nbsp;
                     </li>
                 
             </ul>
@@ -226,37 +222,49 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="JS-的強制轉型"><a href="#JS-的強制轉型" class="headerlink" title="JS 的強制轉型"></a>JS 的強制轉型</h3><p>要開始探討 JavaScript 的強制轉型（coercion），也一樣是在談資料型別間如何轉換的問題。<br>但因為不太可能記起所有的轉型變化，只能盡可能地去理解轉型的規則了。</p>
-<p><strong>強制轉型的三大規則</strong>：</p>
-<ol>
-<li>強制轉型有分<code>顯性轉型(explicit coercion)</code>及隱性轉型<code>(implicit coercion)</code>。</li>
-<li>強制轉型將轉出：布林值、字串、數字。</li>
-<li>原始型別和物件型別這兩種值的轉換邏輯會不大一樣。(但目前只會先著重在紀錄原始型別的強制轉型)</li>
-</ol>
-<h3 id="強制轉型的顯性與隱性轉型"><a href="#強制轉型的顯性與隱性轉型" class="headerlink" title="強制轉型的顯性與隱性轉型"></a>強制轉型的顯性與隱性轉型</h3><p><code>顯性轉型</code> 透過<strong>手動</strong>的方式，以函式的方法轉換值的型別。<br><code>隱性轉型</code> 由 JS 主動來幫你轉。</p>
-<p>但總之，不管是人工透過函式或直接由 JS 幫你轉，最終也只會轉出<code>布林值</code>、<code>字串</code>、<code>數字</code>這三種型別。</p>
-<p>而在進入正題前，要先說明，本系列文章主要是參考 <a class="link"   target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/" >JavaScript type coercion explained<i class="fas fa-external-link-alt"></i></a> 這篇文章分類的方式，<br>再依我自己認為由簡單到複雜的程度，分別由布林值、字串、數字的順序來解釋強制轉型及其規則。</p>
-<h4 id="布林值的顯性轉型"><a href="#布林值的顯性轉型" class="headerlink" title="布林值的顯性轉型"></a>布林值的顯性轉型</h4><p>如前言所述，顯性轉型是必須以<strong>手動</strong>方式透過函式的方法來進行型別的轉換，<br>因此就以 Boolean(); 來舉例，不論是任何型別的值丟進函式 Boolean()，都會轉出布林值的結果。</p>
-<ul>
-<li>屬於 falsy 值的，透過函式則會轉出 false，</li>
-<li>屬於 truthy值的，在 Boolean() 也會轉出 true。</li>
+            <p>在寫 JavaScript 的時候，要綁定 <code>DOM</code> 一定會頻繁用到 <code>querySelector</code> 和 <code>querySelectorAll</code>，<br>因此這篇要來紀錄一下這兩者的用法，以下也搭配 DOM 結構的示意圖。<br><br><br><img src="https://miro.medium.com/max/1400/1*myiSK2p22sRBpl6gNUOeRw.png"></p>
+<br>
+<br>
+
+<h3 id="querySelector-選取-1-個-第-1-個-DOM"><a href="#querySelector-選取-1-個-第-1-個-DOM" class="headerlink" title="querySelector (選取 1 個 / 第 1 個 DOM)"></a>querySelector (選取 1 個 / 第 1 個 DOM)</h3><p>只會選取一個 <code>id</code> 或 <code>class</code>，可用來綁定單一的 id 或 class，<br>且當有多個同名的 class 時，也只會抓取其中符合條件的<code>第一個</code> class：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.js-name&#x27;</span>);</span><br><span class="line">or</span><br><span class="line"><span class="keyword">const</span> name = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#js-name&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+
+<h3 id="querySelectorAll-選取多個標籤組成-nodelist"><a href="#querySelectorAll-選取多個標籤組成-nodelist" class="headerlink" title="querySelectorAll (選取多個標籤組成 nodelist)"></a>querySelectorAll (選取多個標籤組成 nodelist)</h3><p>如它的名稱所示，既然是 querySelectorAll()，<br>根據傳入的 class 或屬性名稱，它就可以用來一次同時綁定多個同名 class 或屬性，<br>且由於一次打包很多個 tag，它將會自動幫開發者組成一個 nodelist，用法範例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-list&quot;</span>&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;</span>customer1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;</span>customer2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;</span>customer3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"><span class="keyword">const</span> customerList = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.js-customer-item&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://miro.medium.com/max/2400/1*Lac93p3DN5AC5olKJ1OuVw.png">
+
+<br>
+
+<h4 id="nodelist-的順序性"><a href="#nodelist-的順序性" class="headerlink" title="nodelist 的順序性"></a>nodelist 的順序性</h4><p>又因為 querySelectorAll 會組成一個 nodelist，<br>而 nodelist 還具備陣列<code>序列性</code>的特質，因此也可以拆解成這樣來看：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(customerList[<span class="number">0</span>]) </span><br><span class="line"><span class="built_in">console</span>.log(customerList[<span class="number">1</span>]) </span><br><span class="line"><span class="built_in">console</span>.log(customerList[<span class="number">2</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我們會得到這樣一個回傳的結果：</p>
+<img src="https://miro.medium.com/max/599/1*6R63czLR3bvT9Ow4pPkLNA.png">
+
+<p>nodelist 跟 li 對應的情形：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">customerList[<span class="number">0</span>] 對應 &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;customer1&lt;/li&gt;</span><br><span class="line">customerList[<span class="number">1</span>] 對應 &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;customer2&lt;/li&gt;</span><br><span class="line">customerList[<span class="number">2</span>] 對應 &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;customer3&lt;/li&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br>
+
+<h4 id="用-nodelist-跑-forEach"><a href="#用-nodelist-跑-forEach" class="headerlink" title="用 nodelist 跑 forEach"></a>用 nodelist 跑 forEach</h4><p>由於 nodelist 具備陣列的特性，當我們要一次同時改變許多個 tag，<br>就可以用 forEach 迴圈來帶入這個陣列，進行一次修改全部的文字，<br>如同剛剛的例子中，customerList (nodelist)，又可以繼續寫成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 用陣列跑 forEach</span></span><br><span class="line">customerList.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">item.textContent = <span class="string">&#x27;customer does not exist&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 此時，customer1, customer2, customer3 </span></span><br><span class="line"><span class="comment">// 都會一起被改為 &#x27;customer does not exist&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>畫面將會被渲染如下：</p>
+<img src="https://miro.medium.com/max/671/1*OntUDGh-U2aFMqJtUDUP_g.png">
+
+<h4 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h4><ul>
+<li>querySelector：選取單一個元素。</li>
+<li>querySelectorAll：選取多個元素。</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 轉出結果為 false 的組別</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">null</span>)); <span class="comment">// false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">undefined</span>)); <span class="comment">// false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(-<span class="number">0</span>)); <span class="comment">//false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(+<span class="number">0</span>)); <span class="comment">//false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">NaN</span>)); <span class="comment">//false </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="string">&quot;&quot;</span>)); <span class="comment">//false </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉出結果為 true 的組別 </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="string">&quot; &quot;</span>)); <span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="string">&quot;0&quot;</span>)); <span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="string">&quot;1&quot;</span>)); <span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="number">1</span>)); <span class="comment">// true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="string">&quot;hello&quot;</span>)); <span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(&#123;&#125;)); <span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>([])); <span class="comment">//true </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>至於 truthy值與 falsy 值到底怎麼分，可參閱下表的整理：</p>
-<img src="https://miro.medium.com/max/700/1*hEO5K4lq3OTqK7L03V-URA.png">
-
-<p>▲ Truthy、Falsy 值列表 (原始資料來源為<a class="link"   target="_blank" rel="noopener" href="https://jkchao.github.io/typescript-book-chinese/tips/truthy.html#%E6%98%8E%E7%A1%AE%E7%9A%84" >深入理解 TypeScript<i class="fas fa-external-link-alt"></i></a> ，再另將表格整理後製表。)</p>
+<p><code>備註</code> 同時還可以利用 <strong>querySelectorAll 組成 nodelist</strong> 的特性，來串接或修改資料，是很好用的一個功能。<br><code>備註</code> nodelist 遇到有一些陣列方法不能使用，可以先把它轉成陣列，方法可參考 <a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10211876" >NodeList 與 Array 差異<i class="fas fa-external-link-alt"></i></a></p>
+<p>除了 querySelector、 querySelectorAll，另外還有 getElementById、getElementsByClassName 及 getElementsByTagName，<br>將分別會記錄在選取 DOM 的方法(二)：回傳 HTMLCollection 物件這一篇當中。</p>
 <br>
 <br>
 
-<h4 id="布林值的隱性轉型"><a href="#布林值的隱性轉型" class="headerlink" title="布林值的隱性轉型"></a>布林值的隱性轉型</h4><p>根據前述，隱性轉型就是透過 JS 自動幫忙轉型。<br>而 if 判斷式的原理，就是當 ( ) 內的值為 true 的時候，就會執行 { } 內的動作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;因為是 true 才回傳這一行字&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>因此這邊以 if 判斷式舉例，且也可以從回傳的印出結果，<br>證實 if 判斷式在 ( ) 內，確實也能把非布林值的值進行轉換。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 以字串為例：</span></span><br><span class="line"><span class="keyword">if</span>(<span class="string">&quot;a string&quot;</span>)&#123; </span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;顯示這段話的時候，就是字串 &quot;a string&quot; 被轉為 true 了&#x27;</span>);  <span class="comment">//顯示</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;只有在 &quot;a string&quot; 被判定為 false 的時候，才會顯示這段話&#x27;</span>); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 以數字為例：</span></span><br><span class="line"><span class="keyword">if</span>(<span class="number">365</span>)&#123; </span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;顯示這段話的時候，就是數字365 被轉為 true 了&#x27;</span>);  <span class="comment">//顯示</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;只有在數字365 被判定為 false 的時候，才會顯示這段話&#x27;</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以 NaN 為例：</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">NaN</span>)&#123; </span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;顯示這段話的時候，就是 NaN 被轉為 true 了&#x27;</span>);  <span class="comment">//顯示</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;只有在 NaN 被判定為 false 的時候，才會顯示這段話&#x27;</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>備註</code> 除了在 if 判斷式，邏輯運算子也會進行隱性轉型。</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.fooish.com/javascript/dom/traversing.html" >JavaScript DOM 查找元素 (DOM Traversing)<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10202689" >Day03-深入理解網頁架構：DOM<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
 
@@ -278,13 +286,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E8%88%87%E8%BD%89%E6%8F%9B%E5%9E%8B%E5%88%A5%E7%9A%84%E8%A6%8F%E5%89%87-%E5%AD%97%E4%B8%B2%E7%AF%87/"
+                           href="/2021/12/17/DOM%20API(%E4%BA%8C)/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">強制轉型 (2) 字串篇</span>
+                                <span class="post-nav-title-item">DOM API(二)：getElement(s)By-* 系列與 HTMLCollection 物件</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -294,10 +302,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90(%E9%9D%9E%E5%B8%83%E6%9E%97%E5%80%BC%E9%81%8B%E7%AE%97)/"
+                           href="/2021/12/17/%E4%BB%80%E9%BA%BC%E6%98%AF%20DOM%EF%BC%9ADOM%20API%20%E7%9A%84%E8%83%8C%E5%BE%8C%E5%8E%9F%E7%90%86/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">邏輯運算子 (非布林值運算)</span>
+                                <span class="post-nav-title-item">什麼是 DOM：DOM API 的背後原理</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -422,7 +430,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-%E7%9A%84%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">JS 的強制轉型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B%E7%9A%84%E9%A1%AF%E6%80%A7%E8%88%87%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">強制轉型的顯性與隱性轉型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E6%9E%97%E5%80%BC%E7%9A%84%E9%A1%AF%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">布林值的顯性轉型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E6%9E%97%E5%80%BC%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">布林值的隱性轉型</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelector-%E9%81%B8%E5%8F%96-1-%E5%80%8B-%E7%AC%AC-1-%E5%80%8B-DOM"><span class="nav-number">1.</span> <span class="nav-text">querySelector (選取 1 個 &#x2F; 第 1 個 DOM)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelectorAll-%E9%81%B8%E5%8F%96%E5%A4%9A%E5%80%8B%E6%A8%99%E7%B1%A4%E7%B5%84%E6%88%90-nodelist"><span class="nav-number">2.</span> <span class="nav-text">querySelectorAll (選取多個標籤組成 nodelist)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nodelist-%E7%9A%84%E9%A0%86%E5%BA%8F%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">nodelist 的順序性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8-nodelist-%E8%B7%91-forEach"><span class="nav-number">2.2.</span> <span class="nav-text">用 nodelist 跑 forEach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">2.3.</span> <span class="nav-text">小結</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">參考資料</span></a></li></ol>
     </div>
 </div>
         </aside>
