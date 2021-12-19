@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            淺談 HTML 的 data-* 屬性應用：組陣列、用 dataset 取值 |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">淺談 HTML 的 data-* 屬性應用：組陣列、用 dataset 取值</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-18 10:47:44</span>
+        <span class="mobile">2021-12-18 10:47</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E9%99%A3%E5%88%97/">陣列</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/HTML/">HTML</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E8%BF%B4%E5%9C%88/">迴圈</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/HTML/%E5%B1%AC%E6%80%A7/">屬性</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/HTML/">HTML</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <img src="https://miro.medium.com/max/1400/1*myiSK2p22sRBpl6gNUOeRw.png">
+
+<br>
+<br>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在 HTML 結構中會看到很多標籤，h1, h2, p…，但你想過，這些標籤上的屬性(attribute)，它的功能是什麼嗎？<br>其實屬性的功能都是在補充與這些 HTML 標籤有關的更多資訊！</p>
+<p>既然屬性是 HTML 標籤的補充資料，那想當然爾，這些資料必定有它的用處，<br>而其中當要自定義資料的時候，會使用 data-* 這個屬性來儲存開發者所需的資料，<br>但問題是，到底要怎麼取用到這些標籤上的資料？這些資料又能怎麼用？是本文想探討的問題。</p>
+<p>在研究 data-* 的取得方式和用法前，先來看看 HTML 元素上有哪些全域屬性吧。<br>在 HTML 標籤上可以使用很多屬性，屬性又分<code>全域屬性</code>，以及在特定標籤上使用的<code>非全域屬性</code>。</p>
+<h3 id="全域屬性"><a href="#全域屬性" class="headerlink" title="全域屬性"></a>全域屬性</h3><p>全域屬性是在全部的標籤上都能共用的屬性，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 全域屬性：class, id, style, data-* ...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;main-title&quot;</span>&gt;</span>我是個主標<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">id</span>=<span class="string">&quot;another-title&quot;</span>&gt;</span>我是另一個title<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;color: red;&quot;</span>&gt;</span>我是個段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-year</span>=<span class="string">&quot;2021&quot;</span>&gt;</span>今年是西元 2021 年<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="非全域屬性"><a href="#非全域屬性" class="headerlink" title="非全域屬性"></a>非全域屬性</h3><p>僅對特定標籤有作用的屬性，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 非全域屬性：href, type, autoplay...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>一個連結<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上述的所有標籤屬性，列出來只是要說明屬性與 HTML 元素之間是如何互相搭配應用的，<br>接下來將主要記錄 data-* 屬性的用法。</p>
+<h3 id="怎麼用-data-屬性？"><a href="#怎麼用-data-屬性？" class="headerlink" title="怎麼用 data-* 屬性？"></a>怎麼用 data-* 屬性？</h3><p>前面可看到屬性的功能都已經定下來了，但 data-* 屬性卻是能依照開發者自己所需要的資料來做設定的屬性，<br>目的是方便開發過程中，可依照自己的需求在 data-* 屬性上面埋資料。<br>但問題是， data-* 屬性到底可以怎麼用呢？</p>
+<p>舉例來說：<br>現在有兩個 p 標籤上設定 data-user 屬性 (屬性要設定成什麼，由開發者自己定義)，<br>其值分別為 “信箱” 跟 “密碼”。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//HTML</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;alertMsg&quot;</span> <span class="attr">data-user</span>=<span class="string">&quot;信箱&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;alertMsg&quot;</span> <span class="attr">data-user</span>=<span class="string">&quot;密碼&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="Q1-如何選取到-p-標籤？"><a href="#Q1-如何選取到-p-標籤？" class="headerlink" title="Q1 如何選取到 p 標籤？"></a>Q1 如何選取到 p 標籤？</h4><p>querySelectorAll + class選取器。<br>querySelectorAll + 屬性選取器 (因為 data-* 是屬性)。</p>
+<h4 id="Q2-如何取到-data-user-屬性的值？"><a href="#Q2-如何取到-data-user-屬性的值？" class="headerlink" title="Q2 如何取到 data-user 屬性的值？"></a>Q2 如何取到 data-user 屬性的值？</h4><p>用 forEach 把兩個標籤都帶入，運用 dataset.user 取到值 (即：物件取值的概念)。</p>
+<h4 id="Q3-取到的值，如何渲染到畫面上？"><a href="#Q3-取到的值，如何渲染到畫面上？" class="headerlink" title="Q3 取到的值，如何渲染到畫面上？"></a>Q3 取到的值，如何渲染到畫面上？</h4><p>綁定 DOM，用 forEach 把多個字串資料 用 textContent / innerHTML 渲染到畫面上。</p>
+<h3 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h3><h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>透過 querySelectorAll 來選取 data-user 屬性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// (1) querySelectorAll + class 選取器用法 (只取一個 data-user)</span></span><br><span class="line"><span class="keyword">const</span> data = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.alertMsg&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">// 用 (&#x27;.alertMsg&#x27;)[0]：只選到 user=&quot;信箱&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (2) querySelectorAll + 屬性選取器用法 (取到所有 data-user)</span></span><br><span class="line"><span class="keyword">const</span> data = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;[data-user]&quot;</span>);</span><br><span class="line"><span class="comment">// 用 querySelectorAll(&quot;[data-user]&quot;) </span></span><br><span class="line"><span class="comment">// 選到 data-user=&quot;信箱&quot;、data-user=&quot;密碼&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>由於 querySelectorAll 會回傳陣列資料，因此可以開始用 forEach 來跑資料、取值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;[data-user]&quot;</span>);</span><br><span class="line"></span><br><span class="line">data.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(item) </span><br><span class="line"><span class="comment">// &lt;p class=&quot;alertMsg&quot; data-user=&quot;信箱&quot;&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">// &lt;p class=&quot;alertMsg&quot; data-user=&quot;密碼&quot;&gt;&lt;/p&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(item.dataset)</span><br><span class="line"><span class="comment">// 取到 &#123;user: &quot;信箱&quot;&#125;, &#123;user: &quot;密碼&quot;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(item.dataset.user) </span><br><span class="line"><span class="comment">// 終於取到 &quot;信箱&quot;、&quot;密碼&quot;</span></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h4><p>將 item.dataset.user 取出的值，賦予到 item 上，<br>如此一來， forEach 每跑一次，就同步會把字串在畫面上劃入一次資料。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;[data-user]&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">data.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">str = item.dataset.user;</span><br><span class="line">item.textContent = str;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>由於 data-* 屬性 能用陣列來跑 forEach 的關係，在應用上，還能夠用陣列的 index 值來寫刪除資料的功能，<br>詳細說明可以參考 <a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10221029" >JavaScript 初心者筆記: HTML 的自訂資料屬性 — data-*<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>此外，也能夠透過綁定監聽事件，用 e.target.dataset，進一步與網頁互動、取到開發者想要取得的值，<br>詳細可參閱 <a class="link"   target="_blank" rel="noopener" href="https://codepen.io/Coding_Snorlax/pen/OJxPXgE?editors=1111" >codepen<i class="fas fa-external-link-alt"></i></a> 的用法。</p>
+<br>
+
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a class="link"   target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2017/01/html-5-data-attribute.html" >[技術分享] 什麼是 HTML 5 中的資料屬性（data-* attribute）<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://hsuchihting.github.io/javascript/20201019/3849135081/" >JS 筆記 — dataset 與 Array 的運用<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Attribute_selectors" >MDN — Attribute selectors<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zm0MuN01Ooc" >What are HTML data attributes and how can we use them?<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/HTML/">#HTML</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/18/%E5%AF%AC%E9%AC%86%E7%AD%89%E6%96%BC-%E8%88%87%E5%B8%83%E6%9E%97%E5%80%BC%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">為什麼 &#39;true&#39; == true 是 false?</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/17/%E6%93%8D%E4%BD%9C%20HTML%20%E5%B1%AC%E6%80%A7%20(2)%20getAttribute%20%E7%94%A8%E4%BE%86%E5%8F%96%E5%80%BC/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">操作 HTML 屬性 (2) getAttribute 用來取值</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">全域屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">非全域屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E9%BA%BC%E7%94%A8-data-%E5%B1%AC%E6%80%A7%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">怎麼用 data-* 屬性？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-%E5%A6%82%E4%BD%95%E9%81%B8%E5%8F%96%E5%88%B0-p-%E6%A8%99%E7%B1%A4%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">Q1 如何選取到 p 標籤？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-%E5%A6%82%E4%BD%95%E5%8F%96%E5%88%B0-data-user-%E5%B1%AC%E6%80%A7%E7%9A%84%E5%80%BC%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">Q2 如何取到 data-user 屬性的值？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-%E5%8F%96%E5%88%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E5%88%B0%E7%95%AB%E9%9D%A2%E4%B8%8A%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">Q3 取到的值，如何渲染到畫面上？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">5.</span> <span class="nav-text">程式碼</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">5.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="nav-number">5.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5"><span class="nav-number">5.3.</span> <span class="nav-text">第三步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">6.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
