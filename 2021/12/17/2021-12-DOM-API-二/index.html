@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            DOM API(二)：getElement(s)By-* 系列與 HTMLCollection 物件 |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">DOM API(二)：getElement(s)By-* 系列與 HTMLCollection 物件</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-17 09:25:27</span>
+        <span class="mobile">2021-12-17 09:25</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E9%81%B8%E5%8F%96%E5%99%A8/">選取器</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/DOM/">DOM</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <img src="https://miro.medium.com/max/1400/1*myiSK2p22sRBpl6gNUOeRw.png">
+
+<p>在前一篇認識了 querySelector 及 querySelectorAll，而本篇要解釋的是選取 <code>DOM 的 getElement(s)By-*</code> 系列，<br>並互相比較這兩種方法選取的 DOM 集合，有何不同。</p>
+<br>
+
+<h3 id="getElementById-VS-querySelector-的差異"><a href="#getElementById-VS-querySelector-的差異" class="headerlink" title="getElementById VS querySelector 的差異?"></a>getElementById VS querySelector 的差異?</h3><p>因為這兩種選取器一次都只能選取一個，因此也常常用來進行功能上的比較，<br>但 getElementById 就只能選取單一個 ID (而本來網頁中的 ID 名稱也就只能有一個)；<br>而至於 querySelector 則不挑食，可一個選取 class 或 ID。</p>
+<br>
+
+<h3 id="querySelectorAll-VS-getElementsBy-系列的差異"><a href="#querySelectorAll-VS-getElementsBy-系列的差異" class="headerlink" title="querySelectorAll VS getElementsBy-* 系列的差異?"></a>querySelectorAll VS getElementsBy-* 系列的差異?</h3><p>既然有選取單一元素的選擇器，也就有一次選取多個元素的選取器。<br>對應到 querySelectorAll 的 DOM 選取器，在本篇主要介紹的是 <a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/Document/getElementsByClassName" >getElementsByClassName<i class="fas fa-external-link-alt"></i></a> 及 <a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName" >getElementsByTagName<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>透過 <code>getElementsBy-*</code> 選擇器選取到的元素，回傳的會是物件，<br>原因是， <strong><code>getElementsBy-*</code> 選取的是 DOM 的 element 節點</strong> ，<br><font color="tomato">(而 querySelectorAll 選的是指定的 class 名稱或屬性…)。</font><br>而且是一個<em>像陣列格式的物件</em>，又被稱為 <strong><code>HTML Collection</code>。</strong></p>
+<p>為什麼說像陣列呢，原因有二：</p>
+<ul>
+<li>它在物件內的<code>第一個屬性是從 0 起算</code>，有類似陣列排序的概念。</li>
+<li>它的外圍包覆 { } ，因此雖然有著陣列的形式，<em><strong>但它本質上還是一個物件</strong></em> 。</li>
+</ul>
+<p>範例如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//HTML</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;item&quot;</span>&gt;<span class="number">1</span>&lt;/div&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> itemCollection = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&#x27;item&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(itemCollection)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://miro.medium.com/max/570/1*_IAhPmt90yHTwQmoOSXBEg.png">
+
+<p><code>圖說</code> getElementsByClassName 選取的 HTML Collection 本質上仍是個物件</p>
+<p>由於 HTML Collection 這種「類陣列」的物件特性，便能用物件取值 (方括號取值) 的方式，<br>來選取到 HTMLCollection 物件內的屬性。</p>
+<img src="https://miro.medium.com/max/700/1*TqoabFKPoupliHpTKQpJ1g.png">
+
+<h4 id="HTMLCollection-物件不可跑-forEach"><a href="#HTMLCollection-物件不可跑-forEach" class="headerlink" title="HTMLCollection 物件不可跑 forEach"></a>HTMLCollection 物件不可跑 forEach</h4><p>假如要用 HTMLCollection 來跑 forEach，就會得到 xxxx.forEach is not a function 的回應。</p>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p><code>getElementsByClassName</code> 回傳 HTML Collection 物件，DOM 不能跑 forEach<br><code>getElementsByTagName</code> 回傳 HTML Collection 物件，DOM 不能跑 forEach<br><code>querySelectorAll</code> 回傳 nodelist (類陣列)，DOM 可以跑 forEach</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/NodeList" >Nodelist — MDN<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10202689" >Day03-深入理解網頁架構：DOM<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/17/2021-12-querySelectorAll-%E6%90%AD%E9%85%8D%E5%B1%AC%E6%80%A7%E9%81%B8%E5%8F%96%E5%99%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">querySelectorAll 搭配屬性選取器</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/17/2021-12-DOM-API-%E4%B8%80/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">DOM API(一)：querySelector、querySelectorAll</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#getElementById-VS-querySelector-%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">1.</span> <span class="nav-text">getElementById VS querySelector 的差異?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelectorAll-VS-getElementsBy-%E7%B3%BB%E5%88%97%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">2.</span> <span class="nav-text">querySelectorAll VS getElementsBy-* 系列的差異?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTMLCollection-%E7%89%A9%E4%BB%B6%E4%B8%8D%E5%8F%AF%E8%B7%91-forEach"><span class="nav-number">2.1.</span> <span class="nav-text">HTMLCollection 物件不可跑 forEach</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">3.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            JS 中的傳值與傳址 (傳址篇) |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">JS 中的傳值與傳址 (傳址篇)</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-16 18:49:36</span>
+        <span class="mobile">2021-12-16 18:49</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5/">物件型別</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5/">資料型別</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94/">變數與記憶體</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="什麼是傳值？"><a href="#什麼是傳值？" class="headerlink" title="什麼是傳值？"></a>什麼是傳值？</h3><p>先前在傳值篇解釋過，在變數宣告並賦予值的過程中，變數是指向各個獨立的值，<br>而這個值若是屬於「原始型別」，每一筆都將儲存在獨立的記憶體內，<br>因此傳值的動作，可以理解為：變數指向的是另一份「複製」後的單獨記憶體。</p>
+<h3 id="什麼是傳址？"><a href="#什麼是傳址？" class="headerlink" title="什麼是傳址？"></a>什麼是傳址？</h3><p>傳址是<code>兩個變數共同指向同一個值</code>，且這邊的值是屬於「物件型別」（它可能是物件、陣列或函式），<br>因為傳址沒有複製值，當然不會有新的位址，可是兩個變數都指向同一筆資料，而這筆資料被儲存在某一個地點，<br>並且有一個「位址 (address) 」。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> fruit1 = [ <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;papaya&#x27;</span>, <span class="string">&#x27;guava&#x27;</span>, <span class="string">&#x27;mango&#x27;</span> ] </span><br><span class="line"><span class="keyword">let</span> fruit2 = fruit1; <span class="comment">// 傳址 </span></span><br><span class="line"><span class="built_in">console</span>.log(fruit2); <span class="comment">// 回傳 [&#x27;orange&#x27;, &#x27;papaya&#x27;, &#x27;guava&#x27;, &#x27;mango&#x27;]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>傳址</code>類似於 fruit 1 寫一張紙條給 fruit2，告訴它：<br><em>「當你之後要找這筆陣列資料的時候，去紙條上這個地址就會找到。」</em></p>
+<img src="https://miro.medium.com/max/689/1*s24XN9nISFEJC-osIKNkmg.png">
+
+<h4 id="傳址：兩個位址連動改變的現象"><a href="#傳址：兩個位址連動改變的現象" class="headerlink" title="傳址：兩個位址連動改變的現象"></a>傳址：兩個位址連動改變的現象</h4><p>既然 fruit1 與 fruit2 共用同一個陣列位址，<br>當透過 fruit2 來刪減陣列內的資料會發現，<br>在 fruit2 刪除陣列中的第一筆資料 orange，<br>從 fruit1 查詢發現 orange 也一起不見了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">delete</span> fruit2[<span class="number">0</span>]; <span class="comment">//刪除陣列中的第一筆資料 </span></span><br><span class="line"><span class="built_in">console</span>.log(fruit1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://miro.medium.com/max/529/1*xYe17cTBWXok6LKtr1oygQ.png">
+
+<p>▲ console.log(fruit1); 的結果</p>
+<h4 id="傳址：重新賦予值"><a href="#傳址：重新賦予值" class="headerlink" title="傳址：重新賦予值"></a>傳址：重新賦予值</h4><p>假如對 fruit2 重新賦予值，fruit1 和 fruit2 各自會有什麼結果呢？<br>根據回傳結果，可以得知，當對 fruit2 重新賦予值，fruit2 的值改變了，但 fruit1 仍然不受影響。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> fruit1 = [ <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;papaya&#x27;</span>, <span class="string">&#x27;guava&#x27;</span>, <span class="string">&#x27;mango&#x27;</span> ] </span><br><span class="line"><span class="keyword">let</span> fruit2 = fruit1; <span class="comment">// 傳址</span></span><br><span class="line"><span class="built_in">console</span>.log(fruit2); <span class="comment">// 回傳 [&#x27;orange&#x27;, &#x27;papaya&#x27;, &#x27;guava&#x27;, &#x27;mango&#x27;] </span></span><br><span class="line">fruit2 = [ <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;papaya&#x27;</span>, <span class="string">&#x27;guava&#x27;</span>, <span class="string">&#x27;mango&#x27;</span>, <span class="string">&#x27;durian&#x27;</span>] </span><br><span class="line"><span class="comment">// 對 fruit2 重新賦予值 </span></span><br><span class="line"><span class="built_in">console</span>.log(fruit2); </span><br><span class="line"><span class="comment">// 回傳 [ &#x27;orange&#x27;, &#x27;papaya&#x27;, &#x27;guava&#x27;, &#x27;mango&#x27;, &#x27;durian&#x27;] </span></span><br><span class="line"><span class="built_in">console</span>.log(fruit1); </span><br><span class="line"><span class="comment">// 回傳 [&#x27;orange&#x27;, &#x27;papaya&#x27;, &#x27;guava&#x27;, &#x27;mango&#x27;]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>這可以理解為，當對變數重新賦予值的時候，電腦就會再開一個新的記憶體空間來儲存這個值，<br>當有新的空間、就有新的位址，那麼兩個變數這時就各自指向獨立的值，不再互相影響了。</p>
+<img src="https://miro.medium.com/max/700/1*ZPK5egsWCh5gxS-gJWS3lg.png">
+
+<p>再看一個更進階的例子：<br>當我現在需要把物件的某一個屬性的值取出，因此我另外再宣告一個新的變數 stationary 儲存這個值，<br>同時最後我用 console.log 驗證一下變數是否有成功代入物件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> myPencilCase = &#123;</span><br><span class="line">    <span class="string">&quot;color&quot;</span>: <span class="string">&quot;brown&quot;</span>,</span><br><span class="line">    <span class="string">&quot;contents&quot;</span>: [<span class="string">&#x27;ruler&#x27;</span>, <span class="string">&#x27;fountain pen&#x27;</span>, <span class="string">&#x27;scissor&#x27;</span>, <span class="string">&#x27;pencil&#x27;</span>],</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stationary = <span class="string">&quot;contents&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(myPencilCase[<span class="string">&quot;contents&quot;</span>])</span><br><span class="line"><span class="comment">//回傳[&#x27;ruler&#x27;, &#x27;fountain pen&#x27;, &#x27;scissor&#x27;, &#x27;pencil&#x27;](4)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myPencilCase[stationary])</span><br><span class="line"><span class="comment">//回傳[&#x27;ruler&#x27;, &#x27;fountain pen&#x27;, &#x27;scissor&#x27;, &#x27;pencil&#x27;](4)</span></span><br><span class="line"><span class="comment">//代表變數已經成功抓到我要的值</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>經過宣告 stationary 這個新的變數，自此之後，只要一修改 “contents” 屬性的陣列資料，<br>這兩個地方的資料都會同步串聯了，例如：這邊用push()來新增一筆陣列資料。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">myPencilCase[<span class="string">&quot;contents&quot;</span>].push(<span class="string">&#x27;eraser&#x27;</span>); <span class="comment">//新增一筆陣列資料</span></span><br><span class="line"><span class="built_in">console</span>.log(myPencilCase[<span class="string">&quot;contents&quot;</span>])</span><br><span class="line"><span class="comment">//回傳[&#x27;ruler&#x27;, &#x27;fountain pen&#x27;, &#x27;scissor&#x27;, &#x27;pencil&#x27;, &#x27;eraser&#x27;](5)</span></span><br><span class="line"><span class="built_in">console</span>.log(myPencilCase[stationary])</span><br><span class="line"><span class="comment">//回傳[&#x27;ruler&#x27;, &#x27;fountain pen&#x27;, &#x27;scissor&#x27;, &#x27;pencil&#x27;, &#x27;eraser&#x27;](5)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但唯一做一個動作，就會斷掉兩者的牽連，那就是：重新對變數 stationary 賦予值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> myPencilCase = &#123;</span><br><span class="line">    <span class="string">&quot;color&quot;</span>: <span class="string">&quot;brown&quot;</span>,</span><br><span class="line">    <span class="string">&quot;contents&quot;</span>: [<span class="string">&#x27;ruler&#x27;</span>, <span class="string">&#x27;fountain pen&#x27;</span>, <span class="string">&#x27;scissor&#x27;</span>, <span class="string">&#x27;pencil&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> stationary = <span class="string">&quot;contents&quot;</span>;</span><br><span class="line">myPencilCase[stationary] = [<span class="number">666</span>]</span><br><span class="line">stationary = [<span class="string">&#x27;marker&#x27;</span>]; <span class="comment">//重新對變數 stationary 賦予值。</span></span><br><span class="line"><span class="built_in">console</span>.log(myPencilCase[<span class="string">&quot;contents&quot;</span>]) <span class="comment">//回傳 [666]</span></span><br><span class="line"><span class="built_in">console</span>.log(myPencilCase[stationary]) <span class="comment">// 回傳 undefined</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>這邊的 myPencilCase[“contents”] 之所以會回傳 [666]，是因為 stationary 重新賦予值之前，透過這個變數 stationary 已經修改了“contents”陣列的資料，因此最終陣列資料停留在[666]。</p>
+<p>但後面將 stationary 重新賦予值，因此最後一行的 console.log 已無法透過 stationary 這個變數在 myPencilCase 這個物件內讀取資料了，故回傳 undefined。</p>
+<br>
+<br>
+
+<h4 id="小結：傳址的三個重點"><a href="#小結：傳址的三個重點" class="headerlink" title="小結：傳址的三個重點"></a>小結：傳址的三個重點</h4><ol>
+<li>傳址指的是當超過一個以上的變數要存取同一筆物件型別的值(物件、陣列或函式)。</li>
+<li>傳址可視為有一個以上的變數都指向同一個位址、取用同一筆物件型別的值，因此透過任一個變數去修改值，所有的變數的值都會連動一起改變。</li>
+<li>傳址後的兩個變數 fruit1、fruit2，雖然都會到同一個位址去存取一筆物件型別的資料，但假如對其中任一的變數 fruit1 再重新賦予一個值，此時電腦將另新開一個記憶體空間來存放這一筆資料，這時的 fruit1 與 fruit2 就各自指向不同的記憶體空間、資料也不再互相連動了。</li>
+</ol>
+<br>
+<br>
+
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p><code>傳值</code> 複製一筆值、產生獨立的記憶體空間來儲存資料，因此假如後續再對任一變數重新賦予值，兩者之間也不會產生影響。</p>
+<p><code>傳址</code> 變數 a 複製了一個「位址」到變數 b 那邊去，所以兩個變數共同指向的仍是同一筆值，因此若透過任一個變數來修改這個值，兩者都會產生連動的改變。</p>
+<p><code>傳址又重新對其中一個變數賦予值</code> 對變數重新賦予值會產生一個新的記憶體空間，又會回到很像傳值的時候，這時兩個變數裡面的資料內容並不相同。而這邊很關鍵的重點就是在於有了「重新賦予值」的動作，產生一個新的記憶體空間來儲存資料，導致 fruit1 與 fruit2 兩個變數日後不再互相影響。</p>
+<br>
+<br>
+
+<h4 id="表格：重點回顧"><a href="#表格：重點回顧" class="headerlink" title="表格：重點回顧"></a>表格：重點回顧</h4><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">產生新記憶體空間</th>
+<th align="left">產生新位址</th>
+<th align="left">修改其中一個變數<br>是否影響其他變數</th>
+<th align="left">對其中一個變數重新賦予值<br>是否還會影響其他變數</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">傳值</td>
+<td align="left">Ｖ</td>
+<td align="left">Ｖ</td>
+<td align="left">Ｘ</td>
+<td align="left">Ｘ</td>
+</tr>
+<tr>
+<td align="left">傳址</td>
+<td align="left">Ｘ</td>
+<td align="left">Ｘ</td>
+<td align="left">Ｖ</td>
+<td align="left">Ｘ</td>
+</tr>
+</tbody></table>
+<br>
+<br>
+<br>
+
+<h4 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h4><ol>
+<li>你不可不知的 JavaScript 二三事#Day26：程式界的哈姆雷特 — — Pass by value, or Pass by reference？</li>
+<li>by reference (傳參考)、by value(傳值)的差別</li>
+<li>Javascript pass by reference or value</li>
+<li>How to get a grip on reference vs value in JavaScript</li>
+<li>深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？</li>
+<li>JS 變數傳遞探討：pass by value 、 pass by reference 還是 pass by sharing？</li>
+</ol>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/16/2021-12-%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90-%E5%B8%83%E6%9E%97%E5%80%BC%E9%81%8B%E7%AE%97/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">邏輯運算子 (布林值運算)</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/16/2021-12-JS-%E4%B8%AD%E7%9A%84%E5%82%B3%E5%80%BC%E8%88%87%E5%82%B3%E5%9D%80-%E5%82%B3%E5%80%BC%E7%AF%87/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JS 中的傳值與傳址 (傳值篇)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E5%82%B3%E5%80%BC%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是傳值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E5%82%B3%E5%9D%80%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什麼是傳址？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%82%B3%E5%9D%80%EF%BC%9A%E5%85%A9%E5%80%8B%E4%BD%8D%E5%9D%80%E9%80%A3%E5%8B%95%E6%94%B9%E8%AE%8A%E7%9A%84%E7%8F%BE%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">傳址：兩個位址連動改變的現象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%82%B3%E5%9D%80%EF%BC%9A%E9%87%8D%E6%96%B0%E8%B3%A6%E4%BA%88%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">傳址：重新賦予值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90%EF%BC%9A%E5%82%B3%E5%9D%80%E7%9A%84%E4%B8%89%E5%80%8B%E9%87%8D%E9%BB%9E"><span class="nav-number">2.3.</span> <span class="nav-text">小結：傳址的三個重點</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">3.</span> <span class="nav-text">總結</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%EF%BC%9A%E9%87%8D%E9%BB%9E%E5%9B%9E%E9%A1%A7"><span class="nav-number">3.1.</span> <span class="nav-text">表格：重點回顧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">3.2.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

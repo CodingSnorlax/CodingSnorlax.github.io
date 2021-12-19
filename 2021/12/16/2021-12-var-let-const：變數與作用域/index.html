@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            淺談變數與它們的作用域 |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">淺談變數與它們的作用域</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-16 12:04:40</span>
+        <span class="mobile">2021-12-16 12:04</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E8%AE%8A%E6%95%B8/">變數</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>在探討這三者的差異之前，應該要先來談一下，var, let, 和 const 的用途：</p>
+<p>當需要電腦協助儲存一筆資料到記憶體的時候，要透過 var, let 或 const 來宣告 (declare) 變數，將資料存到變數裡，變數則會儲存在電腦記憶體，往後再呼叫這個變數，便能拿到這筆資料。</p>
+<p>假設要告訴電腦，Karen 有 1 杯茶，Roger 有 3 杯茶，可以怎麼敘述呢？<br>透過 let 就是在宣告 karenHasTea (變數)，並賦予變數的值為 1。<br><code>註：這邊的等號是賦值運算子的一種。</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> karenHasTea = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> rogerHasTea = <span class="number">3</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而當一個變數被宣告的同時，也會有一個作用域跟著這個變數，於是你可能又想問，什麼是「作用域 (variable scope) 」？</p>
+<p>簡單來說，作用域就是一個變數能夠被存取到的範圍，而這範圍又分為全域作用域和區域作用域。<br>但是，全域作用域和區域作用域，到底又代表什麼意思呢？我們應該如何理解這兩種區域作用域的範圍？</p>
+<h3 id="全域作用域-Global-Scope"><a href="#全域作用域-Global-Scope" class="headerlink" title="全域作用域 (Global Scope)"></a>全域作用域 (Global Scope)</h3><p>前面提到，我們透過 var, let 或 const 來宣告一個變數。<br>但是假如不透過它們「宣告」變數，直接對變數賦予一個值，這是可以的嗎？<br>（是的，記者現在實地為您測試…）<br>假設今天有一個變數為 myName，我賦予它一個字串值 ‘Karen’：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">myName = <span class="string">&#x27;Karen&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然後我再度到 chrome 的 dev tool 呼叫 myName 這個變數，主控台顯示：</p>
+<img src="https://miro.medium.com/max/2400/1*I19M8UNGudNcDo--1Gz3AA.png">
+
+<p>由此可知，不透過 var, let 或 const 來宣告，myName 也是可以寫入資料的，只是這時沒有被宣告，它存在的範圍會是在「全域作用域」，既無法確認它來自哪裡，它可以被存取的範圍也有模糊不清的問題(後續將會舉例說明)，未被宣告過的 myName 是一個「全域屬性」，為避免發生遺憾…，</p>
+<h3 id="請一定要記得宣告你的變數！"><a href="#請一定要記得宣告你的變數！" class="headerlink" title="請一定要記得宣告你的變數！"></a>請一定要記得宣告你的變數！</h3><p>宣告變數，像是這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> myName = <span class="string">&#x27;Karen&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>被宣告過的變數，可以想像成是在幫一個變數劃出存取範圍。當變數是在函式之外被宣告，它的作用範圍就是屬於全域作用域；相反地，在函式之內被宣告的變數，它的存取範圍就是在區域作用域，而區域作用域又可分為<code>函式作用域</code>和<code>區塊作用域</code>。<br>那你可能又會想問，為什麼區域作用域內，又要再分函式作用域和區塊作用域？<br>以下將開始說明。</p>
+<h3 id="前情提要：JS-的前世今生"><a href="#前情提要：JS-的前世今生" class="headerlink" title="前情提要：JS 的前世今生"></a>前情提要：JS 的前世今生</h3><p>在 JavaScript ES6 出現之前，沒有 let 和 const，只能靠 var 來宣告變數，而 var 宣告的變數就是在「函式作用域」，直到 ES6 之後有了 let 和 const，「區塊作用域」才應運而生。</p>
+<p>所以，函式作用域是什麼？它和區塊作用域又有何差別？</p>
+<h3 id="區域作用域-Local-Scope"><a href="#區域作用域-Local-Scope" class="headerlink" title="區域作用域 (Local Scope)"></a>區域作用域 (Local Scope)</h3><p>首先，要先來解釋何謂區域作用域？<br>簡單來說，區域作用域是相對於全域作用域的概念，只要不是在全域的範圍內的，都是屬於區域作用域，像是 function 函式、if 判斷式、for 和 else 的迴圈內的範圍，都是屬於區域作用域，而 JavaScript 的區域作用域又可分為函式作用域與區塊作用域。</p>
+<h4 id="函式作用域-Function-Scope"><a href="#函式作用域-Function-Scope" class="headerlink" title="函式作用域 (Function Scope)"></a>函式作用域 (Function Scope)</h4><p>函式作用域的範圍是在函式之內。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tellMyFavoriteSingerLately</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myFavoriteSingerLately = <span class="string">&#x27;Bruno Major&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;在函式作用域內的字串&#x27;</span>, myFavoriteSingerLately); <span class="comment">// 顯示 &#x27;Bruno Major&#x27;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tellMyFavoriteSingerLately();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;在函式作用域外的字串&#x27;</span>, myFavoriteSingerLately); </span><br><span class="line"><span class="comment">// 顯示 myFavoriteSingerLately is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>為何函式外的 console.log 會印出 not defined 呢？<br>因為 myFavoriteSingerLately 這個變數在函式內被宣告後，它的作用域僅限於函式內，在函式外的地方就讀取不到這個變數。</p>
+<p><code>備註</code><br>undefined 與 is not defined 是不同的，not defined 所指的是這個變數在這個區域是不存在的，根本讀取不到；undefined 則是指出在記憶體中有這一筆變數資料，只是尚未被賦予值。</p>
+<h4 id="區塊作用域-Block-Scope"><a href="#區塊作用域-Block-Scope" class="headerlink" title="區塊作用域 (Block Scope)"></a>區塊作用域 (Block Scope)</h4><p>區塊作用域的範圍是在大括號 { } 之內。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">let</span> myFavoriteSingerLately = <span class="string">&#x27;Bruno Major&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myFavoriteSingerLately);  <span class="comment">// 顯示 myFavoriteSingerLately is not defined.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>為什麼在大括號外的 console.log 會印出 not defined 呢？<br>因為 myFavoriteSingerLately 這個變數在大括號內被宣告後，它的作用域僅限於大括號內，在大括號以外的地方就讀取不到這個變數。</p>
+<p>透過以 let 宣告變數在函式作用域與區塊作用域的例子，解釋了這兩個作用域的涵蓋範圍。在理解了這兩種作用域的範圍後，將在下一篇更進一步探討，var 和 let 的差異。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/16/2021-12-var-let-const%EF%BC%9A%E6%AF%94%E8%BC%83-var-%E8%88%87-let-%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">比較 var 與 let 的作用域</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/16/2021-12-%E6%B4%BB%E7%94%A8-CSS-backgrounds-%E5%81%9A%E6%BB%BF%E7%89%88%E8%83%8C%E6%99%AF-%E4%B8%8A/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">活用 CSS backgrounds 做滿版背景 (上)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%9F%9F%E4%BD%9C%E7%94%A8%E5%9F%9F-Global-Scope"><span class="nav-number">1.</span> <span class="nav-text">全域作用域 (Global Scope)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AB%8B%E4%B8%80%E5%AE%9A%E8%A6%81%E8%A8%98%E5%BE%97%E5%AE%A3%E5%91%8A%E4%BD%A0%E7%9A%84%E8%AE%8A%E6%95%B8%EF%BC%81"><span class="nav-number">2.</span> <span class="nav-text">請一定要記得宣告你的變數！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81%EF%BC%9AJS-%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F"><span class="nav-number">3.</span> <span class="nav-text">前情提要：JS 的前世今生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%80%E5%9F%9F%E4%BD%9C%E7%94%A8%E5%9F%9F-Local-Scope"><span class="nav-number">4.</span> <span class="nav-text">區域作用域 (Local Scope)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F-Function-Scope"><span class="nav-number">4.1.</span> <span class="nav-text">函式作用域 (Function Scope)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F-Block-Scope"><span class="nav-number">4.2.</span> <span class="nav-text">區塊作用域 (Block Scope)</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
