@@ -9,7 +9,7 @@
     
     <title>
         
-            AJAX 取資料及 XMLHttpRequest |
+            陣列方法: filter |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">AJAX 取資料及 XMLHttpRequest</span>
+            <span class="title-hover-animation">陣列方法: filter</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-20 10:39:34</span>
-        <span class="mobile">2021-12-20 10:39</span>
+        <span class="pc">2021-12-22 22:13:08</span>
+        <span class="mobile">2021-12-22 22:13</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,7 +183,7 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/AJAX/">AJAX</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E9%99%A3%E5%88%97/">陣列</a>&nbsp;
                     </li>
                 
             </ul>
@@ -218,63 +218,34 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="什麼是-AJAX"><a href="#什麼是-AJAX" class="headerlink" title="什麼是 AJAX?"></a>什麼是 AJAX?</h3><p>全名為 Asynchronous JavaScript and XML，最核心的語法部分是 <code>XMLHttpRequest</code>。</p>
-<p>在頁面上<strong>即便沒有重新整理網頁，透過 AJAX 也能用瀏覽器撈取遠端資料庫</strong>，<br>並即時同步回傳後端資料庫的資料，使得網頁能即時更動、回應。</p>
-<br>
-
-<h4 id="取得-AJAX-資料的方法"><a href="#取得-AJAX-資料的方法" class="headerlink" title="取得 AJAX 資料的方法"></a>取得 AJAX 資料的方法</h4><p>發展到現今已有三種方法都可發請求，取得 AJAX 資料：</p>
-<ul>
-<li>XMLHttpRequest </li>
-<li>fetch</li>
-<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/axios/axios" >axios<i class="fas fa-external-link-alt"></i></a> (操作底層原理是 XMLHttpRequest)</li>
+            <h3 id="filter-陣列使用時機"><a href="#filter-陣列使用時機" class="headerlink" title="filter 陣列使用時機"></a>filter 陣列使用時機</h3><ul>
+<li>對資料進行篩選，return 一個新的陣列。</li>
+<li>return 判斷式為 <code>true</code> 的資料。</li>
 </ul>
 <br>
 
-<h4 id="AJAX-非同步特性"><a href="#AJAX-非同步特性" class="headerlink" title="AJAX 非同步特性"></a>AJAX 非同步特性</h4><p><code>非同步</code>特性不會等到資料回傳，而是在資料尚未回傳前，<br>持續讓程式碼繼續往下跑完，對使用者來說，等待資料的過程，<br>畫面上還是有其他資訊可以觀看或有介面可以操作，<br>等伺服器回應後，就得到回傳的資料。</p>
+<h3 id="資料集"><a href="#資料集" class="headerlink" title="資料集"></a>資料集</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> fruitData = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;apple&#x27;</span>,</span><br><span class="line">        <span class="attr">price</span>: <span class="number">30</span>,</span><br><span class="line">        <span class="attr">num</span>: <span class="number">3</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;mango&#x27;</span>,</span><br><span class="line">        <span class="attr">price</span>: <span class="number">60</span>,</span><br><span class="line">        <span class="attr">num</span>: <span class="number">5</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;guava&#x27;</span>,</span><br><span class="line">        <span class="attr">price</span>: <span class="number">25</span>,</span><br><span class="line">        <span class="attr">num</span>: <span class="number">10</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;tangerine&#x27;</span>,</span><br><span class="line">        <span class="attr">price</span>: <span class="number">15</span>,</span><br><span class="line">        <span class="attr">num</span>: <span class="number">7</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="forEach-搭配-if-判斷式"><a href="#forEach-搭配-if-判斷式" class="headerlink" title="forEach 搭配 if 判斷式"></a>forEach 搭配 if 判斷式</h3><p>forEach 搭配 <code>if 判斷式</code>也可篩選陣列，<br>與 filter 差異在不會 return 一個新陣列。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> newData = []</span><br><span class="line"></span><br><span class="line">fruitData.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(item.price &gt;= <span class="number">25</span>)&#123;</span><br><span class="line">        newData.push(item)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <br>
 
 
-<h4 id="AJAX-可發出的請求格式"><a href="#AJAX-可發出的請求格式" class="headerlink" title="AJAX 可發出的請求格式"></a>AJAX 可發出的請求格式</h4><ul>
-<li>get (讀取)</li>
-<li>post (傳送資料到伺服器)</li>
-<li>patch (修改)</li>
-<li>put (修改)</li>
-<li>delete (刪除)</li>
+<h3 id="filter-一般寫法"><a href="#filter-一般寫法" class="headerlink" title="filter 一般寫法"></a>filter 一般寫法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> newData = fruitData.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> item.price &gt;= <span class="number">25</span> <span class="comment">//return 整個 item</span></span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="filter-箭頭函式"><a href="#filter-箭頭函式" class="headerlink" title="filter 箭頭函式"></a>filter 箭頭函式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// (1)</span></span><br><span class="line"><span class="keyword">const</span> newData = fruitData.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> item.price &gt;= <span class="number">25</span> <span class="comment">//return 整個 item</span></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// (2) 省略 return 及 &#123; &#125;</span></span><br><span class="line"><span class="keyword">const</span> newData = fruitData.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item.price &gt;= <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_vFuDQ_6Xt8" >JavaScript 陣列處理必學巧技<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://hsiangfeng.github.io/javascript/20190421/1216566123/" >關於 JavaScript 陣列 20 種操作的方法<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
-<br>
-
-
-<h3 id="XMLHttpRequest-原生語法"><a href="#XMLHttpRequest-原生語法" class="headerlink" title="XMLHttpRequest 原生語法"></a>XMLHttpRequest 原生語法</h3><p>透過以下第 2 行程式碼的宣告，產生一包新的 XMLHttpRequest 物件，<br>能開始<strong>透過瀏覽器和其他伺服器要資料</strong>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 格式、 url 、 是否同步</span></span><br><span class="line">xhr.open(<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;網址&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.send()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="readyState-請求狀態"><a href="#readyState-請求狀態" class="headerlink" title="readyState 請求狀態"></a>readyState 請求狀態</h4><p>透過 <code>readyState</code> 查詢目前狀態 (再 call 一次 xhr 可觀察到 readyState)：</p>
-<ul>
-<li>readyState: 0 =&gt; 已成功建立 XMLHttpRequest 物件，但尚未撈取資料。</li>
-<li>readyState: 1 =&gt; 用了 xhr.open()，但尚未送出。</li>
-<li>readyState: 2 =&gt; 已發出 xhr.send()。</li>
-<li>readyState: 3 =&gt; loading</li>
-<li>readyState: 4 =&gt; 已成功撈取資料。</li>
-</ul>
-<br>
-
-
-<h4 id="onload：待資料回傳後啟動下一步"><a href="#onload：待資料回傳後啟動下一步" class="headerlink" title="onload：待資料回傳後啟動下一步"></a>onload：待資料回傳後啟動下一步</h4><p>onload 是等到資料回傳後(也就是 readyState: 4)，<br>才會觸發去執行 function 的關鍵語法。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line"><span class="keyword">let</span> url = <span class="string">&#x27;https://hexschool.github.io/ajaxHomework/data.json&#x27;</span></span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">&#x27;get&#x27;</span>, url, <span class="literal">true</span>)</span><br><span class="line">xhr.send()</span><br><span class="line"></span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="XMLHttpRequest-發請求流程整理"><a href="#XMLHttpRequest-發請求流程整理" class="headerlink" title="XMLHttpRequest 發請求流程整理"></a>XMLHttpRequest 發請求流程整理</h3><ol>
-<li>建立 XMLHttpRequest</li>
-<li>傳送請求到對方伺服器要資料</li>
-<li>資料回傳到自己的瀏覽器</li>
-</ol>
-<br>
-
-
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a class="link"   target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/" >輕鬆理解 Ajax 與跨來源請求<i class="fas fa-external-link-alt"></i></a></p>
-<br>
 <br>
 <br>
 
@@ -298,13 +269,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/20/CORS/"
+                           href="/2021/12/23/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-findIndex/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">什麼是 CORS？</span>
+                                <span class="post-nav-title-item">陣列方法: findIndex</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -314,10 +285,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/19/2021-12-JavaScript-%E6%99%82%E9%96%93%E6%88%B3%E8%BD%89%E6%8F%9B%E6%97%A5%E6%9C%9F%E7%9A%84%E6%96%B9%E6%B3%95/"
+                           href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-map/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">JavaScript 時間戳轉換日期的方法</span>
+                                <span class="post-nav-title-item">陣列方法: map</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +413,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-AJAX"><span class="nav-number">1.</span> <span class="nav-text">什麼是 AJAX?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%96%E5%BE%97-AJAX-%E8%B3%87%E6%96%99%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">取得 AJAX 資料的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E7%89%B9%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">AJAX 非同步特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-%E5%8F%AF%E7%99%BC%E5%87%BA%E7%9A%84%E8%AB%8B%E6%B1%82%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">AJAX 可發出的請求格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMLHttpRequest-%E5%8E%9F%E7%94%9F%E8%AA%9E%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">XMLHttpRequest 原生語法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#readyState-%E8%AB%8B%E6%B1%82%E7%8B%80%E6%85%8B"><span class="nav-number">2.1.</span> <span class="nav-text">readyState 請求狀態</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onload%EF%BC%9A%E5%BE%85%E8%B3%87%E6%96%99%E5%9B%9E%E5%82%B3%E5%BE%8C%E5%95%9F%E5%8B%95%E4%B8%8B%E4%B8%80%E6%AD%A5"><span class="nav-number">2.2.</span> <span class="nav-text">onload：待資料回傳後啟動下一步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMLHttpRequest-%E7%99%BC%E8%AB%8B%E6%B1%82%E6%B5%81%E7%A8%8B%E6%95%B4%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">XMLHttpRequest 發請求流程整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-%E9%99%A3%E5%88%97%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">filter 陣列使用時機</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">資料集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forEach-%E6%90%AD%E9%85%8D-if-%E5%88%A4%E6%96%B7%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">forEach 搭配 if 判斷式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-%E4%B8%80%E8%88%AC%E5%AF%AB%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">filter 一般寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">filter 箭頭函式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li></ol>
     </div>
 </div>
         </aside>
