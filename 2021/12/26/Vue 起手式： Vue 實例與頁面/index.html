@@ -9,7 +9,7 @@
     
     <title>
         
-            強制轉型 (2) 字串篇 |
+            Vue 起手式：Vue 實例與頁面 |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">強制轉型 (2) 字串篇</span>
+            <span class="title-hover-animation">Vue 起手式：Vue 實例與頁面</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-16 20:08:19</span>
-        <span class="mobile">2021-12-16 20:08</span>
+        <span class="pc">2021-12-26 13:32:45</span>
+        <span class="mobile">2021-12-26 13:32</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -179,19 +179,11 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        <a href="/categories/Vue/">Vue</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5/">資料型別</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B/">強制轉型</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/">原始型別</a>&nbsp;
+                        &gt; <a href="/categories/Vue/%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/">環境配置</a>&nbsp;
                     </li>
                 
             </ul>
@@ -203,7 +195,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                        <a href="/tags/Vue-3/">Vue 3</a>&nbsp;
                     </li>
                 
             </ul>
@@ -226,41 +218,41 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="字串的顯性與隱性轉型"><a href="#字串的顯性與隱性轉型" class="headerlink" title="字串的顯性與隱性轉型"></a>字串的顯性與隱性轉型</h3><p><strong>強制轉型的三大規則</strong>：</p>
-<ol>
-<li>強制轉型有分<code>顯性轉型(explicit coercion)</code>及隱性轉型<code>(implicit coercion)</code>。</li>
-<li>強制轉型將轉出：布林值、字串、數字。</li>
-<li>原始型別和物件型別這兩種值的轉換邏輯會不大一樣。(但目前只會先著重在紀錄原始型別的強制轉型)</li>
-</ol>
-<h4 id="字串的顯性轉型"><a href="#字串的顯性轉型" class="headerlink" title="字串的顯性轉型"></a>字串的顯性轉型</h4><ul>
-<li>字串的顯性轉型一樣是透過函式。</li>
-<li>透過回傳結果可觀察到 String() 將數字、布林值、null、undefined 轉為字串。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">666666</span>; </span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">undefined</span>; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(a), <span class="keyword">typeof</span> <span class="built_in">String</span>(a)); <span class="comment">// 回傳 666666 string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(b), <span class="keyword">typeof</span> <span class="built_in">String</span>(b)); <span class="comment">// 回傳 true string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(c), <span class="keyword">typeof</span> <span class="built_in">String</span>(c)); <span class="comment">// 回傳 false string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(d), <span class="keyword">typeof</span> <span class="built_in">String</span>(d)); <span class="comment">// 回傳 null string </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(e), <span class="keyword">typeof</span> <span class="built_in">String</span>(e)); <span class="comment">// 回傳 undefined string </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(d.toString()); </span><br><span class="line"><span class="comment">//Uncaught TypeError: Cannot read properties of null (reading &#x27;toString&#x27;) </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(e.toString()); </span><br><span class="line"><span class="comment">//Uncaught TypeError: Cannot read properties of undefined (reading &#x27;toString&#x27;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <p>載入 cdn、確認 Vue 正確引入之後，準備來寫一個 Hello Vue!</p>
+<h3 id="Vue-起手式–實例-Instance"><a href="#Vue-起手式–實例-Instance" class="headerlink" title="Vue 起手式–實例 (Instance)"></a>Vue 起手式–實例 (Instance)</h3><p>在 Vue 文件內的 <code>實例</code> 指的就是 <code>物件</code>，<br>data 即是所有動態資料存放的位置，而其屬性名稱是對應到 HTML 的插值。<br>接著 Vue 實例內的資料，需要透過綁定到 DOM 上，才能渲染到畫面，<br>以下個別拆解出 element 及 data 寫法的意思。</p>
+<h4 id="Vue-instance-綁定-DOM"><a href="#Vue-instance-綁定-DOM" class="headerlink" title="Vue instance 綁定 DOM"></a>Vue instance 綁定 DOM</h4><p>Vue 實例綁定 DOM 的語法是： <code>Vue.createApp(&#123;&#125;).mount()</code> 。<br>基本上 Vue 語法的 <code>.mount(&#39;#app&#39;)</code>，<br>就是在說要把 Vue 實例安裝到 <code>#app</code> 這個 DOM 上，<br>是不是很像原生 JS 的 document.getElementById(‘app’)。</p>
+<h4 id="Vue-實例的-data-物件"><a href="#Vue-實例的-data-物件" class="headerlink" title="Vue 實例的 data 物件"></a>Vue 實例的 data 物件</h4><p>Vue 3 的 data 物件包在函式裡，而這樣的寫法，是為日後的組件作準備。</p>
+<p>如果我們在 data 函式內，看看 this 指向哪，<br>會發現這個 this 是指向 Vue 實例 (Vue 在調用這個 data 函式)，<br>因此，此處 data 絕對不可以寫成箭頭函式。</p>
+<p><code>備註</code> 所有被 Vue instance 託管的函式，都不可寫成箭頭函式，this 會變成指向 window。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// data 函式寫法</span></span><br><span class="line"></span><br><span class="line">Vue.createApp(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// 這邊的 this 指向 Vue 實例</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">greetings</span>: <span class="string">&#x27;Hello Vue!&#x27;</span>,</span><br><span class="line">            <span class="attr">linkTitle</span>: <span class="string">&#x27;這是個網址&#x27;</span>,</span><br><span class="line">            <span class="attr">link</span>: <span class="string">&#x27;https://codingsnorlax.github.io/&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">        </span><br><span class="line">&#125;).mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (還原) data 函式寫法 </span></span><br><span class="line"></span><br><span class="line">Vue.createApp(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">data</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  <span class="comment">// 這邊不可寫成箭頭函式！</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// 這邊的 this 指向 Vue 實例</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">greetings</span>: <span class="string">&#x27;Hello Vue!&#x27;</span>,</span><br><span class="line">            <span class="attr">linkTitle</span>: <span class="string">&#x27;這是個網址&#x27;</span>,</span><br><span class="line">            <span class="attr">link</span>: <span class="string">&#x27;https://codingsnorlax.github.io/&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">        </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><code>備註</code><br>String(value) 和 value.toString() 都是能強制轉型為字串的函式，<br>但在 value.toString() 這個方法中，null 和 undefined 將無法轉為字串型別。</p>
-<h4 id="字串的隱性轉型"><a href="#字串的隱性轉型" class="headerlink" title="字串的隱性轉型"></a>字串的隱性轉型</h4><p>字串的隱性轉型，必要的條件是在算式中，至少其中一個值為字串，<br><code>( + ) 運算子</code>會觸發隱性轉型，以下組合都會轉出字串：</p>
+<br>
+
+<h3 id="Vue-起手式–頁面"><a href="#Vue-起手式–頁面" class="headerlink" title="Vue 起手式–頁面"></a>Vue 起手式–頁面</h3><p>完成設置 Vue 實例後，還需要在 HTML 上設定一個<code>容器</code>承接資料：</p>
 <ul>
-<li>字串 + 字串</li>
-<li>字串 + 數字</li>
-<li>字串 + 布林值</li>
-<li>字串 + undefined</li>
-<li>字串 + null</li>
-<li>字串 + NaN</li>
-<li>字串 + 數字 + null</li>
-<li>字串 + 物件</li>
-<li>字串 + 陣列</li>
+<li>一個 Vue instance 只能對應一個容器。</li>
+<li>id 選取器上面的 app 就是綁定在 <code>.mount()</code>。</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;3&quot;</span> + <span class="string">&quot;3&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> b = <span class="string">&quot;8&quot;</span> + <span class="number">3</span>; </span><br><span class="line"><span class="keyword">let</span> c = <span class="string">&quot;9&quot;</span> + <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">undefined</span> + <span class="string">&quot;3&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> e = <span class="literal">null</span> + <span class="string">&quot;3&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> f = <span class="literal">NaN</span> + <span class="string">&quot;aaa&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> g = <span class="literal">null</span> + <span class="number">111</span> + <span class="string">&quot;666&quot;</span>; </span><br><span class="line"><span class="keyword">let</span> h = <span class="string">&quot;here&quot;</span> + &#123;&#125;; </span><br><span class="line"><span class="keyword">let</span> i = <span class="string">&quot;here&quot;</span> + []; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a, <span class="keyword">typeof</span> a); <span class="comment">// 回傳 33 string </span></span><br><span class="line"><span class="built_in">console</span>.log(b, <span class="keyword">typeof</span> b); <span class="comment">// 回傳 83 string </span></span><br><span class="line"><span class="built_in">console</span>.log(c, <span class="keyword">typeof</span> c); <span class="comment">// 回傳 9true string </span></span><br><span class="line"><span class="built_in">console</span>.log(d, <span class="keyword">typeof</span> d); <span class="comment">// 回傳 undefined3 string </span></span><br><span class="line"><span class="built_in">console</span>.log(e, <span class="keyword">typeof</span> e); <span class="comment">// 回傳 null3 string </span></span><br><span class="line"><span class="built_in">console</span>.log(f, <span class="keyword">typeof</span> f); <span class="comment">// 回傳 NaNaaa string </span></span><br><span class="line"><span class="built_in">console</span>.log(g, <span class="keyword">typeof</span> g); <span class="comment">// 回傳 111666 string </span></span><br><span class="line"><span class="built_in">console</span>.log(g, <span class="keyword">typeof</span> h); <span class="comment">// 回傳 here[object Object] string </span></span><br><span class="line"><span class="built_in">console</span>.log(g, <span class="keyword">typeof</span> i); <span class="comment">// 回傳 here[object Object] string</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br>
 
-<p>以上為布林值及字串的強制轉型，而下一篇將專注在整理數字的強制轉型，<br>並比較多在討論比較運算子 == 寬鬆等於、!= 寬鬆不等於的隱性轉型過程。</p>
-<h4 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h4><ul>
-<li>Day10 — 隱含的強制轉型</li>
-<li>[22] 強制轉型 — ToBoolean、Falsy、Truthy</li>
-<li>JavaScript type coercion explained</li>
-<li>MDN — Addition (+)</li>
-<li>JS 我轉型我又轉了打我阿笨蛋</li>
+<h4 id="插值語法-Interpolation"><a href="#插值語法-Interpolation" class="headerlink" title="插值語法 (Interpolation)"></a>插值語法 (Interpolation)</h4><p>主要用於控制 HTML <strong>開始標記</strong> 到 <strong>結束標記</strong> 之間的 <code>文字</code>。</p>
+<ul>
+<li><code>&#123;&#123;&#125;&#125;</code> 稱之為插值，是頁面上接收 data 屬性的位置。</li>
+<li>僅接受 <code>表達式</code>，以下當 Vue instance 的 greetings 資料為 false (不存在) 時，會顯示 <code>Welcome!</code>。</li>
 </ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;greetings || &#x27;Welcome!&#x27;&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="指令語法"><a href="#指令語法" class="headerlink" title="指令語法"></a>指令語法</h4><ul>
+<li>主要用於控制 HTML 上的 <code>標籤</code>，範圍包括：<code>標籤屬性</code>、標籤的<code>文字</code>內容、<code>綁定事件</code>。</li>
+<li>指令語法以 <code>v-</code> 開頭，v-bind、v-model…。</li>
+<li>指令語法會使得範例的：linkTitle、link 轉為一個 <code>表達式</code> (因為它們在 Data 內都有對應的值)。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">&quot;link&quot;</span>&gt;</span>&#123;&#123;linkTitle&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    // v-bind: 可簡化到剩下冒號</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">&quot;link&quot;</span>&gt;</span>&#123;&#123;linkTitle&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
 
         </div>
 
@@ -270,7 +262,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                        <a href="/tags/Vue-3/">#Vue 3</a>&nbsp;
                     </li>
                 
             </ul>
@@ -282,13 +274,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/16/2021-12-%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B-3-%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E8%88%87%E8%BD%89%E5%9E%8B%E8%A6%8F%E5%89%87%E7%AF%87/"
+                           href="/2021/12/26/%E9%99%B3%E8%BF%B0%E5%BC%8F%E8%88%87%E8%A1%A8%E9%81%94%E5%BC%8F/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">強制轉型 (3) 數字型別與轉型規則篇</span>
+                                <span class="post-nav-title-item">陳述式與表達式</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -298,10 +290,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/16/2021-12-%E5%BC%B7%E5%88%B6%E8%BD%89%E5%9E%8B-1-%E5%B8%83%E6%9E%97%E5%80%BC%E7%AF%87/"
+                           href="/2021/12/25/%E4%BE%86%E5%AF%AB%E4%B8%80%E5%80%8B-callback-function/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">強制轉型 (1) 布林值篇</span>
+                                <span class="post-nav-title-item">來寫個 callback function</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -426,7 +418,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%B8%B2%E7%9A%84%E9%A1%AF%E6%80%A7%E8%88%87%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">字串的顯性與隱性轉型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%B8%B2%E7%9A%84%E9%A1%AF%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">字串的顯性轉型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%B8%B2%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">字串的隱性轉型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-%E8%B5%B7%E6%89%8B%E5%BC%8F%E2%80%93%E5%AF%A6%E4%BE%8B-Instance"><span class="nav-number">1.</span> <span class="nav-text">Vue 起手式–實例 (Instance)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-instance-%E7%B6%81%E5%AE%9A-DOM"><span class="nav-number">1.1.</span> <span class="nav-text">Vue instance 綁定 DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-%E5%AF%A6%E4%BE%8B%E7%9A%84-data-%E7%89%A9%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">Vue 實例的 data 物件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-%E8%B5%B7%E6%89%8B%E5%BC%8F%E2%80%93%E9%A0%81%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">Vue 起手式–頁面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%80%BC%E8%AA%9E%E6%B3%95-Interpolation"><span class="nav-number">2.1.</span> <span class="nav-text">插值語法 (Interpolation)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E8%AA%9E%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">指令語法</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
