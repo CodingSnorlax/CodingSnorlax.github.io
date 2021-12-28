@@ -9,7 +9,7 @@
     
     <title>
         
-            DOM API(一)：querySelector、querySelectorAll |
+            this 的指向觀念 |
         
         Karen&#39;s Coding Notes
     </title>
@@ -153,7 +153,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">DOM API(一)：querySelector、querySelectorAll</span>
+            <span class="title-hover-animation">this 的指向觀念</span>
         </div>
 
         
@@ -170,8 +170,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-17 09:23:49</span>
-        <span class="mobile">2021-12-17 09:23</span>
+        <span class="pc">2021-12-27 14:06:18</span>
+        <span class="mobile">2021-12-27 14:06</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -183,11 +183,7 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/JavaScript/%E9%81%B8%E5%8F%96%E5%99%A8/">選取器</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/JavaScript/DOM/">DOM</a>&nbsp;
+                        &gt; <a href="/categories/JavaScript/%E7%89%A9%E4%BB%B6/">物件</a>&nbsp;
                     </li>
                 
             </ul>
@@ -222,50 +218,42 @@
         
 
         <div class="article-content markdown-body">
-            <p>在寫 JavaScript 的時候，要綁定 <code>DOM</code> 一定會頻繁用到 <code>querySelector</code> 和 <code>querySelectorAll</code>，<br>因此這篇要來紀錄一下這兩者的用法，以下也搭配 DOM 結構的示意圖。<br><br><br><img src="https://miro.medium.com/max/1400/1*myiSK2p22sRBpl6gNUOeRw.png"></p>
-<br>
-<br>
-
-<h3 id="querySelector-選取-1-個-第-1-個-DOM"><a href="#querySelector-選取-1-個-第-1-個-DOM" class="headerlink" title="querySelector (選取 1 個 / 第 1 個 DOM)"></a>querySelector (選取 1 個 / 第 1 個 DOM)</h3><p>只會選取一個 <code>id</code> 或 <code>class</code>，可用來綁定單一的 id 或 class，<br>且當有多個同名的 class 時，也只會抓取其中符合條件的<code>第一個</code> class：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.js-name&#x27;</span>);</span><br><span class="line">or</span><br><span class="line"><span class="keyword">const</span> name = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#js-name&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-<br>
-
-<h3 id="querySelectorAll-選取多個標籤組成-nodelist"><a href="#querySelectorAll-選取多個標籤組成-nodelist" class="headerlink" title="querySelectorAll (選取多個標籤組成 nodelist)"></a>querySelectorAll (選取多個標籤組成 nodelist)</h3><p>如它的名稱所示，既然是 querySelectorAll()，<br>根據傳入的 class 或屬性名稱，它就可以用來一次同時綁定多個同名 class 或屬性，<br>且由於一次打包很多個 tag，它將會自動幫開發者組成一個 nodelist，用法範例：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-list&quot;</span>&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;</span>customer1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;</span>customer2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;</span>customer3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"><span class="keyword">const</span> customerList = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.js-customer-item&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<img src="https://miro.medium.com/max/2400/1*Lac93p3DN5AC5olKJ1OuVw.png">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>this 離開物件就沒有意義，因為 this 指向的是它本身目前所處的一個 <code>空間</code>，<br>而這個空間等同於容納 this 的這一個 <code>物件</code>。</p>
+<p>由於 JS 是物件導向設計的語法，透過以下最簡單的例子，<br>可驗證最初的 this 的確存在於 window 這個大物件內。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">// 指向 window</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h4 id="什麼是-nodelist"><a href="#什麼是-nodelist" class="headerlink" title="什麼是 nodelist"></a>什麼是 nodelist</h4><p>nodelist 可看作是 <code>節點的集合</code>，可用來操作 DOM 元素，<br>但 nodelist 不是純陣列 (純陣列中，存放的是值)，<br>因此有一些陣列方法 nodelist 是不能用的！</p>
-<h4 id="nodelist-的順序性"><a href="#nodelist-的順序性" class="headerlink" title="nodelist 的順序性"></a>nodelist 的順序性</h4><p>又因為 querySelectorAll 會組成一個 nodelist，<br>而 nodelist 還具備陣列<code>序列性</code>的特質，因此也可以拆解成這樣來看：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(customerList[<span class="number">0</span>]) </span><br><span class="line"><span class="built_in">console</span>.log(customerList[<span class="number">1</span>]) </span><br><span class="line"><span class="built_in">console</span>.log(customerList[<span class="number">2</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>我們會得到這樣一個回傳的結果：</p>
-<img src="https://miro.medium.com/max/599/1*6R63czLR3bvT9Ow4pPkLNA.png">
-
-<p>nodelist 跟 li 對應的情形：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">customerList[<span class="number">0</span>] 對應 &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;customer1&lt;/li&gt;</span><br><span class="line">customerList[<span class="number">1</span>] 對應 &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;customer2&lt;/li&gt;</span><br><span class="line">customerList[<span class="number">2</span>] 對應 &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;js-customer-item&quot;</span>&gt;customer3&lt;/li&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br>
-
-<h4 id="用-nodelist-跑-forEach"><a href="#用-nodelist-跑-forEach" class="headerlink" title="用 nodelist 跑 forEach"></a>用 nodelist 跑 forEach</h4><p>由於 nodelist 具備陣列的特性，當我們要一次同時改變許多個 tag，<br>就可以用 forEach 迴圈來帶入這個陣列，進行一次修改全部的文字，<br>如同剛剛的例子中，customerList (nodelist)，又可以繼續寫成：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 用陣列跑 forEach</span></span><br><span class="line">customerList.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">item.textContent = <span class="string">&#x27;customer does not exist&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 此時，customer1, customer2, customer3 </span></span><br><span class="line"><span class="comment">// 都會一起被改為 &#x27;customer does not exist&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>畫面將會被渲染如下：</p>
-<img src="https://miro.medium.com/max/671/1*OntUDGh-U2aFMqJtUDUP_g.png">
-
-<h4 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h4><ul>
-<li>querySelector：選取單一個元素。</li>
-<li>querySelectorAll：選取多個元素。</li>
+<h3 id="函式的原始參數"><a href="#函式的原始參數" class="headerlink" title="函式的原始參數"></a>函式的原始參數</h3><p>除此之外，也可透過函式原先的幾個參數來觀察：</p>
+<ul>
+<li>params (呼叫函式第一個帶入的參數，1)</li>
+<li><code>this</code> 指向 window</li>
+<li>window</li>
+<li>arguments 預設是帶入所有參數，變成一個類陣列 [1, 2, 3]</li>
 </ul>
-<p><code>備註</code> 同時還可以利用 <strong>querySelectorAll 組成 nodelist</strong> 的特性，來串接或修改資料，是很好用的一個功能。<br><code>備註</code> nodelist 遇到有一些陣列方法不能使用，可以先把它轉成陣列，方法可參考 <a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10211876" >NodeList 與 Array 差異<i class="fas fa-external-link-alt"></i></a></p>
-<p>除了 querySelector、 querySelectorAll，另外還有 getElementById、getElementsByClassName 及 getElementsByTagName，<br>將分別會記錄在選取 DOM 的方法(二)：回傳 HTMLCollection 物件這一篇當中。</p>
-<br>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;全域&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sampleFn</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(params, <span class="built_in">this</span>, <span class="built_in">window</span>, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">sampleFn(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <br>
 
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.fooish.com/javascript/dom/traversing.html" >JavaScript DOM 查找元素 (DOM Traversing)<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10202689" >Day03-深入理解網頁架構：DOM<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://attacomsian.com/blog/javascript-nodelist-vs-array" >Difference between a NodeList and an Array in JavaScript<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="this-指向物件"><a href="#this-指向物件" class="headerlink" title="this 指向物件"></a>this 指向物件</h3><p>this 指向的是不是 window，<br>端看<code>調用它的方法</code>，跟 this 所處的作用域無關，<br>因此 this 可視為存在於「動態」的作用域 (?)<br>在以下的調用方法中，this 都會指向物件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 在全域範圍的 someone </span></span><br><span class="line"><span class="keyword">var</span> someone = <span class="string">&#x27;全域&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callSomeone</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.someone);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// (1)</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">someone</span>: <span class="string">&#x27;物件&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">callSomeone</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.someone);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.callSomeone(); <span class="comment">// 物件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (2)</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">  <span class="attr">someone</span>: <span class="string">&#x27;物件2&#x27;</span>,</span><br><span class="line">  callSomeone</span><br><span class="line">&#125;</span><br><span class="line">obj2.callSomeone(); <span class="comment">// 物件2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (3)</span></span><br><span class="line"><span class="keyword">var</span> wrapObj = &#123;</span><br><span class="line">  <span class="attr">someone</span>: <span class="string">&#x27;外層物件&#x27;</span>,</span><br><span class="line">  callSomeone,</span><br><span class="line">  <span class="attr">innerObj</span>: &#123;</span><br><span class="line">    <span class="attr">someone</span>: <span class="string">&#x27;內層物件&#x27;</span>,</span><br><span class="line">    callSomeone,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">wrapObj.callSomeone(); <span class="comment">// 外層物件</span></span><br><span class="line">wrapObj.innerObj.callSomeone(); 內層物件</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="this-指向全域"><a href="#this-指向全域" class="headerlink" title="this 指向全域"></a>this 指向全域</h3><p>先前提到，this 的指向跟<strong>調用它的方法</strong>有關，<br>在以下狀況中的 this 會指向全域：</p>
+<ul>
+<li>透過 simple call 調用的函式<ul>
+<li>立即函式</li>
+<li>CallBack Function</li>
+<li>Clousure</li>
+</ul>
+</li>
+<li>箭頭函式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// (1)</span></span><br><span class="line"><span class="keyword">var</span> someone = <span class="string">&#x27;全域&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callSomeone</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.someone);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">callSomeone(); <span class="comment">// 立即函式</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (2)</span></span><br><span class="line"><span class="keyword">var</span> obj3 = &#123;</span><br><span class="line">  <span class="attr">someone</span>: <span class="string">&#x27;物件 3&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">fn</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    callSomeone(); <span class="comment">// 立即函式</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj3.fn(); <span class="comment">// 透過這邊調用的還是立即函式，故 this 仍指向全域</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (3)</span></span><br><span class="line"><span class="keyword">var</span> obj4 = &#123;</span><br><span class="line">  <span class="attr">someone</span>: <span class="string">&#x27;物件 4&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">fn</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.someone);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj4.fn(); <span class="comment">// setTimeout 是 CallBack Function</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
 
         </div>
 
@@ -287,13 +275,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/12/17/2021-12-DOM-API-%E4%BA%8C/"
+                           href="/2021/12/28/JS-%E7%B0%A1%E5%AF%AB%E5%BD%99%E6%95%B4/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">DOM API(二)：getElement(s)By-* 系列與 HTMLCollection 物件</span>
+                                <span class="post-nav-title-item">JS 語法糖整理</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -303,10 +291,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/12/17/2021-12-%E4%BB%80%E9%BA%BC%E6%98%AF-DOM%EF%BC%9ADOM-API-%E7%9A%84%E8%83%8C%E5%BE%8C%E5%8E%9F%E7%90%86/"
+                           href="/2021/12/26/MVVM-%E7%9A%84%E6%A6%82%E5%BF%B5/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">什麼是 DOM：DOM API 的背後原理</span>
+                                <span class="post-nav-title-item">什麼是 MVVM？</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -431,7 +419,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelector-%E9%81%B8%E5%8F%96-1-%E5%80%8B-%E7%AC%AC-1-%E5%80%8B-DOM"><span class="nav-number">1.</span> <span class="nav-text">querySelector (選取 1 個 &#x2F; 第 1 個 DOM)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelectorAll-%E9%81%B8%E5%8F%96%E5%A4%9A%E5%80%8B%E6%A8%99%E7%B1%A4%E7%B5%84%E6%88%90-nodelist"><span class="nav-number">2.</span> <span class="nav-text">querySelectorAll (選取多個標籤組成 nodelist)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-nodelist"><span class="nav-number">2.1.</span> <span class="nav-text">什麼是 nodelist</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodelist-%E7%9A%84%E9%A0%86%E5%BA%8F%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">nodelist 的順序性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8-nodelist-%E8%B7%91-forEach"><span class="nav-number">2.3.</span> <span class="nav-text">用 nodelist 跑 forEach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">2.4.</span> <span class="nav-text">小結</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">參考資料</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%8F%83%E6%95%B8"><span class="nav-number">2.</span> <span class="nav-text">函式的原始參數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-%E6%8C%87%E5%90%91%E7%89%A9%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">this 指向物件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-%E6%8C%87%E5%90%91%E5%85%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">this 指向全域</span></a></li></ol>
     </div>
 </div>
         </aside>
