@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            事件與事件監聽 |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">事件與事件監聽</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-28 20:06:30</span>
+        <span class="mobile">2021-12-28 20:06</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E4%BA%8B%E4%BB%B6/">事件</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="什麼是事件-Event"><a href="#什麼是事件-Event" class="headerlink" title="什麼是事件 (Event)"></a>什麼是事件 (Event)</h3><p><code>事件</code> 是觸發一段 JS 函式的方法，<br>也可以說，事件是用戶和瀏覽器<strong>互動</strong>的瞬間，<br>互動有很多種，像是鍵盤事件、滑鼠事件 (click / dblclick / mouseenter)…，<br>基本上如同滑鼠的 hover 之於觸發 CSS 的效果。</p>
+<br>
+
+<h3 id="何謂事件監聽及其兩種寫法"><a href="#何謂事件監聽及其兩種寫法" class="headerlink" title="何謂事件監聽及其兩種寫法"></a>何謂事件監聽及其兩種寫法</h3><p><code>事件監聽器</code> (addEventListener) 主要用來偵測使用者在網頁頁面上的所有行為，<br>舉凡：點擊按鈕、滑鼠滑過的區域、視窗放大縮小等，都可被偵測。</p>
+<br>
+
+<h4 id="寫在-HTML-標籤屬性上-不建議做法"><a href="#寫在-HTML-標籤屬性上-不建議做法" class="headerlink" title="寫在 HTML 標籤屬性上 (不建議做法)"></a>寫在 HTML 標籤屬性上 (不建議做法)</h4><p>在按鈕標籤上，增加一個 onclick 屬性，並寫下對應的函式名稱，<br>這樣就寫完了一個監聽事件，點擊按鈕時就會觸發 sendPassword() 函式。</p>
+<p><code>註</code> 在標籤上的 <font color="tomato">this</font>，指的就是 button 這個元素本身。<br><code>注意！</code> 為避免 XSS 攻擊事件，script 標籤別放在 HTML 上面，網站很容易被攻擊！</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;請輸入密碼&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;sendPassword(this)&quot;</span>&gt;</span>確定送出<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// JS</span><br><span class="line">function sendPassword(btn)&#123;</span><br><span class="line">  console.log(&#x27;密碼已成功送出！&#x27;)</span><br><span class="line">  btn.style.color = &#x27;green&#x27; // 文字改為綠色</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="透過-JS-綁定-DOM"><a href="#透過-JS-綁定-DOM" class="headerlink" title="透過 JS 綁定 DOM"></a>透過 JS 綁定 DOM</h4><p>透過 JS 來綁定，將 DOM 儲存在變數裡，對 DOM 綁定監聽事件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;請輸入密碼&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;sendPassword()&quot;</span>&gt;</span>確定送出<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// JS</span><br><span class="line">let dom = document.querySelector(&#x27;.btn&#x27;)</span><br><span class="line">dom.addEventListener(&#x27;click&#x27;, function()&#123;</span><br><span class="line">  </span><br><span class="line">  // console.log(&#x27;密碼已成功送出！&#x27;)</span><br><span class="line">  this.style.color = &#x27;green&#x27; // this 同樣可改到 dom 樣式</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+
+<h3 id="拆解監聽器結構"><a href="#拆解監聽器結構" class="headerlink" title="拆解監聽器結構"></a>拆解監聽器結構</h3><h4 id="event-e"><a href="#event-e" class="headerlink" title="event (e)"></a>event (e)</h4><p>在瀏覽器中，有事件被觸發時，event 會變成函式的參數，<br>原因是這個事件本身也是一個物件，內含瀏覽器相關的資訊，<br>例如：滑鼠座標、滑鼠滾輪上下滾動的距離、鍵盤的按鍵…等，<br>帶入函式後就能利用這事件內建的資訊了。</p>
+<br>
+
+<h4 id="target-監聽對象"><a href="#target-監聽對象" class="headerlink" title="target 監聽對象"></a>target 監聽對象</h4><p>即瀏覽器，若要選取範圍可透過 class、ID。</p>
+<br>
+
+<h4 id="type-事件類型"><a href="#type-事件類型" class="headerlink" title="type 事件類型"></a>type 事件類型</h4><p>通常是一個觸發事件，例如滑鼠或鍵盤事件。</p>
+<br>
+
+<h4 id="function"><a href="#function" class="headerlink" title="function"></a>function</h4><p>要透過滑鼠或鍵盤事件去執行的動作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="number">1</span>)  (<span class="number">2</span>)                  (<span class="number">3</span>)      (<span class="number">4</span>)</span><br><span class="line">e.target.addEventListener(type, <span class="function"><span class="keyword">function</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">e</span>.<span class="title">target</span>.<span class="title">addEventListener</span>(<span class="params">type, <span class="keyword">function</span>(e)&#123;</span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>)</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/30/2021-12-2021-12-%E8%99%95%E7%90%86%E5%85%BC%E5%AE%B9%E6%80%A7%E5%95%8F%E9%A1%8C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">處理兼容性問題</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/28/2021-12-2021-12-JS-%E7%B0%A1%E5%AF%AB%E5%BD%99%E6%95%B4/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JS 語法糖整理</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E4%BA%8B%E4%BB%B6-Event"><span class="nav-number">1.</span> <span class="nav-text">什麼是事件 (Event)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%95%E8%AC%82%E4%BA%8B%E4%BB%B6%E7%9B%A3%E8%81%BD%E5%8F%8A%E5%85%B6%E5%85%A9%E7%A8%AE%E5%AF%AB%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">何謂事件監聽及其兩種寫法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%AB%E5%9C%A8-HTML-%E6%A8%99%E7%B1%A4%E5%B1%AC%E6%80%A7%E4%B8%8A-%E4%B8%8D%E5%BB%BA%E8%AD%B0%E5%81%9A%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">寫在 HTML 標籤屬性上 (不建議做法)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%8F%E9%81%8E-JS-%E7%B6%81%E5%AE%9A-DOM"><span class="nav-number">2.2.</span> <span class="nav-text">透過 JS 綁定 DOM</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%86%E8%A7%A3%E7%9B%A3%E8%81%BD%E5%99%A8%E7%B5%90%E6%A7%8B"><span class="nav-number">3.</span> <span class="nav-text">拆解監聽器結構</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#event-e"><span class="nav-number">3.1.</span> <span class="nav-text">event (e)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#target-%E7%9B%A3%E8%81%BD%E5%B0%8D%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">target 監聽對象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#type-%E4%BA%8B%E4%BB%B6%E9%A1%9E%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">type 事件類型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#function"><span class="nav-number">3.4.</span> <span class="nav-text">function</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

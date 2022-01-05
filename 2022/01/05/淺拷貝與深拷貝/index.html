@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="前端, 網頁, 網頁開發, JavaScript, HTML, CSS, SCSS">
+    <meta name="description" content="記錄各種網頁開發遇到的問題或想法">
+    <meta name="author" content="Karen Huang">
+    
+    <title>
+        
+            如何分辨淺拷貝與深拷貝？ |
+        
+        Karen&#39;s Coding Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Karen&#39;s Coding Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分類
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分類</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">如何分辨淺拷貝與深拷貝？</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Karen Huang</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-05 14:57:44</span>
+        <span class="mobile">2022-01-05 14:57</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/JavaScript/%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5/">基本觀念</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="淺拷貝與深拷貝針對的問題"><a href="#淺拷貝與深拷貝針對的問題" class="headerlink" title="淺拷貝與深拷貝針對的問題"></a>淺拷貝與深拷貝針對的問題</h3><p>淺拷貝與深拷貝主要是解決：<br>開發者在更改物件、陣列內的資料，<br>會因為 JS 傳址的特性，而連動更改到原始資料的問題。</p>
+<p>也就是說，<code>淺拷貝與深拷貝可以避免更動到原始資料</code>。</p>
+<br>
+
+<h3 id="比較淺拷貝與深拷貝的差異"><a href="#比較淺拷貝與深拷貝的差異" class="headerlink" title="比較淺拷貝與深拷貝的差異"></a>比較淺拷貝與深拷貝的差異</h3><p>假設：有 <code>A 物件</code> 及 <code>B 空物件</code>，<br>也用了上述方法將 <code>A 物件</code> 的內容複製到空物件中，<br>如果同樣都是拷貝，深拷貝與淺拷貝有什麼差異？</p>
+<h4 id="最大差異比較"><a href="#最大差異比較" class="headerlink" title="最大差異比較"></a>最大差異比較</h4><blockquote>
+<p><strong>淺拷貝</strong><br>遇到重新賦值時，<code>物件/陣列</code>內的 <strong>下一層</strong> <code>物件/陣列</code>，<strong>仍維持傳址特性 (會連動更改)</strong> 。<br>原因：<strong>下一層</strong>指向相同記憶體位址。</p>
+</blockquote>
+<blockquote>
+<p><strong>深拷貝</strong><br>遇到重新賦值時，<code>物件/陣列</code>內的 <strong>下一層</strong> <code>物件/陣列</code>，各自獨立不受影響。<br>原因：整包物件/陣列都已指向不同記憶體位址。</p>
+</blockquote>
+<br>
+
+<h3 id="淺拷貝"><a href="#淺拷貝" class="headerlink" title="淺拷貝"></a>淺拷貝</h3><h4 id="物件的淺拷貝"><a href="#物件的淺拷貝" class="headerlink" title="物件的淺拷貝"></a>物件的淺拷貝</h4><p><code>Object.assign()</code> 概念是把 source 賦值到 target 物件上（後者附到前者上）。</p>
+<ul>
+<li><code>target</code> 是接收資料的<strong>容器</strong></li>
+<li><code>source</code> 是拷貝的資料來源</li>
+</ul>
+<blockquote>
+<p>(1) Object.assign(target, source)<br>(2) Object.assign({}, source) </p>
+</blockquote>
+<iframe height="300" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/Coding_Snorlax/embed/zYEazmv?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a class="link"   target="_blank" rel="noopener" href="https://codepen.io/Coding_Snorlax/pen/zYEazmv" >
+  Untitled<i class="fas fa-external-link-alt"></i></a> by Karen Huang (<a class="link"   target="_blank" rel="noopener" href="https://codepen.io/Coding_Snorlax" >@Coding_Snorlax<i class="fas fa-external-link-alt"></i></a>)
+  on <a class="link"   target="_blank" rel="noopener" href="https://codepen.io" >CodePen<i class="fas fa-external-link-alt"></i></a>.
+</iframe>
+
+<br>
+<br>
+
+<p><code>重點複習</code> Object.assign() 是<strong>淺拷貝</strong>，兩物件的第一層都已有各自獨立位址，但第二層仍有連動影響！</p>
+<br>
+
+<h4 id="物件淺拷貝範例題目"><a href="#物件淺拷貝範例題目" class="headerlink" title="物件淺拷貝範例題目"></a>物件淺拷貝範例題目</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// (1)</span></span><br><span class="line"><span class="keyword">const</span> a = &#123; <span class="attr">name</span>: <span class="string">&#x27;Good&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">Object</span>.assign(a, &#123; <span class="attr">name2</span>: <span class="string">&#x27;good b&#x27;</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(a, b, a === b);</span><br><span class="line"></span><br><span class="line"><span class="comment">// a 與 b 都同時會有 name, name2 的屬性</span></span><br><span class="line"><span class="comment">// a 與 b 完全相等</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (2)</span></span><br><span class="line"><span class="keyword">let</span> a = &#123; <span class="attr">name</span>: <span class="string">&#x27;Good&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> b = &#123;&#125;</span><br><span class="line">b = <span class="built_in">Object</span>.assign(b, a);</span><br><span class="line"><span class="built_in">console</span>.log(a, b, a === b);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Object.assign 是將 a 的屬性複製至 b，但「兩者的參考位置是不同」的，所以兩者是不相等</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (3)</span></span><br><span class="line"><span class="keyword">let</span> a = &#123; <span class="attr">name</span>: <span class="string">&#x27;Good&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> b = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> c = b;</span><br><span class="line">b = <span class="built_in">Object</span>.assign(b, a);</span><br><span class="line"><span class="built_in">console</span>.log(a, b, c, b === c, c===a);</span><br><span class="line"></span><br><span class="line"><span class="comment">// c 取得 b 的參考，將 a 值加入到 b</span></span><br><span class="line"><span class="comment">// c 與 b 依然一致，但 c 與 a 不同 </span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+
+<h4 id="陣列的淺拷貝"><a href="#陣列的淺拷貝" class="headerlink" title="陣列的淺拷貝"></a>陣列的淺拷貝</h4><ul>
+<li>各種陣列方法：splice, filter, reduce…</li>
+<li>展開運算子： <code>...</code> 後面接一個陣列 (也可以是物件或參數)，代表將內容全數複製過來。</li>
+</ul>
+<br>
+
+<h3 id="深拷貝"><a href="#深拷貝" class="headerlink" title="深拷貝"></a>深拷貝</h3><p>JSON 的深拷貝要怎麼做呢？<br>原理是先將<strong>物件或陣列轉為 JSON 字串</strong>，再把 <strong>JSON 字串轉(包括，但不限於)物件</strong>。</p>
+<p><code>備註</code> JSON.parse() 函式，可將 JSON 字串轉為任何 JS 的值</p>
+<blockquote>
+<p>JSON.parse(JSON.stringify(obj))</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> string = <span class="built_in">JSON</span>.stringify(obj);</span><br><span class="line"><span class="keyword">let</span> newCopyObj = <span class="built_in">JSON</span>.parse(string)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+
+
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" >Object.assign()<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/how-to-clone-an-array-in-javascript-1d3183468f6a/" >How to clone an array in JavaScript<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://medium.com/itsems-frontend/javascript-json-stringify-and-json-parse-7a1251d3824c" >[JavaScript] JSON.stringify() and JSON.parse()：變 JSON 和變物件<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<br>
+<br>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/01/hoisting-%E7%9A%84%E5%8E%9F%E7%90%86/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">hoisting 的原理</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BA%E6%8B%B7%E8%B2%9D%E8%88%87%E6%B7%B1%E6%8B%B7%E8%B2%9D%E9%87%9D%E5%B0%8D%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">淺拷貝與深拷貝針對的問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BC%83%E6%B7%BA%E6%8B%B7%E8%B2%9D%E8%88%87%E6%B7%B1%E6%8B%B7%E8%B2%9D%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">2.</span> <span class="nav-text">比較淺拷貝與深拷貝的差異</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%B7%AE%E7%95%B0%E6%AF%94%E8%BC%83"><span class="nav-number">2.1.</span> <span class="nav-text">最大差異比較</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BA%E6%8B%B7%E8%B2%9D"><span class="nav-number">3.</span> <span class="nav-text">淺拷貝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E7%9A%84%E6%B7%BA%E6%8B%B7%E8%B2%9D"><span class="nav-number">3.1.</span> <span class="nav-text">物件的淺拷貝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E6%B7%BA%E6%8B%B7%E8%B2%9D%E7%AF%84%E4%BE%8B%E9%A1%8C%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">物件淺拷貝範例題目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%A3%E5%88%97%E7%9A%84%E6%B7%BA%E6%8B%B7%E8%B2%9D"><span class="nav-number">3.3.</span> <span class="nav-text">陣列的淺拷貝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B2%9D"><span class="nav-number">4.</span> <span class="nav-text">深拷貝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

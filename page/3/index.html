@@ -19,7 +19,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -155,32 +155,44 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-%E6%93%8D%E4%BD%9C-HTML-%E5%B1%AC%E6%80%A7-1-setAttribute-%E6%9B%B4%E6%94%B9%E5%B1%AC%E6%80%A7%E8%88%87%E5%80%BC/">
-                        操作 HTML 屬性 (1) setAttribute 增設屬性與值
+                    <a href="/2021/12/24/2021-12-2021-12-%E5%87%BD%E5%BC%8F%E5%8F%8A%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F/">
+                        函式及箭頭函式
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
-
-
-
-setAttribute 增設屬性與值setAttribute 是可以同時用來增設 HTML 元素上的屬性以及屬性的值，由於這樣的特性，setAttribute 可以用來做很多事。
-
-
-setAttribute 的寫法123element.s...
+                        函式陳述式函式陳述式在被宣告之前，就可以呼叫，寫法如下：
+1234567891011addNum(1, 3) // okfunction addNum(a, b)&#123;        return a + b&#125;addNum(1, 3)...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 20:53:32 GMT+0800">2021-12-17</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 24 2021 11:34:27 GMT+0800">2021-12-24</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/17/2021-12-%E6%93%8D%E4%BD%9C-HTML-%E5%B1%AC%E6%80%A7-1-setAttribute-%E6%9B%B4%E6%94%B9%E5%B1%AC%E6%80%A7%E8%88%87%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/24/2021-12-2021-12-%E5%87%BD%E5%BC%8F%E5%8F%8A%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -190,30 +202,47 @@ setAttribute 的寫法123element.s...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-querySelectorAll-%E6%90%AD%E9%85%8D%E5%B1%AC%E6%80%A7%E9%81%B8%E5%8F%96%E5%99%A8/">
-                        querySelectorAll 搭配屬性選取器
+                    <a href="/2021/12/23/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-sort/">
+                        陣列方法: sort
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        CSS 屬性選取器的長相：[ ]根據 MDN 的解釋 
-
-中文版CSS 屬性選擇器通過已經存在的屬性名或屬性值配對到元素。 
+                        sort 陣列使用時機sort() 可以接受帶入 函式參數，透過這個函式參數來設定 sort() 的排序。
 
 
-英文版The CSS attribute selector matches elements based on the ...
+字串排序預設是根據字串的 Unicode 編碼位置而定。
+12345arr = [&#x27;d&#x27;, &#x27;e&#x27;...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 14:54:46 GMT+0800">2021-12-17</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 23 2021 11:44:58 GMT+0800">2021-12-23</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E9%99%A3%E5%88%97/">陣列</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/17/2021-12-querySelectorAll-%E6%90%AD%E9%85%8D%E5%B1%AC%E6%80%A7%E9%81%B8%E5%8F%96%E5%99%A8/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/23/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-sort/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -223,30 +252,48 @@ setAttribute 的寫法123element.s...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-DOM-API-%E4%BA%8C/">
-                        DOM API(二)：getElement(s)By-* 系列與 HTMLCollection 物件
+                    <a href="/2021/12/23/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-reduce/">
+                        陣列方法: reduce
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                        reduce 陣列方法亮點
+可設定初始值當作起算的起點：reduce 的參數與其他陣列方法相比，特殊之處是它可自定義 初始值，初始值是用來 累計 數字，並 return 一個累計後的值。
 
-在前一篇認識了 querySelector 及 querySelectorAll，而本篇要解釋的是選取 DOM 的 getElement(s)By-* 系列，並互相比較這兩種方法選取的 DOM 集合，有何不同。
+若有設定初始值，accu 最初的值 = 初始值。
 
-
-getElementById ...
+初始值可...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 09:25:27 GMT+0800">2021-12-17</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 23 2021 11:44:43 GMT+0800">2021-12-23</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E9%99%A3%E5%88%97/">陣列</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/17/2021-12-DOM-API-%E4%BA%8C/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/23/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-reduce/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -256,29 +303,50 @@ getElementById ...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-DOM-API-%E4%B8%80/">
-                        DOM API(一)：querySelector、querySelectorAll
+                    <a href="/2021/12/23/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-findIndex/">
+                        陣列方法: findIndex
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        在寫 JavaScript 的時候，要綁定 DOM 一定會頻繁用到 querySelector 和 querySelectorAll，因此這篇要來紀錄一下這兩者的用法，以下也搭配 DOM 結構的示意圖。
+                        findIndex 陣列使用時機
+對資料進行篩選，return 一筆資料的 索引位置(數字)。
+return 判斷式為 true 的資料 索引位置(數字)。
+透過取得該筆資料的陣列索引，可抓出單一筆資料並進行修改。
 
 
 
-querySelector (選取 1 ...
+資料集12345678910...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 09:23:49 GMT+0800">2021-12-17</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 23 2021 11:41:06 GMT+0800">2021-12-23</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E9%99%A3%E5%88%97/">陣列</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/17/2021-12-DOM-API-%E4%B8%80/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/23/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-findIndex/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -288,179 +356,49 @@ querySelector (選取 1 ...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-%E4%BB%80%E9%BA%BC%E6%98%AF-DOM%EF%BC%9ADOM-API-%E7%9A%84%E8%83%8C%E5%BE%8C%E5%8E%9F%E7%90%86/">
-                        什麼是 DOM：DOM API 的背後原理
+                    <a href="/2021/12/22/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-filter/">
+                        陣列方法: filter
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        如何選取 DOM選取 DOM 的方式，我們可以透過以下幾種選取器：
+                        filter 陣列使用時機
+對資料進行篩選，return 一個新的陣列。
+return 判斷式為 true 的資料。
 
-querySeletor()
-querySeletorAll()
-getElementByTagName()
-getElementByClassName()
-getElementB...
+
+
+資料集123456789101112131415161718192021222324const fruitData = [  ...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 08:30:18 GMT+0800">2021-12-17</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Dec 22 2021 22:13:08 GMT+0800">2021-12-22</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E9%99%A3%E5%88%97/">陣列</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/17/2021-12-%E4%BB%80%E9%BA%BC%E6%98%AF-DOM%EF%BC%9ADOM-API-%E7%9A%84%E8%83%8C%E5%BE%8C%E5%8E%9F%E7%90%86/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-%E4%BB%80%E9%BA%BC%E6%98%AF-DOM%EF%BC%9ADOM-%E8%88%87%E5%AE%83%E7%9A%84%E7%AF%80%E9%BB%9E/">
-                        什麼是 DOM：DOM 與它的節點
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        網頁的 Document這篇主要在介紹什麼是 DOM (文件物件模型)。但在開始探討 DOM 之前，不得不先提到 document！網頁開發經常看到的 document 其實是一包物件，只要在 dev tool 上面輸入 document，就會看到 ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 08:28:18 GMT+0800">2021-12-17</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/17/2021-12-%E4%BB%80%E9%BA%BC%E6%98%AF-DOM%EF%BC%9ADOM-%E8%88%87%E5%AE%83%E7%9A%84%E7%AF%80%E9%BB%9E/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/2021-12-%E7%89%A9%E4%BB%B6%E5%8F%96%E5%80%BC%EF%BC%9A%E7%94%A8%E6%96%B9%E6%8B%AC%E8%99%9F%E5%8F%96%E5%80%BC/">
-                        物件取值：用方括號取值
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        用方括號取值 (Bracket notation)百毒不侵的 [ ]obj[value]此處的 value 可以是一個字串、數字或布林，而方括號如此百毒不侵的關鍵是，不論字串、數字或布林，在 [ ] 內都會被強制轉型轉出字串！
-除了字串之外，也可以在...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 22:40:54 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/2021-12-%E7%89%A9%E4%BB%B6%E5%8F%96%E5%80%BC%EF%BC%9A%E7%94%A8%E6%96%B9%E6%8B%AC%E8%99%9F%E5%8F%96%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/2021-12-%E7%89%A9%E4%BB%B6%E5%8F%96%E5%80%BC%EF%BC%9A%E7%94%A8%E9%BB%9E%E5%8F%96%E5%80%BC/">
-                        物件取值：用點取值
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        物件取值是在做什麼？物件裡面可以裝載很多資料，妥善的規劃程式碼結構，並懂得運用這些資料，可以讓程式碼更為精簡。當需要從物件取用這些資料的時候，就要透過物件取值，其中物件取值有兩種方法，一種是直接透過 . 來取值，另外一種則是以 [ ] 來取值。
-用點...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 22:40:45 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/2021-12-%E7%89%A9%E4%BB%B6%E5%8F%96%E5%80%BC%EF%BC%9A%E7%94%A8%E9%BB%9E%E5%8F%96%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/2021-12-JS-%E7%89%A9%E4%BB%B6-object-%E7%9A%84%E5%9F%BA%E7%A4%8E%E8%A7%80%E5%BF%B5/">
-                        JS 物件(object) 的基礎觀念
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        在開始看物件取值之前，再看一看物件的基本定義吧！
-物件的結構屬性(key) ：用來取得資料的「位置」。值(value) ：有不同型別。
-在物件內，沒有順序性，只有屬性名稱與值。
-
-
-物件的功能物件是 JavaScript 的物件型別之一，理解它的方法...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 22:35:18 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/2021-12-JS-%E7%89%A9%E4%BB%B6-object-%E7%9A%84%E5%9F%BA%E7%A4%8E%E8%A7%80%E5%BF%B5/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/16/2021-12-%E8%AA%8D%E8%AD%98-switch-%E7%9A%84%E7%94%A8%E6%B3%95/">
-                        認識 switch 的用法
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        switch 的基本結構主要由 switch, case, break 和 default 組成。
-switch 的 (  )switch 的 ( ) 內，主要是一個變數，而變數的值可能是字串、布林值、數字、null、undefined，而這個變數將...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 16 2021 21:52:06 GMT+0800">2021-12-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/16/2021-12-%E8%AA%8D%E8%AD%98-switch-%E7%9A%84%E7%94%A8%E6%B3%95/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/22/2021-12-2021-12-%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-filter/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -500,22 +438,8 @@ switch 的 (  )switch 的 ( ) 內，主要是一個變數，而變數的值可�
               <span>2021</span>
               -
             
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
         </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
         
         <div class="theme-info info-item">
             <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>

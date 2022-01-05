@@ -19,7 +19,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"codingsnorlax.github.io","root":"/","language":"zh-TW","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習歷程"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#FF9900","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"簡單. 持續. 紀錄前端學習"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -155,31 +155,44 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-filter/">
-                        陣列方法: filter
+                    <a href="/2021/12/27/2021-12-2021-12-this-%E7%9A%84%E6%8C%87%E5%90%91%E8%A7%80%E5%BF%B5/">
+                        this 的指向觀念
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        filter 陣列使用時機
-對資料進行篩選，return 一個新的陣列。
-return 判斷式為 true 的資料。
-
-
-
-資料集123456789101112131415161718192021222324const fruitData = [  ...
+                        前言this 離開物件就沒有意義，因為 this 指向的是它本身目前所處的一個 空間，而這個空間等同於容納 this 的這一個 物件。
+由於 JS 是物件導向設計的語法，透過以下最簡單的例子，可驗證最初的 this 的確存在於 window 這個大物...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Dec 22 2021 22:13:08 GMT+0800">2021-12-22</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 27 2021 14:06:18 GMT+0800">2021-12-27</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E7%89%A9%E4%BB%B6/">物件</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-filter/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/27/2021-12-2021-12-this-%E7%9A%84%E6%8C%87%E5%90%91%E8%A7%80%E5%BF%B5/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -189,32 +202,48 @@ return 判斷式為 true 的資料。
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-map/">
-                        陣列方法: map
+                    <a href="/2021/12/26/2021-12-2021-12-MVVM-%E7%9A%84%E6%A6%82%E5%BF%B5/">
+                        什麼是 MVVM？
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        map 陣列使用時機
-map 與 forEach 很相似，都會遍歷陣列內的每一筆資料。
-map 會 return 一筆新的陣列資料，適用於對陣列資料逐筆做修改時。
-
-備註 forEach 不會 return 一筆新的陣列資料。
+                        MVVM 模型圖
 
 
-資料集123456...
+Model (資料)資料獨立存放處，可在此處動態更新資料，model 上的資料，全部都會被加入到 View Model，因此資料都可同步透過 View Model 解析到 View，這概念就是來自 關注點分離，便於管理資料。
+
+...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Dec 22 2021 14:47:21 GMT+0800">2021-12-22</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Dec 26 2021 15:46:04 GMT+0800">2021-12-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Vue/">Vue</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/Vue/%E9%97%9C%E6%B3%A8%E9%BB%9E%E5%88%86%E9%9B%A2/">關注點分離</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-map/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/26/2021-12-2021-12-MVVM-%E7%9A%84%E6%A6%82%E5%BF%B5/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -224,31 +253,46 @@ map 會 return 一筆新的陣列資料，適用於對陣列資料逐筆做修�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-forEach/">
-                        陣列方法: forEach
+                    <a href="/2021/12/26/2021-12-2021-12-%E9%99%B3%E8%BF%B0%E5%BC%8F%E8%88%87%E8%A1%A8%E9%81%94%E5%BC%8F/">
+                        陳述式與表達式
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        forEach 陣列方法簡介
-forEach 會遍歷陣列中的每一筆資料。
-forEach 不可跳出迴圈，若一定要終止迴圈，就用 for。
+                        到底如何來分辨 陳述式 跟 表達式？兩者的差異在哪？很重要的一個判斷關鍵在於，是否回傳一個值，表達式 會回傳值，而陳述式不會。
 
 
-
-參數在 forEach 迴圈內，可帶入 3 個參數，分別為：item, index, array，其中前兩...
+表達式 (Expression)表達式必然會產生一個 值，因此它又被稱為 運算式，它通常會寫在需要回傳 值 的地方，因...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Dec 22 2021 14:47:11 GMT+0800">2021-12-22</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Dec 26 2021 15:23:10 GMT+0800">2021-12-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5/">基本觀念</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/22/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95-forEach/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/26/2021-12-2021-12-%E9%99%B3%E8%BF%B0%E5%BC%8F%E8%88%87%E8%A1%A8%E9%81%94%E5%BC%8F/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -258,26 +302,44 @@ forEach 不可跳出迴圈，若一定要終止迴圈，就用 for。
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/22/%E4%BB%80%E9%BA%BC%E6%98%AF%E9%97%9C%E6%B3%A8%E9%BB%9E%E5%88%86%E9%9B%A2/">
-                        什麼是關注點分離
+                    <a href="/2021/12/26/2021-12-2021-12-Vue-%E8%B5%B7%E6%89%8B%E5%BC%8F%EF%BC%9A-Vue-%E5%AF%A6%E4%BE%8B%E8%88%87%E9%A0%81%E9%9D%A2/">
+                        Vue 起手式：Vue 實例與頁面
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        為什麼網頁需要關注點分離？關注點分離能夠使網頁更方便開發與維護，拆解出的各個部分不僅可以獨立開發、方便日後維護，一處的修改也不會對其他部分連動影響，且各個部分都可重複使用。
-關注點分離概念網頁的關注點分離可視為四個部分的拆解，而當這些區塊拆解開後，開...
+                        載入 cdn、確認 Vue 正確引入之後，準備來寫一個 Hello Vue!
+Vue 起手式–實例 (Instance)在 Vue 文件內的 實例 指的就是 物件，data 即是所有動態資料存放的位置，而其屬性名稱是對應到 HTML 的插值。接著 V...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Dec 22 2021 13:51:42 GMT+0800">2021-12-22</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Dec 26 2021 13:32:45 GMT+0800">2021-12-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Vue/">Vue</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/Vue/%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/">環境配置</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/22/%E4%BB%80%E9%BA%BC%E6%98%AF%E9%97%9C%E6%B3%A8%E9%BB%9E%E5%88%86%E9%9B%A2/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/26/2021-12-2021-12-Vue-%E8%B5%B7%E6%89%8B%E5%BC%8F%EF%BC%9A-Vue-%E5%AF%A6%E4%BE%8B%E8%88%87%E9%A0%81%E9%9D%A2/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -287,180 +349,53 @@ forEach 不可跳出迴圈，若一定要終止迴圈，就用 for。
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/20/2021-12-2021-12-CORS/">
-                        什麼是 CORS？
+                    <a href="/2021/12/25/2021-12-2021-12-%E4%BE%86%E5%AF%AB%E4%B8%80%E5%80%8B-callback-function/">
+                        來寫個 callback function
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        CORS 概述跨網域資源共享，全名 Cross-Origin Resource Sharing，假如伺服器同意跨域分享資源，就要同意來自不同網域的 HTTP 發出的請求，並一一對這些請求作出回應，而這些回應最終會回到瀏覽器。
-CORS 設定的位置會是...
+                        同步與非同步在 JS 的程式執行中，有分兩種模式：
+
+同步執行
+非同步執行
+
+
+
+同步執行一般來說，程式指令會按照由上至下的先後順序，第一個完成後，才接著執行第二個，依此類推。
+
+
+非同步執行非同步執行的程式碼，可以想像是，它會先在另一個區塊等待，等...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 20 2021 15:55:29 GMT+0800">2021-12-20</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Dec 25 2021 13:09:31 GMT+0800">2021-12-25</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
         
         
     </div>
 
-    <a href="/2021/12/20/2021-12-2021-12-CORS/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/20/2021-12-2021-12-AJAX/">
-                        AJAX 取資料及 XMLHttpRequest
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        什麼是 AJAX?全名為 Asynchronous JavaScript and XML，最核心的語法部分是 XMLHttpRequest。
-在頁面上即便沒有重新整理網頁，透過 AJAX 也能用瀏覽器撈取遠端資料庫，並即時同步回傳後端資料庫的資料，使...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 20 2021 10:39:34 GMT+0800">2021-12-20</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/20/2021-12-2021-12-AJAX/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/19/2021-12-JavaScript-%E6%99%82%E9%96%93%E6%88%B3%E8%BD%89%E6%8F%9B%E6%97%A5%E6%9C%9F%E7%9A%84%E6%96%B9%E6%B3%95/">
-                        JavaScript 時間戳轉換日期的方法
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        new Date()：宣告時間物件new Date() 是 JS 的內建物件語法，可以用來宣告一筆時間物件資料。為什麼說 new Date() 是用來宣告時間的物件呢？因為如果使用 typeof 來檢查 new Date()，會發現它是一個物件(Ob...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Dec 19 2021 10:59:11 GMT+0800">2021-12-19</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/19/2021-12-JavaScript-%E6%99%82%E9%96%93%E6%88%B3%E8%BD%89%E6%8F%9B%E6%97%A5%E6%9C%9F%E7%9A%84%E6%96%B9%E6%B3%95/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/18/2021-12-%E5%AF%AC%E9%AC%86%E7%AD%89%E6%96%BC-%E8%88%87%E5%B8%83%E6%9E%97%E5%80%BC%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B/">
-                        為什麼 &#39;true&#39; == true 是 false?
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        為什麼 ‘true’ == true 是 false?
-這個問題和寬鬆等於 == 在遇到布林值，中間的隱性轉型有關。
-猜猜看以下四個運算式的結果？
-123456console.log(&#x27;false&#x27; == false)consol...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Dec 18 2021 23:17:35 GMT+0800">2021-12-18</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/18/2021-12-%E5%AF%AC%E9%AC%86%E7%AD%89%E6%96%BC-%E8%88%87%E5%B8%83%E6%9E%97%E5%80%BC%E7%9A%84%E9%9A%B1%E6%80%A7%E8%BD%89%E5%9E%8B/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/18/2021-12-%E6%B7%BA%E8%AB%87-HTML-%E7%9A%84-data-%E5%B1%AC%E6%80%A7%E6%87%89%E7%94%A8%EF%BC%9A%E7%B5%84%E9%99%A3%E5%88%97%E3%80%81%E7%94%A8-dataset-%E5%8F%96%E5%80%BC/">
-                        淺談 HTML 的 data-* 屬性應用：組陣列、用 dataset 取值
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-
-
-
-
-前言在 HTML 結構中會看到很多標籤，h1, h2, p…，但你想過，這些標籤上的屬性(attribute)，它的功能是什麼嗎？其實屬性的功能都是在補充與這些 HTML 標籤有關的更多資訊！
-既然屬性是 HTML 標籤的補充資料，那想當然...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Dec 18 2021 10:47:44 GMT+0800">2021-12-18</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/18/2021-12-%E6%B7%BA%E8%AB%87-HTML-%E7%9A%84-data-%E5%B1%AC%E6%80%A7%E6%87%89%E7%94%A8%EF%BC%9A%E7%B5%84%E9%99%A3%E5%88%97%E3%80%81%E7%94%A8-dataset-%E5%8F%96%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/12/17/2021-12-%E6%93%8D%E4%BD%9C-HTML-%E5%B1%AC%E6%80%A7-2-getAttribute-%E7%94%A8%E4%BE%86%E5%8F%96%E5%80%BC/">
-                        操作 HTML 屬性 (2) getAttribute 用來取值
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-
-
-
-getAttribute 用來取值getAttribute 是透過選取 element 的屬性名稱，得到屬性的值，既然是回傳一個值，因此 getAttribute 其實就是可以用來取值和組資料的！(關於 getAttribute 取值的部分會...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 17 2021 21:15:05 GMT+0800">2021-12-17</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/12/17/2021-12-%E6%93%8D%E4%BD%9C-HTML-%E5%B1%AC%E6%80%A7-2-getAttribute-%E7%94%A8%E4%BE%86%E5%8F%96%E5%80%BC/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/12/25/2021-12-2021-12-%E4%BE%86%E5%AF%AB%E4%B8%80%E5%80%8B-callback-function/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -500,22 +435,8 @@ getAttribute 用來取值getAttribute 是透過選取 element 的屬性名稱，
               <span>2021</span>
               -
             
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Karen Huang</a>
         </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        讀者&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
         
         <div class="theme-info info-item">
             <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
